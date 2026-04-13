@@ -33,3 +33,37 @@ Project Review
 -Categorize Products
 -Store Information
 -Receive Input
+
+# Package description
+- Presentation
+  In our Presantation layer, we will have both the Menu class and the Main class, since they will be in charge of user         interaction, such as displaying information to the user and Main will be "running" the entire system, getting information    from all the various classes. This layer contains no logic of its own.
+
+- Application
+  The application layer will have all of our services, such as ProductService, MaterialService, RecyclingGuideService,         SimpleSumStrategy and WeightedByLifespanStrategy. This layer calls into the domain to exacute business, gives instructions   but does   not do the work itself. ProductService receives an ImpactCalculationStrategy via its constructor,                 SimpleSumStrategy and WeightedByLifespanStrategy implements our ImpactCalculationStrategy interface and provides the         actual calculations for the products. The RecyclingGuidanceService will provide guidance for recycling, it takes a product   and provides information of what material/s the product is made of and how to recycle it properly. ProductService creates,   removes and changes products and MaterialService defines the various materials.
+
+- Domain
+  The domain layer is the heart of the program. We have our Product class, storing all of the products and Material storing    the different materials. We have our ImpactCalculationStrategy interface, which is an interface because we want to be able   to possibly add more ways of calculating impact. Here is also where we have our RecyclingCategory class because this class   will divide all the materials into different recycling sections. We have a ProductRepository interface that provides a       contract on how to load and save files.
+
+- Infrastructure
+  Then we have our InMemoryProductRepository (instantiated in Main) that implements where to save/store file.
+
+presentation/
+	Main
+	Menu
+
+application/
+	ProductService
+	MaterialService
+	RecyclingGuidanceService
+	SimpleSumStrategy
+	WeightedByLifespanStrategy
+
+domain /
+	ImpactCalculationStrategy
+	ProductRepository
+	Product
+	Material
+	RecyclingCategory
+
+infrastructure /
+	InMemoryProductRepository
