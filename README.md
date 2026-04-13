@@ -44,21 +44,21 @@ The domain layer is the heart of the program. We have our Product class, storing
 For the infrastructure, we have our InMemoryProductRepository (instantiated in Main) that implements where to save/store file.
 
 presentation/
-	Main
+	Main,
 	Menu
 
 application/
-	ProductService
-	MaterialService
-	RecyclingGuidanceService
-	SimpleSumStrategy
+	ProductService,
+	MaterialService,
+	RecyclingGuidanceService,
+	SimpleSumStrategy,
 	WeightedByLifespanStrategy
 
 domain /
-	ImpactCalculationStrategy
-	ProductRepository
-	Product
-	Material
+	ImpactCalculationStrategy,
+	ProductRepository,
+	Product,
+	Material,
 	RecyclingCategory
 
 infrastructure /
