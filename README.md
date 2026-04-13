@@ -16,6 +16,10 @@ Planning
 Testing and error handling
 Planning and analysing
 Project Review
+ReadMe - Albin, Kim
+Skeleton - Alex, Keylie
+UML - Kim, ALex
+Packages - Albin, Keylie
 
 
 # Domain Concept
