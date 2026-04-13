@@ -19,7 +19,7 @@ Project Review
 ### Finsihed tasks
 ReadMe - Albin, Kim |
 Skeleton - Alex, Keylie |
-UML - Kim, ALex |
+UML - Kim, Alex |
 Packages - Albin, Keylie |
 
 
