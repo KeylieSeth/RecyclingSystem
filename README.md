@@ -41,8 +41,7 @@ The application layer will have all of our services, such as ProductService, Mat
 
 The domain layer is the heart of the program. We have our Product class, storing all of the products and Material storing    the different materials. We have our ImpactCalculationStrategy interface, which is an interface because we want to be able   to possibly add more ways of calculating impact. Here is also where we have our RecyclingCategory class because this class   will divide all the materials into different recycling sections. We have a ProductRepository interface that provides a       contract on how to load and save files.
 
-- Infrastructure,
-Then we have our InMemoryProductRepository (instantiated in Main) that implements where to save/store file.
+For the infrastructure, we have our InMemoryProductRepository (instantiated in Main) that implements where to save/store file.
 
 presentation/
 	Main
