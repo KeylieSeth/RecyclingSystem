@@ -17,10 +17,10 @@ Testing and error handling
 Planning and analysing
 Project Review
 ### Finsihed tasks
-ReadMe - Albin, Kim
-Skeleton - Alex, Keylie
-UML - Kim, ALex
-Packages - Albin, Keylie
+ReadMe - Albin, Kim |
+Skeleton - Alex, Keylie |
+UML - Kim, ALex |
+Packages - Albin, Keylie |
 
 
 # Domain Concept
