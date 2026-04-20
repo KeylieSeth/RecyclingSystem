@@ -18,7 +18,7 @@ public class ProductMenu {
             System.out.println("2) Delete product");
             System.out.println("3) List products");
             System.out.println("4) Environmental impact");
-            System.out.println("5) Back to main menu");
+            System.out.println("0) Back to main menu");
 
             String choice = readChoice();
 
@@ -35,7 +35,7 @@ public class ProductMenu {
                 case "4":
                     showImpact();
                     break;
-                case "5":
+                case "0":
                     System.out.println("Returning to main menu.");
                     return;
                 default:

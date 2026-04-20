@@ -39,8 +39,8 @@ public class Menu {
                     printMenu();
                     break;
                 case "2":
-                    // materialMenu.run();
-                    System.out.println("Material menu will be here");
+                    materialMenu.run();
+                    printMenu();
                     break;
                 case "3":
                     // recyclingMenu.run();
