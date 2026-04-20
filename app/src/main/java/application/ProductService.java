@@ -2,10 +2,8 @@ package application;
 import domain.*;
 
 public class ProductService {
-    Product product = new Product();
+    public ProductService(ProductRepository productRepo, MaterialService materialService) {
 
-    public void pleb(){
-        product.print();
     }
     
 
