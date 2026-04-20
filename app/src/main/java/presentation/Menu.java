@@ -16,14 +16,14 @@ public class Menu {
     private MaterialMenu materialMenu;
     private RecyclingMenu recyclingMenu;
 
-    public Menu(ProductService ps, MaterialService ms, FileHandler fh) {
-        this.productService = ps;
-        this.materialService = ms;
-        this.fileHandler = fh;
+    public Menu(ProductService productService, MaterialService materialService, FileHandler fileHandler) {
+        this.productService = productService;
+        this.materialService = materialService;
+        this.fileHandler = fileHandler;
 
-        this.productMenu = new ProductMenu(ps, scanner);
-        this.materialMenu = new MaterialMenu(ms, scanner);
-        this.recyclingMenu = new RecyclingMenu(ps, scanner);
+        this.productMenu = new ProductMenu(productService, scanner);
+        this.materialMenu = new MaterialMenu(materialService, scanner);
+        this.recyclingMenu = new RecyclingMenu(productService, scanner);
     }
 
     public void runMenu() {
@@ -35,8 +35,8 @@ public class Menu {
 
             switch(choice.toLowerCase()) {
                 case "1":
-                    // productMenu.run();
-                    System.out.println("Product menu will be here");
+                    productMenu.run();
+                    printMenu();
                     break;
                 case "2":
                     // materialMenu.run();
