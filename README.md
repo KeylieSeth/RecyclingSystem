@@ -21,7 +21,11 @@ ReadMe - Albin, Kim |
 Skeleton - Alex, Keylie |
 UML - Kim, Alex |
 Packages - Albin, Keylie |
-
+#### Presentation layer:
+Main Menu: Keylie
+Product Menu: Albin
+Material Menu: Alex
+Recycling Menu: Kim
 
 # Domain Concept
 -Products
