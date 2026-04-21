@@ -37,8 +37,8 @@ public class Menu {
                     printMenu();
                     break;
                 case "3":
-                    // recyclingMenu.run();
-                    System.out.println("Recycling menu will be here");
+                    recyclingMenu.run();
+                    printMenu();
                     break;
                 case "4":
                     // GenerateReport report = new GenerateReport(productService);
