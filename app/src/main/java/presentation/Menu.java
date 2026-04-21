@@ -6,24 +6,18 @@ import application.*;
 import infrastructure.FileHandler;
 
 public class Menu {
-    private Scanner scanner = new Scanner(System.in);
-    
-    private ProductService productService;
-    private MaterialService materialService;
-    private FileHandler fileHandler;
-    
     private ProductMenu productMenu;
     private MaterialMenu materialMenu;
     private RecyclingMenu recyclingMenu;
+    private FileHandler fileHandler;
+    private Scanner scanner;
 
-    public Menu(ProductService productService, MaterialService materialService, FileHandler fileHandler) {
-        this.productService = productService;
-        this.materialService = materialService;
+    public Menu(ProductMenu productMenu, MaterialMenu materialMenu, RecyclingMenu recyclingMenu, FileHandler fileHandler, Scanner scanner){
+        this.productMenu = productMenu;
+        this.materialMenu = materialMenu;
+        this.recyclingMenu = recyclingMenu;
         this.fileHandler = fileHandler;
-
-        this.productMenu = new ProductMenu(productService, scanner);
-        this.materialMenu = new MaterialMenu(materialService, scanner);
-        this.recyclingMenu = new RecyclingMenu(productService, scanner);
+        this.scanner = scanner;
     }
 
     public void runMenu() {
