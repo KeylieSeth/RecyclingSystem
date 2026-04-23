@@ -41,8 +41,10 @@ public class Menu {
                     printMenu();
                     break;
                 case "4":
-                    // GenerateReport report = new GenerateReport(productService);
-                    // String result = report.generate();
+                    // Report report = new Report(productService);
+                    // ReportFormatter reportFormatter = new ReportFormatter();
+
+                    // String result = reportFormatter.format(report);
                     // System.out.println(result);
 
                     System.out.println("Save report to file? (y/n)");
