@@ -24,7 +24,7 @@ public class Main {
         MaterialMenu materialMenu = new MaterialMenu(materialService, scanner);
         RecyclingMenu recyclingMenu = new RecyclingMenu(productService, recyclingGuidanceService, scanner);
         
-        Menu menu = new Menu(productMenu, materialMenu, recyclingMenu, fileHandler, scanner);
+        Menu menu = new Menu(productService, productMenu, materialMenu, recyclingMenu, fileHandler, scanner);
         menu.runMenu();
         scanner.close();
     }

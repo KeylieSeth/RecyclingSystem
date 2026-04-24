@@ -3,16 +3,19 @@ package presentation;
 import java.util.Scanner;
 
 import application.*;
+import domain.ImpactCalculationStrategy;
 import infrastructure.FileHandler;
 
 public class Menu {
+    private ProductService productService;
     private ProductMenu productMenu;
     private MaterialMenu materialMenu;
     private RecyclingMenu recyclingMenu;
     private FileHandler fileHandler;
     private Scanner scanner;
 
-    public Menu(ProductMenu productMenu, MaterialMenu materialMenu, RecyclingMenu recyclingMenu, FileHandler fileHandler, Scanner scanner){
+    public Menu(ProductService productService, ProductMenu productMenu, MaterialMenu materialMenu, RecyclingMenu recyclingMenu, FileHandler fileHandler, Scanner scanner){
+        this.productService = productService;
         this.productMenu = productMenu;
         this.materialMenu = materialMenu;
         this.recyclingMenu = recyclingMenu;
@@ -41,9 +44,9 @@ public class Menu {
                     printMenu();
                     break;
                 case "4":
-                    // Report report = new Report(productService);
+                    Report report = new Report(productService);
                     // ReportFormatter reportFormatter = new ReportFormatter();
-
+                    
                     // String result = reportFormatter.format(report);
                     // System.out.println(result);
 
