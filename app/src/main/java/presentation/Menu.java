@@ -45,10 +45,10 @@ public class Menu {
                     break;
                 case "4":
                     Report report = new Report(productService);
-                    // ReportFormatter reportFormatter = new ReportFormatter();
+                    ReportFormatter reportFormatter = new ReportFormatter();
                     
-                    // String result = reportFormatter.format(report);
-                    // System.out.println(result);
+                    String result = reportFormatter.format(report);
+                    System.out.println(result);
 
                     System.out.println("Save report to file? (y/n)");
                     String answer = readChoice();
