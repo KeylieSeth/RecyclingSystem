@@ -22,7 +22,7 @@ Skeleton - Alex, Keylie |
 UML - Kim, Alex |
 Packages - Albin, Keylie |
 #### Presentation layer:
-Main Menu: Keylie |
+Main Menu, Recycling Report: Keylie |
 Product Menu: Albin |
 Material Menu: Alex |
 Recycling Menu: Kim
