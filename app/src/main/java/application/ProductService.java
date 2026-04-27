@@ -38,30 +38,28 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Optional<Product> getProductById(UUID productId) {
-        return productRepository.findById(productId);
+    public Product getProductByName(String name) {
+        Optional<Product> product = productRepository.findByName(name);
+        return product.orElse(null);
     }
 
-    public boolean deleteProduct(UUID productId) {
-        return productRepository.deleteById(productId);
+    public boolean deleteProductByName(String name) {
+        Optional<Product> product = productRepository.findByName(name);
+
+        if (product.isEmpty()) {
+            return false;
+        }
+
+        return productRepository.deleteById(product.get().getId());
     }
 
-    public double calculateImpact(UUID productId, ImpactCalculationStrategy strategy) {
-        Optional<Product> product = productRepository.findById(productId);
+    public double calculateImpactByName(String name, ImpactCalculationStrategy strategy) {
+        Optional<Product> product = productRepository.findByName(name);
 
         if (product.isEmpty()) {
             throw new IllegalArgumentException("Product not found.");
         }
 
         return strategy.calculateImpact(product.get());
-    }
-
-    public Product getProductByName(String name) {
-        for (Product product : productRepository.findAll()) {
-            if (product.getName().equalsIgnoreCase(name)) {
-                return product;
-            }
-        }
-        return null;
     }
 }
