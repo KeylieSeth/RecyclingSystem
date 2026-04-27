@@ -17,7 +17,7 @@ public class Main {
         //application
         MaterialService materialService = new MaterialService();
         ProductService productService = new ProductService(productRepo, materialService);
-        RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService();
+        RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService(productRepo);
 
         //presentation
         ProductMenu productMenu = new ProductMenu(productService, scanner);

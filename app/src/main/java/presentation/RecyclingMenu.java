@@ -12,13 +12,13 @@ public class RecyclingMenu {
     private RecyclingGuidanceService recyclingGuidanceService;
     private Scanner scanner;
 
-    public RecyclingMenu(ProductService productService, RecyclingGuidanceService recyclingGuidanceService, Scanner scanner){
+    public RecyclingMenu(ProductService productService, RecyclingGuidanceService recyclingGuidanceService, Scanner scanner) {
         this.productService = productService;
         this.recyclingGuidanceService = recyclingGuidanceService;
         this.scanner = scanner;
     }
 
-        public void run() {
+    public void run() {
         boolean running = true;
 
         while (running) {
@@ -33,10 +33,13 @@ public class RecyclingMenu {
 
             switch (choice) {
                 case "1":
-                    //changeRecyclingGuidanceForProduct();
+                    showRecyclingGuidance();
+                    break;
+                case "2":
+                    changeRecyclingGuidanceForProduct();
                     break;
                 case "3":
-                    //recycleProduct();
+                    recycleProduct();
                     break;
                 case "0":
                     running = false;
@@ -47,98 +50,100 @@ public class RecyclingMenu {
         }
     }
 
-//     private void showRecyclingGuidance() {
-//         List<Product> products = productService.getAllProducts();
+    private void showRecyclingGuidance() {
+        List<Product> products = productService.getAllProducts();
 
-//         //if (products.isEmpty()) {
-//             System.out.println("No products available.");
-//             return;
-//         }
+        if (products.isEmpty()) {
+            System.out.println("No products available.");
+            return;
+        }
 
-//         //printProducts(products);
+        printProducts(products);
 
-//         System.out.print("Enter product number: ");
-//         int index = readInt();
+        System.out.print("Enter product number: ");
+        int index = readInt();
 
-//         if (index < 1 || index > products.size()) {
-//             System.out.println("Invalid product number.");
-//             return;
-//         }
+        if (index < 1 || index > products.size()) {
+            System.out.println("Invalid product number.");
+            return;
+        }
 
-//         Product product = products.get(index - 1);
-//         //String guidance = recyclingGuideService.getGuidance(product);
+        Product product = products.get(index - 1);
+        String guidance = recyclingGuidanceService.getGuidance(product);
 
-//        // System.out.println("\nRecycling guidance for " + product.getName() + ":");
-//         //System.out.println(guidance);
-//     }
+        System.out.println("\nRecycling guidance for " + product.getName() + ":");
+        System.out.println(guidance);
+    }
 
-//     private void changeRecyclingGuidanceForProduct() {
-//         //List<Product> products = productService.getAllProducts();
+    private void changeRecyclingGuidanceForProduct() {
+        List<Product> products = productService.getAllProducts();
 
-//         //if (products.isEmpty()) {
-//             System.out.println("No products available.");
-//             return;
-//         }
+        if (products.isEmpty()) {
+            System.out.println("No products available.");
+            return;
+        }
 
-//         ////if (index < 1 || index > products.size()) {
-//             //System.out.println("Invalid product number.");
-//        //     return;
-//         //}
+        printProducts(products);
 
-//         //Product product = products.get(index - 1);
+        System.out.print("Enter product number: ");
+        int index = readInt();
 
-//         //System.out.print("Enter new recycling guidance: ");
-//         String newGuidance = scanner.nextLine();
+        if (index < 1 || index > products.size()) {
+            System.out.println("Invalid product number.");
+            return;
+        }
 
-//         //recyclingGuidanceService.updateGuidance(product, newGuidance);
+        Product product = products.get(index - 1);
 
-//         //System.out.println("Recycling guidance updated for " + product.getName() + ".");
-//     }
+        System.out.print("Enter new recycling guidance: ");
+        String newGuidance = scanner.nextLine();
 
-//     private void recycleProduct() {
-//         //List<Product> products = productService.getAllProducts();
+        recyclingGuidanceService.updateGuidance(product, newGuidance);
 
-//         if (products.isEmpty()) {
-//             System.out.println("No products available.");
-//             return;
-//         }
+        System.out.println("Recycling guidance updated for " + product.getName() + ".");
+    }
 
-//         printProducts(products);
+    private void recycleProduct() {
+        List<Product> products = productService.getAllProducts();
 
-//         System.out.print("Enter product number to recycle: ");
-//         int index = readInt();
+        if (products.isEmpty()) {
+            System.out.println("No products available.");
+            return;
+        }
 
-//         if (index < 1 || index > products.size()) {
-//             System.out.println("Invalid product number.");
-//             return;
-//         }
+        printProducts(products);
 
-//         Product product = products.get(index - 1);
+        System.out.print("Enter product number to recycle: ");
+        int index = readInt();
 
-//         //boolean recycled = recyclingGuidanceService.recycleProduct(product);
+        if (index < 1 || index > products.size()) {
+            System.out.println("Invalid product number.");
+            return;
+        }
 
-//         if (recycled) {
-//             //System.out.println(product.getName() + " was recycled successfully.");
-//         } else {
-//             System.out.println("Could not recycle " + product.getName() + ".");
-//         }
-//     }
+        Product product = products.get(index - 1);
 
-//     private void printProducts(List<Product> products) {
-//         System.out.println("\nProducts:");
-//         for (int i = 0; i < products.size(); i++) {
-//             //System.out.println((i + 1) + ". " + products.get(i).getName());
-//         }
-//     }
+        boolean recycled = recyclingGuidanceService.recycleProduct(product);
 
-//     private int readInt() {
-//         try {
-//             int value = Integer.parseInt(scanner.nextLine());
-//             return value;
-//         } catch (NumberFormatException e) {
-//             return -1;
-//         }
-//     }
-// }
+        if (recycled) {
+            System.out.println(product.getName() + " was recycled successfully.");
+        } else {
+            System.out.println("Could not recycle " + product.getName() + ".");
+        }
+    }
 
+    private void printProducts(List<Product> products) {
+        System.out.println("\nProducts:");
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println((i + 1) + ". " + products.get(i).getName());
+        }
+    }
+
+    private int readInt() {
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            return -1;
+        }
+    }
 }
