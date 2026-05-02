@@ -12,6 +12,7 @@ public class MaterialMenu {
         this.scanner = scanner;
     }
 
+    // print menu
     public void print(){
         System.out.println("1. Add material\n" + 
                         "2. Delete material\n" + 
@@ -19,7 +20,8 @@ public class MaterialMenu {
                         "4. Environment impact\n" + 
                         "0. Back to main menu");
     }
-
+    
+    // run menu
     public void run(){
         while (true) {
             print();
@@ -28,30 +30,39 @@ public class MaterialMenu {
             scanner.nextLine();
 
             switch (choice) {
+                // Add material
                 case 1:
                     System.out.println("Enter material: ");
                     String name = scanner.nextLine();
+
                     System.out.println("Enter material impact: ");
                     double impact = scanner.nextInt();
                     scanner.nextLine();
-                    // materialService.defineMaterial(name, impact);
-                    System.out.println("Material added");
+
+                    materialService.defineMaterial(name, impact);
                     break;
 
+
+                // Delete material
                 case 2:
                     System.out.println("Enter material name to delete :");
                     name = scanner.nextLine();
                     // materialService.deleteMaterial(name);
                     break;
 
-                case 3:
-                    // materialService.listMatterials();
 
+                // List all materials
+                case 3:
+                    materialService.listMatterials();
+
+
+                // Calculate 
                 case 4:
                     System.out.println("Enter material name: ");
                     name = scanner.nextLine();
-                    // productService.calculateImpact(name, null);
+                    productService.calculateImpact(name, null);
 
+                // Back to menu
                 case 0:
                     return;
             
