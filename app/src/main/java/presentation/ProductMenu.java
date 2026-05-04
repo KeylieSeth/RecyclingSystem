@@ -59,7 +59,7 @@ public class ProductMenu {
         int lifespan = scanner.nextInt();
         scanner.nextLine();
 
-        // productService.addProduct(name, category, lifespan);
+        productService.addProduct(name, category, lifespan);
         System.out.println("Product has been added.");
     }
     private void deleteProduct() {
@@ -67,12 +67,12 @@ public class ProductMenu {
         System.out.println("Enter product name to delete: ");
         String name = scanner.nextLine();
 
-        // productService.deleteProduct(name);
+        productService.deleteProduct(name);
         System.out.println("Product deleted.");
     }
     private void listProducts() {
         System.out.println("List of all products:");
-        // productService.getAllProducts().forEach(System.out::println);
+        productService.getAllProducts().forEach(System.out::println);
     }
     private void showImpact() {
         System.out.println("Environmental impact");
@@ -80,8 +80,8 @@ public class ProductMenu {
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
 
-        // double impact = productService.calculateImpact(name);
+        double impact = productService.calculateImpact(name);
 
-       // System.out.println("Environmental impact: " + impact);
+       System.out.println("Environmental impact: " + impact);
     }
 }
