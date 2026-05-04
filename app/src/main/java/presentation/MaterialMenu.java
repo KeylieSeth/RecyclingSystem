@@ -2,6 +2,7 @@ package presentation;
 
 import java.util.Scanner;
 import application.MaterialService;
+import application.ProductService;
 
 public class MaterialMenu {
     private MaterialService materialService;
@@ -53,14 +54,14 @@ public class MaterialMenu {
 
                 // List all materials
                 case 3:
-                    materialService.listMatterials();
+                    materialService.listMaterials();
 
 
                 // Calculate 
-                case 4:
-                    System.out.println("Enter material name: ");
-                    name = scanner.nextLine();
-                    productService.calculateImpact(name, null);
+                // case 4:
+                   // System.out.println("Enter material name: ");
+                   // name = scanner.nextLine();
+                   // ProductService.calculateImpact(name);
 
                 // Back to menu
                 case 0:

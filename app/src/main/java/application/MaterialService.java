@@ -18,4 +18,14 @@ public class MaterialService {
     public List<Material> listMaterials(){
         return materials;
     }
+
+    public Material findByname(String name) {
+        for (Material material: materials) {
+            if (material.getName().equals(name)) {
+                return material;
+            }
+        } 
+        return null;
+     }
 }
+

@@ -10,4 +10,12 @@ public class Material {
                 this.impactValue = impactValue;
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getImpact(){
+        return impactValue;
+    }
 }
