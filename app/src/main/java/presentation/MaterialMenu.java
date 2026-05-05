@@ -48,7 +48,7 @@ public class MaterialMenu {
                 case 2:
                     System.out.println("Enter material name to delete :");
                     name = scanner.nextLine();
-                    // materialService.deleteMaterial(name);
+                    materialService.deleteMaterial(name);
                     break;
 
 

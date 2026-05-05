@@ -15,11 +15,21 @@ public class MaterialService {
         materials.add(material);
     }
 
+    public void deleteMaterial(String name) {
+        for (Material material: materials){
+            if (material.getName().equals(name)); {
+                materials.remove(material);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Material not found: " + name);
+    }
+
     public List<Material> listMaterials(){
         return materials;
     }
 
-    public Material findByname(String name) {
+    public Material findByName(String name) {
         for (Material material: materials) {
             if (material.getName().equals(name)) {
                 return material;
