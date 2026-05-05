@@ -3,6 +3,7 @@ package presentation;
 import java.util.Scanner;
 import application.MaterialService;
 import application.ProductService;
+import domain.Material;
 
 public class MaterialMenu {
     private MaterialService materialService;
@@ -15,38 +16,42 @@ public class MaterialMenu {
 
     // print menu
     public void print(){
+        System.out.println();
         System.out.println("1. Add material\n" + 
                         "2. Delete material\n" + 
                         "3. List all materials\n" + 
                         "4. Environment impact\n" + 
                         "0. Back to main menu");
+        System.out.println();
     }
+  
     
     // run menu
     public void run(){
         while (true) {
             print();
-            System.out.println("Enter your choice: ");
+            System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             switch (choice) {
                 // Add material
                 case 1:
-                    System.out.println("Enter material: ");
-                    String name = scanner.nextLine();
-
-                    System.out.println("Enter material impact: ");
-                    double impact = scanner.nextInt();
-                    scanner.nextLine();
-
-                    materialService.defineMaterial(name, impact);
-                    break;
+                        System.out.print("Enter material: ");
+                        String name = scanner.nextLine();
+                    
+                        System.out.print("Enter material impact: ");
+                        double impact = scanner.nextDouble();
+                        scanner.nextLine();
+                        
+                        materialService.defineMaterial(name, impact);
+                    
+                        break;
 
 
                 // Delete material
                 case 2:
-                    System.out.println("Enter material name to delete :");
+                    System.out.print("Enter material name to delete :");
                     name = scanner.nextLine();
                     materialService.deleteMaterial(name);
                     break;
@@ -54,7 +59,13 @@ public class MaterialMenu {
 
                 // List all materials
                 case 3:
-                    materialService.listMaterials();
+                    if (materialService.listMaterials().isEmpty()){
+                        System.out.println("No materials found");
+                    } else {
+                        for (Material m : materialService.listMaterials()){
+                            System.out.println(m.getName() + " | Impact: " + m.getImpact());
+                        }
+                    }
 
 
                 // Calculate 
@@ -69,7 +80,7 @@ public class MaterialMenu {
             
                 default:
                     break;
-                }
             }
         }
-    }   
+    }
+}

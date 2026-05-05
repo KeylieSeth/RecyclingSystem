@@ -11,13 +11,17 @@ public class MaterialService {
     }
 
     public void defineMaterial(String name, double impact){
-        Material material = new Material(name, impact);
-        materials.add(material);
+        if (impact >= 0) {
+            Material material = new Material(name, impact);
+            materials.add(material);
+            return;
+        }
+        throw new IllegalArgumentException("Incorrect impact value" + impact);
     }
 
     public void deleteMaterial(String name) {
         for (Material material: materials){
-            if (material.getName().equals(name)); {
+            if (material.getName().equals(name)) {
                 materials.remove(material);
                 return;
             }
@@ -26,8 +30,8 @@ public class MaterialService {
     }
 
     public List<Material> listMaterials(){
-        return materials;
-    }
+            return materials;
+        }
 
     public Material findByName(String name) {
         for (Material material: materials) {
@@ -35,7 +39,7 @@ public class MaterialService {
                 return material;
             }
         } 
-        return null;
+        throw new IllegalArgumentException("Material not found" + name);
      }
 }
 

@@ -2,11 +2,11 @@ package domain;
 
 public class Material {
     private String name;
-    private Double impactValue;
+    private double impactValue;
 
     public Material(String name, double impactValue){
         this.name = name;
-            if (impactValue < 0){
+            if (impactValue > 0){
                 this.impactValue = impactValue;
         }
     }
