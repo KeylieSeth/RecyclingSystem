@@ -3,7 +3,6 @@ package presentation;
 import java.util.Scanner;
 import application.MaterialService;
 import application.ProductService;
-import domain.Material;
 
 public class MaterialMenu {
     private MaterialService materialService;
@@ -31,12 +30,13 @@ public class MaterialMenu {
         while (true) {
             print();
             System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            String choice = scanner.nextLine().toLowerCase();
+            print();
 
             switch (choice) {
                 // Add material
-                case 1:
+                case "1":
+                    try{
                         System.out.print("Enter material: ");
                         String name = scanner.nextLine();
                     
@@ -45,28 +45,31 @@ public class MaterialMenu {
                         scanner.nextLine();
                         
                         materialService.defineMaterial(name, impact);
-                    
+
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
                         break;
 
 
                 // Delete material
-                case 2:
+                case "2":
+                    try {
                     System.out.print("Enter material name to delete :");
-                    name = scanner.nextLine();
+                    String name = scanner.nextLine();
                     materialService.deleteMaterial(name);
-                    break;
 
-
-                // List all materials
-                case 3:
-                    if (materialService.listMaterials().isEmpty()){
-                        System.out.println("No materials found");
-                    } else {
-                        for (Material m : materialService.listMaterials()){
-                            System.out.println(m.getName() + " | Impact: " + m.getImpact());
-                        }
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
                     }
 
+                    break;
+                    
+
+                // List all materials
+                case "3":
+                    System.out.println(materialService.listMaterials());
+                    break;
 
                 // Calculate 
                 // case 4:
@@ -75,7 +78,7 @@ public class MaterialMenu {
                    // ProductService.calculateImpact(name);
 
                 // Back to menu
-                case 0:
+                case "0":
                     return;
             
                 default:
