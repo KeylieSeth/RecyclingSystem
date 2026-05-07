@@ -26,7 +26,6 @@ public class Menu {
     public void runMenu() {
         printMenu();
         boolean keepRunning = true;
-
         do {
             String choice = readChoice();
 
@@ -35,45 +34,54 @@ public class Menu {
                     productMenu.run();
                     printMenu();
                     break;
+
                 case "2":
                     materialMenu.run();
                     printMenu();
                     break;
+
                 case "3":
                     recyclingMenu.run();
                     printMenu();
                     break;
-                case "4":
-                    Report report = new Report(productService);
-                    ReportFormatter reportFormatter = new ReportFormatter();
-                    
-                    String result = reportFormatter.format(report);
-                    System.out.println(result);
 
-                    System.out.println("Save report to file? (y/n)");
-                    String answer = readChoice();
-                    if (answer.trim().equalsIgnoreCase("y")) {
-                        // fileHandler.saveReport(result);
-                        System.out.println("Report has been saved.");
-                    }
-                    break;
+                // case "4":
+                //     Report report = new Report(productService);
+                //     ReportFormatter reportFormatter = new ReportFormatter();
+                    
+                //     String result = reportFormatter.format(report);
+                //     System.out.println(result);
+
+                //     System.out.println("Save report to file? (y/n)");
+                //     String answer = readChoice();
+                //     if (answer.trim().equalsIgnoreCase("y")) {
+                //         // fileHandler.saveReport(result);
+                //         System.out.println("Report has been saved.");
+                //     }
+                //     break;
+
                 case "5":
                     //fileHandler.load(productService, materialService);
                     System.out.println("Loaded from file..");
                     break;
+
                 case "6":
                     //fileHandler.save(productService, materialService);
                     System.out.println("Saved to file..");
                     break;
+
                 case "m":
                     printMenu();
                     break;
+
                 case "i":
                     displayInformation();
                     break;
+
                 case "q":
                     keepRunning = false;
                     break;
+
                 default:
                     System.out.println(choice + " is not a valid input.");
                     break;

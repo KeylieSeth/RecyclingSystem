@@ -82,3 +82,12 @@ The domain layer is the heart of the program. We have our Product class, storing
 
 ### Infrastructure
 For the infrastructure, we have our InMemoryProductRepository (instantiated in Main) that implements where to save/store file.
+
+# Design Patterns
+### Strategy Pattern
+Our implementation of Strategy Pattern allows us to calculate different ways the enviromental impact of a product.
+In our program the ImpactCalculationStrategy is an interface, placed in the domain layer. This defines a common contract for the different impact calculations.
+The actual implementations are placed in the application layer, which in our case is the SimpleSumStrategy and WeightedByLifespanStrategy.
+
+### Factory Pattern
+We will consider the use of Factory Pattern in the later stage of the project, when we have a better understanding and structure of the program as a whole.

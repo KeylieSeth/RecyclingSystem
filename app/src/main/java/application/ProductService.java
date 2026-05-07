@@ -20,7 +20,7 @@ public class ProductService {
     }
 
     public void addProduct(String name, String category, int lifespan) {
-        Product product = new Product(name, category, lifespan, new ArrayList<Material>());
+        Product product = new Product(name, category, lifespan);
         products.add(product);
     }
 
@@ -50,6 +50,6 @@ public class ProductService {
         if (product == null) {
             return 0.0;
         }
-        return 1.0; // MOCK THING
+        return 1.0; // MOCK THING (Whole method)
     }
 }
