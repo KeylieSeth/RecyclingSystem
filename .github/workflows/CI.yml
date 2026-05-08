@@ -15,7 +15,7 @@ jobs:
           java-version: 21
 
       - name: Set up Gradle
-        run: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
