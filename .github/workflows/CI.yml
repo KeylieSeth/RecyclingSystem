@@ -1,18 +1,24 @@
 name: Java CI
 on:
-push:
-pull_request:
+  push:
+  pull_request:
 jobs:
-test:
-runs-on: ubuntu-latest
-steps:
-uses: actions/checkout@v4
-name: Set up Java
-uses: actions/setup-java@v4
-with:
-distribution: temurin
-java-version: 21
-name: Set up Gradle
-run: gradle/actions/setup-gradle@v4
-name: Run tests
-run: -/gradlew test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Set up Gradle
+        run: gradle/actions/setup-gradle@v4
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+        
+      - name: Run tests
+        run: ./gradlew test
