@@ -1,5 +1,4 @@
 package domain;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +26,9 @@ public class Product {
     public int getEstimatedLifespan() {
         return estimatedLifespan;
     }
-
     public boolean isRecycled() {
         return recycled;
     }
-
     public void setRecycled(boolean recycled) {
         this.recycled = recycled;
     }
