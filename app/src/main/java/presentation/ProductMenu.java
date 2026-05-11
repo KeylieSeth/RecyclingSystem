@@ -1,15 +1,22 @@
 package presentation;
 
+import java.util.List;
 import java.util.Scanner;
+
+import application.MaterialService;
 import application.ProductService;
+import domain.Material;
+import domain.Product;
 
 public class ProductMenu {
     private Scanner scanner;
     private ProductService productService;
+    private MaterialService materialService;
 
-    public ProductMenu(ProductService productService, Scanner scanner) {
+    public ProductMenu(ProductService productService, MaterialService materialService, Scanner scanner) {
         this.scanner = scanner;
-        this.productService = productService;       
+        this.productService = productService;   
+        this.materialService = materialService;    
     }
     public void run() {
         while (true) {
@@ -17,7 +24,8 @@ public class ProductMenu {
             System.out.println("1) Add product");
             System.out.println("2) Delete product");
             System.out.println("3) List products");
-            System.out.println("4) Environmental impact");
+            System.out.println("4) Add material to product");
+            System.out.println("5) Environmental impact");
             System.out.println("0) Back to main menu");
 
             String choice = readChoice();
@@ -33,6 +41,19 @@ public class ProductMenu {
                     listProducts();
                     break;
                 case "4":
+                    String productName = getSelectedProduct();
+                    
+                    if (productName != null) {
+                        
+                        String materialName = getSelectedMaterial();
+                        
+                        if (materialName != null){
+                            productService.addMaterialToProduct(productName, materialName);
+                            System.out.println(materialName + " has been added to " + productName);
+                        }
+                    }
+                    break;
+                case "5":
                     showImpact();
                     break;
                 case "0":
@@ -72,7 +93,21 @@ public class ProductMenu {
     }
     private void listProducts() {
         System.out.println("List of all products:");
-        productService.getAllProducts().forEach(System.out::println);
+
+        //Print all products (one per row), in numbered order for user selection.
+        for (int i = 0; i < productService.getAllProducts().size(); i++) {
+            System.out.println((i+1) + ". " + productService.getAllProducts().get(i).getName());
+        }
+
+        //productService.getAllProducts().forEach(System.out::println);
+    }
+    private void listMaterials(){
+        System.out.println("List of all materials:");
+
+        //Print all products (one per row), in numbered order for user selection.
+        for (int i = 0; i < materialService.getAllMaterials().size(); i++) {
+            System.out.println((i+1) + ". " + materialService.getAllMaterials().get(i).getName());
+        }
     }
     private void showImpact() {
         System.out.println("Environmental impact");
@@ -83,5 +118,66 @@ public class ProductMenu {
         double impact = productService.calculateImpact(name);
 
        System.out.println("Environmental impact: " + impact);
+    }
+
+    //Choose product from list to add material to.
+    private String getSelectedProduct(){
+        //temporary list when method is called to hold all registered products.
+        List<Product> products = productService.getAllProducts();
+
+        if (!products.isEmpty()){
+            listProducts();
+            System.out.print("Select the number of the product to add material to: ");
+
+            try {    
+                int productChoice = Integer.parseInt(scanner.nextLine());
+
+                if (productChoice < 1 || productChoice > products.size()){
+                    System.out.println("Invalid product number.");
+                    return null;
+                }
+
+                String selectedProduct = products.get(productChoice-1).getName();
+                System.out.println("Selected product is: " + selectedProduct);
+                return selectedProduct;
+
+            } catch(NumberFormatException e){
+                System.out.println("please enter a valid number.");
+                return null;
+            }
+        } else {
+            System.out.println("No products in list.");
+            return null;
+        }
+    }
+
+    //Choose material from list to add to a product.
+    private String getSelectedMaterial(){
+        //temporary list when method is called to hold all registered materials.
+        List<Material> materials = materialService.getAllMaterials();
+
+        if(!materials.isEmpty()){
+            listMaterials();
+            System.out.print("Select the number of the material to add: ");
+
+            try {
+                int materialChoice = Integer.parseInt(scanner.nextLine());
+
+                if (materialChoice < 1 || materialChoice > materials.size()){
+                    System.out.println("Invalid material number.");
+                    return null;
+                }
+
+                String selectedMaterial = materials.get(materialChoice-1).getName();
+                return selectedMaterial;
+
+            } catch(NumberFormatException e) {
+                System.out.println("please enter a valid number.");
+                return null;
+            } 
+        } else {
+            System.out.println("There are no registered materials.");
+            return null;
+        }
     }
 }

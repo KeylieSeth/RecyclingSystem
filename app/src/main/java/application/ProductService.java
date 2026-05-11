@@ -52,4 +52,13 @@ public class ProductService {
         }
         return 1.0; // MOCK THING (Whole method)
     }
+
+    //Method to add a material to a product.
+    public void addMaterialToProduct(String productName, String materialName){
+
+    Product product = findByName(productName);
+    Material material = materialService.findByName(materialName);
+
+    product.addMaterial(material);
+    }
 }
