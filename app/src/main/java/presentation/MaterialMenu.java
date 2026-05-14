@@ -2,6 +2,10 @@ package presentation;
 
 import java.util.Scanner;
 import application.MaterialService;
+<<<<<<< Updated upstream
+=======
+import domain.RecyclingCategory;
+>>>>>>> Stashed changes
 
 public class MaterialMenu {
     private MaterialService materialService;
@@ -28,8 +32,37 @@ public class MaterialMenu {
             scanner.nextLine();
 
             switch (choice) {
+<<<<<<< Updated upstream
                 case 1:
                     System.out.println("Enter material: ");
+=======
+                // Add material
+                case "1":
+                    try{
+                        System.out.print("Enter material: ");
+                        String name = scanner.nextLine();
+                    
+                        System.out.print("Enter material impact: ");
+                        double impact = scanner.nextDouble();
+                        scanner.nextLine();
+
+                        System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, NATURAL, MIXED): ");
+                        String categoryInput = scanner.nextLine().toUpperCase();
+                        RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
+                        
+                        materialService.defineMaterial(name, impact, category);
+
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
+                        break;
+
+
+                // Delete material
+                case "2":
+                    try {
+                    System.out.print("Enter material name to delete :");
+>>>>>>> Stashed changes
                     String name = scanner.nextLine();
                     System.out.println("Enter material impact: ");
                     double impact = scanner.nextInt();

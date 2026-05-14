@@ -5,7 +5,16 @@ public class Material {
     private double impactValue;
     private RecyclingCategory recyclingCategory;
 
+<<<<<<< Updated upstream
     public Material() {
+=======
+    public Material(String name, double impactValue, RecyclingCategory recyclingCategory){
+        this.name = name;
+            if (impactValue > 0){
+                this.impactValue = impactValue;
+        }
+        this.recyclingCategory = recyclingCategory;
+>>>>>>> Stashed changes
     }
 
     public Material(String name, double impactValue, RecyclingCategory recyclingCategory) {
@@ -21,7 +30,10 @@ public class Material {
     public double getImpactValue() {
         return impactValue;
     }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     public RecyclingCategory getRecyclingCategory() {
         return recyclingCategory;
     }

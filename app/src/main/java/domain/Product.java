@@ -11,6 +11,7 @@ public class Product {
     private int estimatedLifespan;
     private List<Material> materials;
     private boolean recycled;
+    private List<Material> materials;
 
     public Product() {
         this.materials = new ArrayList<>();
@@ -41,6 +42,10 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public List<Material> getMaterials() {
+        return materials;
     }
 
     public String getCategory() {

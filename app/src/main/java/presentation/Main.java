@@ -17,7 +17,11 @@ public class Main {
         //application
         MaterialService materialService = new MaterialService();
         ProductService productService = new ProductService(productRepo, materialService);
+<<<<<<< Updated upstream
         RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService(productRepo);
+=======
+        RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService(productService, materialService);
+>>>>>>> Stashed changes
 
         //presentation
         ProductMenu productMenu = new ProductMenu(productService, scanner);
