@@ -48,6 +48,16 @@ public class ProductService {
         return null;
     }
 
+    public List<Product> findAllMatchingNames(String name){
+        List<Product> matchingProducts = new ArrayList<>();
+        for (Product p: products) {
+            if(p.getName().equalsIgnoreCase(name)){
+                matchingProducts.add(p);
+            }
+        }
+        return matchingProducts;
+    }
+
     public double calculateImpact(String name) {
         Product product = findByName(name);
         if (product == null) {
@@ -57,12 +67,18 @@ public class ProductService {
     }
 
     //Method to add a material to a product.
-    public void addMaterialToProduct(String productName, String materialName){
+    public void addMaterialToProduct(int productId, String materialName){
+    
+    //Product product = findByName(productName);
+    for (Product p : products){
+        if (p.getId() == productId){
+            Material material = materialService.findByName(materialName);
+            p.addMaterial(material);
+        }
+    }
+    // Material material = materialService.findByName(materialName);
 
-    Product product = findByName(productName);
-    Material material = materialService.findByName(materialName);
-
-    product.addMaterial(material);
+    // product.addMaterial(material);
     }
 
     public void giveIndex(Product product) {

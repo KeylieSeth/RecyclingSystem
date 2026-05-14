@@ -41,17 +41,17 @@ public class ProductMenu {
                     listProducts();
                     break;
                 case "4":
-                    String productName = getSelectedProduct();
+                    int productId = getSelectedProduct();
                     
-                    if (productName != null) {
+                    //if (!productId != null) {
                         
                         String materialName = getSelectedMaterial();
                         
                         if (materialName != null){
-                            productService.addMaterialToProduct(productName, materialName);
-                            System.out.println(materialName + " has been added to " + productName);
+                            productService.addMaterialToProduct(productId, materialName);
+                            System.out.println(materialName + " has been added.");
                         }
-                    }
+                    //}
                     break;
                 case "5":
                     showImpact();
@@ -121,7 +121,7 @@ public class ProductMenu {
     }
 
     //Choose product from list to add material to.
-    private String getSelectedProduct(){
+    private int getSelectedProduct(){
         //temporary list when method is called to hold all registered products.
         List<Product> products = productService.getAllProducts();
 
@@ -134,20 +134,21 @@ public class ProductMenu {
 
                 if (productChoice < 1 || productChoice > products.size()){
                     System.out.println("Invalid product number.");
-                    return null;
+                    return 0;
                 }
 
                 String selectedProduct = products.get(productChoice-1).getName();
+                int selectedProductId = products.get(productChoice-1).getId();
                 System.out.println("Selected product is: " + selectedProduct);
-                return selectedProduct;
+                return selectedProductId;
 
             } catch(NumberFormatException e){
                 System.out.println("please enter a valid number.");
-                return null;
+                return 0;
             }
         } else {
             System.out.println("No products in list.");
-            return null;
+            return 0;
         }
     }
 
