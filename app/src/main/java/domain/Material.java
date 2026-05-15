@@ -1,6 +1,7 @@
 package domain;
 
 public class Material {
+
     private String name;
     private double impactValue;
 
@@ -10,11 +11,9 @@ public class Material {
                 this.impactValue = impactValue;
         }
     }
-
     public String getName() {
         return name;
     }
-
     public double getImpact(){
         return impactValue;
     }

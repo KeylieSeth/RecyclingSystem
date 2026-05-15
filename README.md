@@ -85,7 +85,7 @@ For the infrastructure, we have our InMemoryProductRepository (instantiated in M
 
 # Design Patterns
 ### Strategy Pattern
-Our implementation of Strategy Pattern allows us to calculate different ways the enviromental impact of a product.
+Our implementation of Strategy Pattern allows us to calculate different ways of the enviromental impact of a product.
 In our program the ImpactCalculationStrategy is an interface, placed in the domain layer. This defines a common contract for the different impact calculations.
 The actual implementations are placed in the application layer, which in our case is the SimpleSumStrategy and WeightedByLifespanStrategy.
 
