@@ -46,7 +46,10 @@ public class MaterialService {
         return result;
     }
 
-
+    //Needed for adding materials to a product in productMenu.
+    public List<Material> getAllMaterials() {
+        return materials;
+    }
 
     public Material findByName(String name) {
         for (Material material: materials) {

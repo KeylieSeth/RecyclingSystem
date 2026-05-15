@@ -45,20 +45,20 @@ public class Menu {
                     printMenu();
                     break;
 
-                // case "4":
-                //     Report report = new Report(productService);
-                //     ReportFormatter reportFormatter = new ReportFormatter();
+                case "4":
+                    Report report = new Report(productService);
+                    ReportFormatter reportFormatter = new ReportFormatter();
                     
-                //     String result = reportFormatter.format(report);
-                //     System.out.println(result);
+                    String result = reportFormatter.format(report);
+                    System.out.println(result);
 
-                //     System.out.println("Save report to file? (y/n)");
-                //     String answer = readChoice();
-                //     if (answer.trim().equalsIgnoreCase("y")) {
-                //         // fileHandler.saveReport(result);
-                //         System.out.println("Report has been saved.");
-                //     }
-                //     break;
+                    System.out.println("Save report to file? (y/n)");
+                    String answer = readChoice();
+                    if (answer.trim().equalsIgnoreCase("y")) {
+                        // fileHandler.saveReport(result);
+                        System.out.println("Report has been saved.");
+                    }
+                    break;
 
                 case "5":
                     //fileHandler.load(productService, materialService);
