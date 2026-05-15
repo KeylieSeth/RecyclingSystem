@@ -1,5 +1,9 @@
 package domain;
 
-public class RecyclingCategory {
-
+public enum RecyclingCategory {
+    PLASTIC,
+    METAL,
+    CERAMIC,
+    NATURAL,
+    MIXED
 }
