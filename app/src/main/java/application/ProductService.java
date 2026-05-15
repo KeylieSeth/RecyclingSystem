@@ -14,6 +14,8 @@ public class ProductService {
 
     private List<Product> products = new ArrayList<>();
 
+    private int currentProductindex = 0;
+
     public ProductService(ProductRepository productRepo, MaterialService materialService) {
         this.productRepo = productRepo;
         this.materialService = materialService;
@@ -21,6 +23,7 @@ public class ProductService {
 
     public void addProduct(String name, String category, int lifespan) {
         Product product = new Product(name, category, lifespan);
+        giveIndex(product);
         products.add(product);
     }
 
@@ -45,11 +48,33 @@ public class ProductService {
         return null;
     }
 
+    public List<Product> findAllMatchingNames(String name){
+        List<Product> matchingProducts = new ArrayList<>();
+        for (Product p: products) {
+            if(p.getName().equalsIgnoreCase(name)){
+                matchingProducts.add(p);
+            }
+        }
+        return matchingProducts;
+    }
+
     public double calculateImpact(String name) {
         Product product = findByName(name);
         if (product == null) {
             return 0.0;
         }
         return 1.0; // MOCK THING (Whole method)
+    }
+
+    //Method to add a material to a product.
+    public void addMaterialToProduct(Product product, String materialName){
+    
+        Material material = materialService.findByName(materialName);
+        product.addMaterial(material);
+    }
+
+    public void giveIndex(Product product) {
+        product.setId(currentProductindex);
+        currentProductindex++;
     }
 }

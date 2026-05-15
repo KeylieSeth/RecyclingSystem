@@ -20,7 +20,7 @@ public class Main {
         RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService();
 
         //presentation
-        ProductMenu productMenu = new ProductMenu(productService, scanner);
+        ProductMenu productMenu = new ProductMenu(productService, materialService, scanner);
         MaterialMenu materialMenu = new MaterialMenu(materialService, scanner);
         RecyclingMenu recyclingMenu = new RecyclingMenu(productService, recyclingGuidanceService, scanner);
         
