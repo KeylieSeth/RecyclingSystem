@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import domain.Material;
 import domain.Product;
@@ -67,18 +68,10 @@ public class ProductService {
     }
 
     //Method to add a material to a product.
-    public void addMaterialToProduct(int productId, String materialName){
+    public void addMaterialToProduct(Product product, String materialName){
     
-    //Product product = findByName(productName);
-    for (Product p : products){
-        if (p.getId() == productId){
-            Material material = materialService.findByName(materialName);
-            p.addMaterial(material);
-        }
-    }
-    // Material material = materialService.findByName(materialName);
-
-    // product.addMaterial(material);
+        Material material = materialService.findByName(materialName);
+        product.addMaterial(material);
     }
 
     public void giveIndex(Product product) {

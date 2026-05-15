@@ -1,6 +1,7 @@
 package presentation;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import application.MaterialService;
@@ -41,17 +42,18 @@ public class ProductMenu {
                     listProducts();
                     break;
                 case "4":
-                    int productId = getSelectedProduct();
+                    Optional<Product> product = getSelectedProduct();
                     
-                    //if (!productId != null) {
-                        
+                    if (product.isPresent()) {
+                        Product p = product.get();
+                    
                         String materialName = getSelectedMaterial();
                         
                         if (materialName != null){
-                            productService.addMaterialToProduct(productId, materialName);
+                            productService.addMaterialToProduct(p, materialName);
                             System.out.println(materialName + " has been added.");
                         }
-                    //}
+                    }
                     break;
                 case "5":
                     showImpact();
@@ -121,7 +123,7 @@ public class ProductMenu {
     }
 
     //Choose product from list to add material to.
-    private int getSelectedProduct(){
+    private Optional<Product> getSelectedProduct(){
         //temporary list when method is called to hold all registered products.
         List<Product> products = productService.getAllProducts();
 
@@ -134,21 +136,21 @@ public class ProductMenu {
 
                 if (productChoice < 1 || productChoice > products.size()){
                     System.out.println("Invalid product number.");
-                    return 0;
+                    return Optional.empty();
                 }
+                String selectedProductName = products.get(productChoice-1).getName();
+                System.out.println("Selected product is: " + selectedProductName);
 
-                String selectedProduct = products.get(productChoice-1).getName();
-                int selectedProductId = products.get(productChoice-1).getId();
-                System.out.println("Selected product is: " + selectedProduct);
-                return selectedProductId;
+                Product selectedProduct = products.get(productChoice-1);
+                return Optional.of(selectedProduct);
 
             } catch(NumberFormatException e){
                 System.out.println("please enter a valid number.");
-                return 0;
+                return Optional.empty();
             }
         } else {
             System.out.println("No products in list.");
-            return 0;
+            return Optional.empty();
         }
     }
 
