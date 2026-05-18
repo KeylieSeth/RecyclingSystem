@@ -8,8 +8,6 @@ public class Product {
     private int estimatedLifespan;
     private boolean recycled;
     
-    private int id;
-    
     //List that will hold all materials that product have.
     private List<Material> productMaterials;
 
@@ -40,15 +38,7 @@ public class Product {
     public void setRecycled(boolean recycled) {
         this.recycled = recycled;
     }
-
-    public void setId(int id){
-        this.id = id;
-    }
-
-    public int getId(){
-        return id;
-    }
-
+    
     //Called by product service to add a material to the list in product.
     public void addMaterial(Material material) {
         productMaterials.add(material);

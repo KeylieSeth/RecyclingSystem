@@ -23,7 +23,6 @@ public class ProductService {
 
     public void addProduct(String name, String category, int lifespan) {
         Product product = new Product(name, category, lifespan);
-        giveIndex(product);
         products.add(product);
     }
 
@@ -71,10 +70,5 @@ public class ProductService {
     
         Material material = materialService.findByName(materialName);
         product.addMaterial(material);
-    }
-
-    public void giveIndex(Product product) {
-        product.setId(currentProductindex);
-        currentProductindex++;
     }
 }
