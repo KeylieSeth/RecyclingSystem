@@ -14,8 +14,6 @@ public class ProductService {
 
     private List<Product> products = new ArrayList<>();
 
-    private int currentProductindex = 0;
-
     public ProductService(ProductRepository productRepo, MaterialService materialService) {
         this.productRepo = productRepo;
         this.materialService = materialService;
