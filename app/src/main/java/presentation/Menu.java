@@ -31,12 +31,12 @@ public class Menu {
 
             switch(choice.toLowerCase()) {
                 case "1":
-                    productMenu.run();
+                    materialMenu.run();
                     printMenu();
                     break;
 
                 case "2":
-                    materialMenu.run();
+                    productMenu.run();
                     printMenu();
                     break;
 
@@ -94,8 +94,8 @@ public class Menu {
 
                 ======= Main Menu =======
                 -------------------------
-                1) Product Menu
-                2) Material Menu
+                1) Material Menu
+                2) Product Menu
                 3) Recycling Menu
                 4) Generate Report
                 5) Load from file
@@ -115,11 +115,11 @@ public class Menu {
 
     public void displayInformation() {
         String infoText = """
-                1) Product Menu
-                   Manage products in the system. Add, remove, list products, add material to a product, and view their environmental impact.
-
-                2) Material Menu
+                1) Material Menu
                    Manage materials used in products. Add, remove, list materials, and analyze their environmental impact.
+
+                2) Product Menu
+                   Manage products in the system. Add, remove, list products, add material to a product, and view their environmental impact.
 
                 3) Recycling Menu
                    Handle recycling processes. View recycling guidelines, update product recycling info, and register recycled products.

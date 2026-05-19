@@ -11,9 +11,9 @@ public class MaterialService {
     }
 
 
-    public void defineMaterial(String name, double impact){
+    public void defineMaterial(String name, double impact, RecyclingCategory category){
         if (impact >= 0) {
-            Material material = new Material(name, impact);
+            Material material = new Material(name, impact, category);
             materials.add(material);
             return;
         }

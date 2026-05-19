@@ -3,6 +3,7 @@ package presentation;
 import java.util.Scanner;
 import application.MaterialService;
 import application.ProductService;
+import domain.RecyclingCategory;
 
 public class MaterialMenu {
     private MaterialService materialService;
@@ -23,7 +24,7 @@ public class MaterialMenu {
             switch (choice) {
                 // Add material
                 case "1":
-                    System.out.println("\n======= Add material =======");
+                    System.out.println("\n======= Add Material =======");
                     try{
                         System.out.print("Enter material name: ");
                         String name = scanner.nextLine();
@@ -32,7 +33,11 @@ public class MaterialMenu {
                         double impact = scanner.nextDouble();
                         scanner.nextLine();
                         
-                        materialService.defineMaterial(name, impact);
+                        System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, NATURAL, MIXED): ");
+                        String categoryInput = scanner.nextLine().toUpperCase();
+                        RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
+
+                        materialService.defineMaterial(name, impact, category);
 
                     } catch (IllegalArgumentException e){
                         System.out.println(e.getMessage());
@@ -63,7 +68,7 @@ public class MaterialMenu {
 
                 // Calculate 
                 case "4":
-                    System.out.println("\n=== Environmental impact ===");
+                    System.out.println("\n=== Environmental Impact ===");
                    // System.out.println("Enter material name: ");
                    // name = scanner.nextLine();
                    // ProductService.calculateImpact(name);
