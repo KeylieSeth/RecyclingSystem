@@ -91,17 +91,20 @@ public class Menu {
 
     public void printMenu() {
         String menuText = """
-                 -----------------
-                | 1) Product Menu
-                | 2) Material Menu
-                | 3) Recycling Menu
-                | 4) Generate Report
-                | 5) Load from file
-                | 6) Save to file
-                | m) Print Menu
-                | i) Help
-                | q) Exit
-                -----------------""";
+
+                ======= Main Menu =======
+                -------------------------
+                1) Product Menu
+                2) Material Menu
+                3) Recycling Menu
+                4) Generate Report
+                5) Load from file
+                6) Save to file
+                m) Print Menu
+                i) Help
+                q) Exit
+                -------------------------""";
+
         System.out.println(menuText);
     }
 
@@ -113,7 +116,7 @@ public class Menu {
     public void displayInformation() {
         String infoText = """
                 1) Product Menu
-                   Manage products in the system. Add, remove, list products, and view their environmental impact.
+                   Manage products in the system. Add, remove, list products, add material to a product, and view their environmental impact.
 
                 2) Material Menu
                    Manage materials used in products. Add, remove, list materials, and analyze their environmental impact.

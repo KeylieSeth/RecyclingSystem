@@ -82,7 +82,7 @@ public class ProductMenu {
         return scanner.nextLine();
     }
     private void addProduct() {
-        System.out.println("======= Add product =======");
+        System.out.println("\n======= Add product =======");
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
         
@@ -97,7 +97,7 @@ public class ProductMenu {
         System.out.println("Product has been added.");
     }
     private void deleteProduct() {
-        System.out.println("====== Delete product ======");
+        System.out.println("\n====== Delete product ======");
         System.out.print("Enter product name to delete: ");
         String name = scanner.nextLine();
 
@@ -105,7 +105,7 @@ public class ProductMenu {
         System.out.println("Product deleted.");
     }
     private void listProducts() {
-        System.out.println("======= Product List =======");
+        System.out.println("\n======= Product List =======");
 
         //Print all products (one per row), in numbered order for user selection.
         for (int i = 0; i < productService.getAllProducts().size(); i++) {
@@ -115,7 +115,7 @@ public class ProductMenu {
         //productService.getAllProducts().forEach(System.out::println);
     }
     private void listMaterials(){
-        System.out.println("==== List of materials: ====");
+        System.out.println("\n==== List of materials: ====");
 
         //Print all products (one per row), in numbered order for user selection.
         for (int i = 0; i < materialService.getAllMaterials().size(); i++) {
@@ -123,7 +123,7 @@ public class ProductMenu {
         }
     }
     private void showImpact() {
-        System.out.println("=== Environmental impact ===");
+        System.out.println("\n=== Environmental impact ===");
 
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
