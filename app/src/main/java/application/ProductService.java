@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import domain.Material;
 import domain.Product;
@@ -21,10 +22,11 @@ public class ProductService {
         this.materialService = materialService;
     }
 
-    public void addProduct(String name, String category, int lifespan) {
-        Product product = new Product(name, category, lifespan);
+    public Product addProduct(String name) {
+        Product product = new Product(name);
         giveIndex(product);
         products.add(product);
+        return product;
     }
 
     public boolean deleteProduct(String name) {
@@ -46,6 +48,15 @@ public class ProductService {
             }
         }
         return null;
+    }
+
+    public Optional<Product> findProductByName(String name){
+        for (Product p : products) {
+            if (p.getName().equalsIgnoreCase(name)) {
+                return Optional.of(p);
+            }
+        }
+        return Optional.empty();
     }
 
     public List<Product> findAllMatchingNames(String name){

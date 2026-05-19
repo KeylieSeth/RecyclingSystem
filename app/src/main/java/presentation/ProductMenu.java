@@ -1,7 +1,6 @@
 package presentation;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import application.MaterialService;
@@ -35,20 +34,6 @@ public class ProductMenu {
                 case "3":
                     listProducts();
                     break;
-                case "4":
-                    Optional<Product> product = getSelectedProduct();
-                    
-                    if (product.isPresent()) {
-                        Product p = product.get();
-                    
-                        String materialName = getSelectedMaterial();
-                        
-                        if (materialName != null){
-                            productService.addMaterialToProduct(p, materialName);
-                            System.out.println(materialName + " has been added.");
-                        }
-                    }
-                    break;
                 case "5":
                     showImpact();
                     break;
@@ -69,8 +54,7 @@ public class ProductMenu {
                 ----------------------------
                 1) Add product       
                 2) Delete product    
-                3) Product list      
-                4) Add material to product           
+                3) Product list           
                 5) Show enviromental impact            
                 0) Back to main menu 
                 ----------------------------""";
@@ -82,21 +66,39 @@ public class ProductMenu {
         System.out.print("Enter your choice: ");
         return scanner.nextLine();
     }
+
     private void addProduct() {
+
+        if (materialService.getAllMaterials().isEmpty()){
+            System.out.println("No registered materials found.");
+            System.out.println("Please add materials before creating a product.");
+            return;
+        }
+
         System.out.println("\n======= Add Product =======");
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
-        
-        System.out.print("Enter category: ");
-        String category = scanner.nextLine();
 
-        System.out.print("Enter estimated lifespan: ");
-        int lifespan = scanner.nextInt();
-        scanner.nextLine();
+        Product product = productService.addProduct(name);
 
-        productService.addProduct(name, category, lifespan);
-        System.out.println("Product has been added.");
+            while (true) {
+                String materialName = getSelectedMaterial();
+
+                if (materialName != null) {
+                    productService.addMaterialToProduct(product, materialName);
+                    System.out.println(materialName + " added to product.");
+                }
+
+                System.out.print("Add another material to product? (y/n): ");
+                String answer = scanner.nextLine();
+
+                if (answer.equalsIgnoreCase("n")) {
+                    break;
+                }
+        }
+        System.out.println("Product added.");
     }
+
     private void deleteProduct() {
         System.out.println("\n====== Delete Product ======");
         System.out.print("Enter product name to delete: ");
@@ -134,65 +136,29 @@ public class ProductMenu {
        System.out.println("Environmental impact: " + impact);
     }
 
-    //Choose product from list to add material to.
-    private Optional<Product> getSelectedProduct(){
-        //temporary list when method is called to hold all registered products.
-        List<Product> products = productService.getAllProducts();
-
-        if (!products.isEmpty()){
-            listProducts();
-            System.out.print("Select the number of the product to add material to: ");
-
-            try {    
-                int productChoice = Integer.parseInt(scanner.nextLine());
-
-                if (productChoice < 1 || productChoice > products.size()){
-                    System.out.println("Invalid product number.");
-                    return Optional.empty();
-                }
-                String selectedProductName = products.get(productChoice-1).getName();
-                System.out.println("Selected product is: " + selectedProductName);
-
-                Product selectedProduct = products.get(productChoice-1);
-                return Optional.of(selectedProduct);
-
-            } catch(NumberFormatException e){
-                System.out.println("please enter a valid number.");
-                return Optional.empty();
-            }
-        } else {
-            System.out.println("No products in list.");
-            return Optional.empty();
-        }
-    }
-
     //Choose material from list to add to a product.
     private String getSelectedMaterial(){
         //temporary list when method is called to hold all registered materials.
         List<Material> materials = materialService.getAllMaterials();
 
-        if(!materials.isEmpty()){
-            listMaterials();
-            System.out.print("Select the number of the material to add: ");
+        listMaterials();
+        System.out.print("Select the number of the material to add: ");
 
-            try {
-                int materialChoice = Integer.parseInt(scanner.nextLine());
+        try {
+            int materialChoice = Integer.parseInt(scanner.nextLine());
 
-                if (materialChoice < 1 || materialChoice > materials.size()){
-                    System.out.println("Invalid material number.");
-                    return null;
-                }
-
-                String selectedMaterial = materials.get(materialChoice-1).getName();
-                return selectedMaterial;
-
-            } catch(NumberFormatException e) {
-                System.out.println("please enter a valid number.");
+            if (materialChoice < 1 || materialChoice > materials.size()){
+                System.out.println("Invalid material number.");
                 return null;
-            } 
-        } else {
-            System.out.println("There are no registered materials.");
+            }
+
+            String selectedMaterial = materials.get(materialChoice-1).getName();
+            return selectedMaterial;
+
+        } catch(NumberFormatException e) {
+            System.out.println("please enter a valid number.");
             return null;
-        }
+        } 
     }
+
 }
