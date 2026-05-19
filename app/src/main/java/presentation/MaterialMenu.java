@@ -3,6 +3,7 @@ package presentation;
 import java.util.Scanner;
 import application.MaterialService;
 import application.ProductService;
+import domain.RecyclingCategory;
 
 public class MaterialMenu {
     private MaterialService materialService;
@@ -41,9 +42,15 @@ public class MaterialMenu {
                         String name = scanner.nextLine();
                     
                         System.out.print("Enter material impact: ");
+
                         double impact = Double.parseDouble(scanner.nextLine());
-                        
-                        materialService.defineMaterial(name, impact);
+
+                        System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, NATURAL, MIXED): ");
+                        String categoryInput = scanner.nextLine().toUpperCase();
+                        RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
+
+
+                        materialService.defineMaterial(name, impact, category);
 
                     } catch (IllegalArgumentException e){
                         System.out.println(e.getMessage());
