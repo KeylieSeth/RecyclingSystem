@@ -56,7 +56,7 @@ public class ProductMenu {
                     System.out.println("Returning to main menu.");
                     return;
                 default:
-                    System.out.println("Invalid choice, try again!");
+                    System.out.println(choice + " is not a valid input.");
             }
         }
     }
