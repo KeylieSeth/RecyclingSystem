@@ -23,26 +23,45 @@ public class Menu {
         this.scanner = scanner;
     }
 
+    public void printMenu() {
+        String menuText = """
+                 -----------------
+                | 1) Product Menu
+                | 2) Material Menu
+                | 3) Recycling Menu
+                | 4) Generate Report
+                | 5) Load from file
+                | 6) Save to file
+                | m) Print Menu
+                | i) Help
+                | q) Exit
+                -----------------""";
+        System.out.println(menuText);
+    }
+
+    public String readChoice() {
+        System.out.print("Enter your choice: ");
+        return scanner.nextLine();
+    }
+
     public void runMenu() {
-        printMenu();
         boolean keepRunning = true;
-        do {
+        while(keepRunning) {
+            printMenu();
+
             String choice = readChoice();
 
             switch(choice.toLowerCase()) {
                 case "1":
                     productMenu.run();
-                    printMenu();
                     break;
 
                 case "2":
                     materialMenu.run();
-                    printMenu();
                     break;
 
                 case "3":
                     recyclingMenu.run();
-                    printMenu();
                     break;
 
                 case "4":
@@ -86,30 +105,10 @@ public class Menu {
                     System.out.println(choice + " is not a valid input.");
                     break;
             }
-        } while (keepRunning);
+        } 
     }
 
-    public void printMenu() {
-        String menuText = """
-                 -----------------
-                | 1) Product Menu
-                | 2) Material Menu
-                | 3) Recycling Menu
-                | 4) Generate Report
-                | 5) Load from file
-                | 6) Save to file
-                | m) Print Menu
-                | i) Help
-                | q) Exit
-                -----------------""";
-        System.out.println(menuText);
-    }
-
-    public String readChoice() {
-        System.out.print("Enter your choice: ");
-        return scanner.nextLine();
-    }
-
+    
     public void displayInformation() {
         String infoText = """
                 1) Product Menu
