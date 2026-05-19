@@ -57,6 +57,7 @@ public class ProductMenu {
                     return;
                 default:
                     System.out.println(choice + " is not a valid input.");
+                    break;
             }
         }
     }
@@ -82,7 +83,7 @@ public class ProductMenu {
         return scanner.nextLine();
     }
     private void addProduct() {
-        System.out.println("\n======= Add product =======");
+        System.out.println("\n======= Add Product =======");
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
         
@@ -97,7 +98,7 @@ public class ProductMenu {
         System.out.println("Product has been added.");
     }
     private void deleteProduct() {
-        System.out.println("\n====== Delete product ======");
+        System.out.println("\n====== Delete Product ======");
         System.out.print("Enter product name to delete: ");
         String name = scanner.nextLine();
 
@@ -115,7 +116,7 @@ public class ProductMenu {
         //productService.getAllProducts().forEach(System.out::println);
     }
     private void listMaterials(){
-        System.out.println("\n==== List of materials: ====");
+        System.out.println("\n==== Material List: ====");
 
         //Print all products (one per row), in numbered order for user selection.
         for (int i = 0; i < materialService.getAllMaterials().size(); i++) {
@@ -123,7 +124,7 @@ public class ProductMenu {
         }
     }
     private void showImpact() {
-        System.out.println("\n=== Environmental impact ===");
+        System.out.println("\n=== Environmental Impact ===");
 
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
