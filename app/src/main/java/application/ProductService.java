@@ -77,4 +77,7 @@ public class ProductService {
         product.setId(currentProductindex);
         currentProductindex++;
     }
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 }

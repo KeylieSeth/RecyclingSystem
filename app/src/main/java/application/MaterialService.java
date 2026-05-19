@@ -59,5 +59,7 @@ public class MaterialService {
         } 
         throw new IllegalArgumentException("Material not found " + name);
      }
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
+    }
 }
-

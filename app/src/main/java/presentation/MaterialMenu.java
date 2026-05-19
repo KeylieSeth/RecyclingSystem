@@ -41,8 +41,7 @@ public class MaterialMenu {
                         String name = scanner.nextLine();
                     
                         System.out.print("Enter material impact: ");
-                        double impact = scanner.nextDouble();
-                        scanner.nextLine();
+                        double impact = Double.parseDouble(scanner.nextLine());
                         
                         materialService.defineMaterial(name, impact);
 
