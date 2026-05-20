@@ -3,7 +3,7 @@ package presentation;
 import java.util.Scanner;
 
 import application.*;
-import domain.ProductRepository;
+import domain.Repository;
 import infrastructure.*;
 
 public class Main {
@@ -11,7 +11,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         //infratructure
-        ProductRepository productRepo = new InMemoryProductRepository();
+        Repository productRepo = new InMemoryRepository();
         FileHandler fileHandler = new FileHandler();
 
         //application
