@@ -29,8 +29,12 @@ public class ProductService {
         return product;
     }
 
-    public boolean deleteProduct(String name) {
-        return products.removeIf(p -> p.getName().equalsIgnoreCase(name));
+    // public boolean deleteProduct(String name) {
+    //     return products.removeIf(p -> p.getName().equalsIgnoreCase(name));
+    // }
+
+    public boolean deleteProduct(Product product){
+        return products.remove(product);
     }
 
     public List<Product> getAllProducts() {

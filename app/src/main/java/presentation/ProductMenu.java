@@ -2,6 +2,7 @@ package presentation;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Optional;
 
 import application.MaterialService;
 import application.ProductService;
@@ -29,9 +30,25 @@ public class ProductMenu {
                     addProduct();
                     break;
                 case "2":
-                    deleteProduct();
+                    System.out.println("\n====== Delete Product ======");
+                    Optional<Product> product = getSelectedProduct();
+
+                    if (product.isPresent()) {
+                        Product p = product.get();
+
+                        boolean removed = productService.deleteProduct(p);
+
+                        if (removed) {
+                            System.out.println("Product has been deleted.");
+                        } else {
+                            System.out.println("Could not delete product.");
+                        }
+                    }
+
                     break;
+                    
                 case "3":
+                    System.out.println("\n======= Product List =======");
                     listProducts();
                     break;
                 case "5":
@@ -99,24 +116,13 @@ public class ProductMenu {
         System.out.println("Product added.");
     }
 
-    private void deleteProduct() {
-        System.out.println("\n====== Delete Product ======");
-        System.out.print("Enter product name to delete: ");
-        String name = scanner.nextLine();
-
-        productService.deleteProduct(name);
-        System.out.println("Product deleted.");
-    }
     private void listProducts() {
-        System.out.println("\n======= Product List =======");
-
         //Print all products (one per row), in numbered order for user selection.
         for (int i = 0; i < productService.getAllProducts().size(); i++) {
             System.out.println((i+1) + ". " + productService.getAllProducts().get(i).getName());
         }
-
-        //productService.getAllProducts().forEach(System.out::println);
     }
+
     private void listMaterials(){
         System.out.println("\n==== Material List: ====");
 
@@ -125,6 +131,7 @@ public class ProductMenu {
             System.out.println((i+1) + ". " + materialService.getAllMaterials().get(i).getName());
         }
     }
+
     private void showImpact() {
         System.out.println("\n=== Environmental Impact ===");
 
@@ -159,6 +166,37 @@ public class ProductMenu {
             System.out.println("please enter a valid number.");
             return null;
         } 
+    }
+
+    private Optional<Product> getSelectedProduct(){
+        //temporary list when method is called to hold all registered products.
+        List<Product> products = productService.getAllProducts();
+
+        if (!products.isEmpty()){
+            listProducts();
+            System.out.print("Select the number of the product: ");
+
+            try {    
+                int productChoice = Integer.parseInt(scanner.nextLine());
+
+                if (productChoice < 1 || productChoice > products.size()){
+                    System.out.println("Invalid product number.");
+                    return Optional.empty();
+                }
+                String selectedProductName = products.get(productChoice-1).getName();
+                System.out.println("Selected product is: " + selectedProductName);
+
+                Product selectedProduct = products.get(productChoice-1);
+                return Optional.of(selectedProduct);
+
+            } catch(NumberFormatException e){
+                System.out.println("please enter a valid number.");
+                return Optional.empty();
+            }
+        } else {
+            System.out.println("No products in list.");
+            return Optional.empty();
+        }
     }
 
 }
