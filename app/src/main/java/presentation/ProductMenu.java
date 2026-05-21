@@ -1,5 +1,6 @@
 package presentation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Optional;
@@ -44,14 +45,13 @@ public class ProductMenu {
                             System.out.println("Could not delete product.");
                         }
                     }
-
                     break;
                     
                 case "3":
                     System.out.println("\n======= Product List =======");
                     listProducts();
                     break;
-                case "5":
+                case "4":
                     showImpact();
                     break;
                 case "0":
@@ -72,7 +72,7 @@ public class ProductMenu {
                 1) Add product       
                 2) Delete product    
                 3) Product list           
-                5) Show enviromental impact            
+                4) Show enviromental impact            
                 0) Back to main menu 
                 ----------------------------""";
 
@@ -85,6 +85,7 @@ public class ProductMenu {
     }
 
     private void addProduct() {
+        List<String> productMaterials = new ArrayList<>();
 
         if (materialService.getAllMaterials().isEmpty()){
             System.out.println("No registered materials found.");
@@ -96,12 +97,23 @@ public class ProductMenu {
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
 
+        if (name.isBlank()){
+            System.out.println("Product name not valid.");
+            return;
+        }
+            
         Product product = productService.addProduct(name);
 
             while (true) {
                 String materialName = getSelectedMaterial();
 
-                if (materialName != null) {
+                if (productMaterials.contains(materialName)){
+                    System.out.println(name + " already has " + materialName + ".");
+                    System.out.println("Please choose another material.");
+                }
+
+                else if (materialName != null) {
+                    productMaterials.add(materialName);
                     productService.addMaterialToProduct(product, materialName);
                     System.out.println(materialName + " added to product.");
                 }
@@ -109,11 +121,16 @@ public class ProductMenu {
                 System.out.print("Add another material to product? (y/n): ");
                 String answer = scanner.nextLine();
 
+                if (answer.equalsIgnoreCase("n") && productMaterials.isEmpty()){
+                    System.out.println("A product must have atleast one material.");
+                    continue;
+                }
+
                 if (answer.equalsIgnoreCase("n")) {
                     break;
                 }
         }
-        System.out.println("Product added.");
+        System.out.println(name + " added.");
     }
 
     private void listProducts() {
