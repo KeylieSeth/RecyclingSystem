@@ -33,7 +33,7 @@ public class MaterialMenu {
                         System.out.print("Enter material name: ");
                         String name = scanner.nextLine();
                     
-                        System.out.print("Enter material's emmision factor: ");
+                        System.out.print("Enter material's emmision factor (kg Co2e/kg): ");
                         double eF = scanner.nextDouble();
                         scanner.nextLine();
                         
