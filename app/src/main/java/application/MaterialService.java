@@ -11,13 +11,13 @@ public class MaterialService {
     }
 
 
-    public void defineMaterial(String name, double impact, RecyclingCategory category){
-        if (impact >= 0) {
-            Material material = new Material(name, impact, category);
+    public void defineMaterial(String name, double eF, RecyclingCategory category){
+        if (eF >= 0) {
+            Material material = new Material(name, eF, category);
             materials.add(material);
             return;
         }
-        throw new IllegalArgumentException("Incorrect impact value " + impact);
+        throw new IllegalArgumentException("Incorrect impact value " + eF);
     }
 
 
@@ -53,11 +53,11 @@ public class MaterialService {
 
     public Material findByName(String name) {
         for (Material material: materials) {
-            if (material.getName().equals(name)) {
+            if (material.getName().toLowerCase().equals(name)) {
                 return material;
             }
         } 
-        throw new IllegalArgumentException("Material not found " + name);
+        throw new IllegalArgumentException("Material not found: " + name);
      }
 }
 

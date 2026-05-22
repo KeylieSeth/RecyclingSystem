@@ -3,11 +3,15 @@ package presentation;
 import java.util.Scanner;
 import application.MaterialService;
 import application.ProductService;
+import domain.ImpactCalculationStrategy;
+import domain.Material;
+import domain.PerMaterialContribution;
 import domain.RecyclingCategory;
 
 public class MaterialMenu {
     private MaterialService materialService;
     private Scanner scanner;
+    private ProductService productService;
     
     public MaterialMenu(MaterialService materialService, Scanner scanner){
         this.materialService = materialService;
@@ -32,7 +36,6 @@ public class MaterialMenu {
             print();
             System.out.print("Enter your choice: ");
             String choice = scanner.nextLine().toLowerCase();
-            print();
 
             switch (choice) {
                 // Add material
@@ -41,16 +44,15 @@ public class MaterialMenu {
                         System.out.print("Enter material: ");
                         String name = scanner.nextLine();
                     
-                        System.out.print("Enter material impact: ");
-                        double impact = scanner.nextDouble();
+                        System.out.print("Enter material's emmision factor: ");
+                        double eF = scanner.nextDouble();
                         scanner.nextLine();
 
                         System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, NATURAL, MIXED): ");
                         String categoryInput = scanner.nextLine().toUpperCase();
                         RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
 
-
-                        materialService.defineMaterial(name, impact, category);
+                        materialService.defineMaterial(name, eF, category);
 
                     } catch (IllegalArgumentException e){
                         System.out.println(e.getMessage());
@@ -68,7 +70,6 @@ public class MaterialMenu {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
-
                     break;
                     
 
@@ -77,11 +78,35 @@ public class MaterialMenu {
                     System.out.println(materialService.listMaterials());
                     break;
 
-                // Calculate 
-                // case 4:
-                   // System.out.println("Enter material name: ");
-                   // name = scanner.nextLine();
-                   // ProductService.calculateImpact(name);
+                    
+                // Carbon Contribution (per material)
+                case "4":
+                    try {
+                    System.out.print("Enter material name: ");
+                    String name = scanner.nextLine();
+                    
+
+                    Material material = materialService.findByName(name);
+
+                    if (material != null){
+                        System.out.print("Enter mass: ");
+                        double mass = scanner.nextDouble();
+                        scanner.nextLine();
+
+                        ImpactCalculationStrategy strategy = new PerMaterialContribution();
+
+                        double result = strategy.calculate(materialService.findByName(name).getEmmissionFactor(), mass);
+
+                        if (result != 0) {
+                            System.out.println("carbon contribution of material: " + result);
+                        }
+                    }
+
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+
 
                 // Back to menu
                 case "0":
