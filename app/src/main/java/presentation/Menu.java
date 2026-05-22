@@ -3,7 +3,6 @@ package presentation;
 import java.util.Scanner;
 
 import application.*;
-import domain.ImpactCalculationStrategy;
 import infrastructure.FileHandler;
 
 public class Menu {
