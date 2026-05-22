@@ -53,11 +53,10 @@ public class MaterialService {
 
     public Material findByName(String name) {
         for (Material material: materials) {
-            if (material.getName().toLowerCase().equals(name)) {
+            if (material.getName().toLowerCase().equals(name.toLowerCase())) {
                 return material;
             }
         } 
         throw new IllegalArgumentException("Material not found: " + name);
      }
 }
-

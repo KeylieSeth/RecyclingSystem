@@ -58,14 +58,6 @@ public class ProductService {
         return matchingProducts;
     }
 
-    public double calculateImpact(String name) {
-        Product product = findByName(name);
-        if (product == null) {
-            return 0.0;
-        }
-        return 1.0; // MOCK THING (Whole method)
-    }
-
     //Method to add a material to a product.
     public void addMaterialToProduct(Product product, String materialName){
     

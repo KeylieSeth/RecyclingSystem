@@ -19,15 +19,18 @@ public class ProductMenu {
         this.productService = productService;   
         this.materialService = materialService;    
     }
+
+
     public void run() {
         while (true) {
+            System.out.println();
             System.out.println("Product Menu");
             System.out.println("1) Add product");
             System.out.println("2) Delete product");
             System.out.println("3) List products");
             System.out.println("4) Add material to product");
             System.out.println("5) Environmental impact");
-            System.out.println("0) Back to main menu");
+            System.out.println("0) Back to main menu" + "\n");
 
             String choice = readChoice();
 
@@ -72,27 +75,31 @@ public class ProductMenu {
     }
     private void addProduct() {
         System.out.println("Add product");
-        System.out.println("Enter product name: ");
+        System.out.print("Enter product name: ");
         String name = scanner.nextLine();
         
-        System.out.println("Enter category: ");
+        System.out.print("Enter category: ");
         String category = scanner.nextLine();
 
-        System.out.println("Enter estimated lifespan: ");
+        System.out.print("Enter estimated lifespan (years): ");
         int lifespan = scanner.nextInt();
         scanner.nextLine();
 
         productService.addProduct(name, category, lifespan);
         System.out.println("Product has been added.");
     }
+
+
     private void deleteProduct() {
         System.out.println("Delete product");
-        System.out.println("Enter product name to delete: ");
+        System.out.print("Enter product name to delete: ");
         String name = scanner.nextLine();
 
         productService.deleteProduct(name);
         System.out.println("Product deleted.");
     }
+
+
     private void listProducts() {
         System.out.println("List of all products:");
 
@@ -103,6 +110,8 @@ public class ProductMenu {
 
         //productService.getAllProducts().forEach(System.out::println);
     }
+
+
     private void listMaterials(){
         System.out.println("List of all materials:");
 
@@ -111,16 +120,17 @@ public class ProductMenu {
             System.out.println((i+1) + ". " + materialService.getAllMaterials().get(i).getName());
         }
     }
+
+
     private void showImpact() {
         System.out.println("Environmental impact");
 
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
 
-        double impact = productService.calculateImpact(name);
-
-       System.out.println("Environmental impact: " + impact);
+        System.out.println();
     }
+
 
     //Choose product from list to add material to.
     private Optional<Product> getSelectedProduct(){
@@ -153,6 +163,7 @@ public class ProductMenu {
             return Optional.empty();
         }
     }
+
 
     //Choose material from list to add to a product.
     private String getSelectedMaterial(){

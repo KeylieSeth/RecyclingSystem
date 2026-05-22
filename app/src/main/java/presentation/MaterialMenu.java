@@ -43,7 +43,8 @@ public class MaterialMenu {
                     try{
                         System.out.print("Enter material: ");
                         String name = scanner.nextLine();
-                    
+                        
+                        // eF
                         System.out.print("Enter material's emmision factor: ");
                         double eF = scanner.nextDouble();
                         scanner.nextLine();
@@ -85,12 +86,11 @@ public class MaterialMenu {
                     System.out.print("Enter material name: ");
                     String name = scanner.nextLine();
                     
-
                     Material material = materialService.findByName(name);
 
                     if (material != null){
                         System.out.print("Enter mass: ");
-                        double mass = scanner.nextDouble();
+                        double mass = scanner.nextDouble(); 
                         scanner.nextLine();
 
                         ImpactCalculationStrategy strategy = new PerMaterialContribution();

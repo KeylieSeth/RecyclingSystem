@@ -11,7 +11,7 @@ public class Product {
     private int id;
     
     //List that will hold all materials that product have.
-    private List<Material> productMaterials;
+    private List<ProductMaterialRelation> productMaterials;
 
     public Product(String name, String category, int estimatedLifespan) {
         this.name = name;
