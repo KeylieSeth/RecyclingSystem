@@ -13,10 +13,8 @@ public class Product {
     //List that will hold all materials that product have.
     private List<Material> productMaterials;
 
-    public Product(String name, String category, int estimatedLifespan) {
+    public Product(String name) {
         this.name = name;
-        this.category = category;
-        this.estimatedLifespan = estimatedLifespan;
         this.recycled = false;
 
         //When product is created it dont contain any materials.

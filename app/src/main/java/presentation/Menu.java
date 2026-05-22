@@ -23,25 +23,23 @@ public class Menu {
     }
 
     public void runMenu() {
-        printMenu();
         boolean keepRunning = true;
-        do {
+        while(keepRunning) {
+            printMenu();
+
             String choice = readChoice();
 
             switch(choice.toLowerCase()) {
                 case "1":
-                    productMenu.run();
-                    printMenu();
+                    materialMenu.run();
                     break;
 
                 case "2":
-                    materialMenu.run();
-                    printMenu();
+                    productMenu.run();
                     break;
 
                 case "3":
                     recyclingMenu.run();
-                    printMenu();
                     break;
 
                 case "4":
@@ -69,10 +67,6 @@ public class Menu {
                     System.out.println("Saved to file..");
                     break;
 
-                case "m":
-                    printMenu();
-                    break;
-
                 case "i":
                     displayInformation();
                     break;
@@ -85,22 +79,24 @@ public class Menu {
                     System.out.println(choice + " is not a valid input.");
                     break;
             }
-        } while (keepRunning);
+        }
     }
 
     public void printMenu() {
         String menuText = """
-                 -----------------
-                | 1) Product Menu
-                | 2) Material Menu
-                | 3) Recycling Menu
-                | 4) Generate Report
-                | 5) Load from file
-                | 6) Save to file
-                | m) Print Menu
-                | i) Help
-                | q) Exit
-                -----------------""";
+
+                ======= Main Menu =======
+                -------------------------
+                1) Material Menu
+                2) Product Menu
+                3) Recycling Menu
+                4) Generate Report
+                5) Load from file
+                6) Save to file
+                i) Help
+                q) Exit
+                -------------------------""";
+
         System.out.println(menuText);
     }
 
@@ -109,19 +105,28 @@ public class Menu {
         return scanner.nextLine();
     }
 
+    
     public void displayInformation() {
         String infoText = """
-                1) Product Menu
-                   Manage products in the system. Add, remove, list products, and view their environmental impact.
 
-                2) Material Menu
+                1) Material Menu
                    Manage materials used in products. Add, remove, list materials, and analyze their environmental impact.
+
+                2) Product Menu
+                   Manage products in the system. Add, remove, list products and view their environmental impact.
 
                 3) Recycling Menu
                    Handle recycling processes. View recycling guidelines, update product recycling info, and register recycled products.
 
                 4) Generate Report
                    Create reports summarizing products, materials, and their environmental impact.""";
+
         System.out.println(infoText);
+
+        System.out.print("\nPress Enter to go back to menu. ");
+
+        if (scanner.nextLine() == ""){
+            return;
+        }
     }
 }
