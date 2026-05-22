@@ -13,42 +13,29 @@ public class MaterialMenu {
         this.materialService = materialService;
         this.scanner = scanner;
     }
-
-    // print menu
-    public void print(){
-        System.out.println();
-        System.out.println("1. Add material\n" + 
-                        "2. Delete material\n" + 
-                        "3. List all materials\n" + 
-                        "4. Environment impact\n" + 
-                        "0. Back to main menu");
-        System.out.println();
-    }
-  
-    
+ 
     // run menu
     public void run(){
         while (true) {
-            print();
+            printMenu();
             System.out.print("Enter your choice: ");
             String choice = scanner.nextLine().toLowerCase();
-            print();
 
             switch (choice) {
                 // Add material
                 case "1":
+                    System.out.println("\n======= Add Material =======");
                     try{
-                        System.out.print("Enter material: ");
+                        System.out.print("Enter material name: ");
                         String name = scanner.nextLine();
                     
                         System.out.print("Enter material impact: ");
                         double impact = scanner.nextDouble();
                         scanner.nextLine();
-
+                        
                         System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, NATURAL, MIXED): ");
                         String categoryInput = scanner.nextLine().toUpperCase();
                         RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
-
 
                         materialService.defineMaterial(name, impact, category);
 
@@ -60,8 +47,9 @@ public class MaterialMenu {
 
                 // Delete material
                 case "2":
+                    System.out.println("\n====== Delete Material ======");
                     try {
-                    System.out.print("Enter material name to delete :");
+                    System.out.print("Enter material name to delete: ");
                     String name = scanner.nextLine();
                     materialService.deleteMaterial(name);
 
@@ -74,22 +62,41 @@ public class MaterialMenu {
 
                 // List all materials
                 case "3":
+                    System.out.println("\n======= Material List =======");
                     System.out.println(materialService.listMaterials());
                     break;
 
                 // Calculate 
-                // case 4:
+                case "4":
+                    System.out.println("\n=== Environmental Impact ===");
                    // System.out.println("Enter material name: ");
                    // name = scanner.nextLine();
                    // ProductService.calculateImpact(name);
+                   break;
 
                 // Back to menu
                 case "0":
                     return;
             
                 default:
+                    System.out.println(choice + " is not a valid input.");
                     break;
             }
         }
+    }
+
+    public void printMenu() {
+        String menuText = """
+
+                ======= Material Menu =======
+                -----------------------------
+                1) Add material       
+                2) Delete material    
+                3) Material list                
+                4) Show enviromental impact            
+                0) Back to main menu 
+                -----------------------------""";
+
+        System.out.println(menuText);
     }
 }

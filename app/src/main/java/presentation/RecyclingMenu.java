@@ -18,35 +18,48 @@ public class RecyclingMenu {
         this.scanner = scanner;
     }
 
-        public void run() {
-        boolean running = true;
+    public void run() {
+        while (true) {
+            printMenu();
 
-        while (running) {
-            System.out.println("\n=== Recycling Menu ===");
-            System.out.println("1. Recyclable guidance");
-            System.out.println("2. Change recycling guidance for product");
-            System.out.println("3. Recycle a product");
-            System.out.println("0. Back to main menu");
-            System.out.print("Choose option: ");
-
+            System.out.print("Enter your choice: ");
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
+                    System.out.println("\n===== Recycling Guidance =====");
                     showRecyclingGuidance();
-                case "2":
-                    changeRecyclingGuidanceForProduct();
                     break;
-                case "3":
+                case "2":
+                    System.out.println("\n====== Recycle Product ======");
                     recycleProduct();
                     break;
+                case "3":
+                    System.out.println("\n= Change Recycling Guidance =");
+                    changeRecyclingGuidanceForProduct();
+                    break;
                 case "0":
-                    running = false;
                     return;
                 default:
-                    System.out.println("Invalid choice. Try again.");
+                    System.out.println(choice + " is not a valid input.");
+                    break;
             }
         }
+    }
+
+    public void printMenu() {
+        String menuText = """
+
+                ======= Recycling Menu =======
+                ------------------------------
+                1) Recycling guidance       
+                2) Recycle a product    
+                3) Change recycling guidance 
+                   for product                         
+                0) Back to main menu 
+                ------------------------------""";
+
+        System.out.println(menuText);
     }
 
     private void showRecyclingGuidance() {
