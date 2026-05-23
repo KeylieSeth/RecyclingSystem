@@ -8,6 +8,7 @@ import application.MaterialService;
 import application.ProductService;
 import domain.Material;
 import domain.Product;
+import domain.ProductMaterialRelation;
 
 public class ProductMenu {
     private Scanner scanner;
@@ -50,11 +51,13 @@ public class ProductMenu {
                     if (product.isPresent()) {
                         Product p = product.get();
                     
-                        String materialName = getSelectedMaterial();
+                        ProductMaterialRelation material = getSelectedMaterial();
                         
-                        if (materialName != null){
-                            productService.addMaterialToProduct(p, materialName);
-                            System.out.println(materialName + " has been added.");
+                        if (material != null){
+                            productService.addMaterialToProduct(p, material);
+                            double mass = getMass();
+
+                            ProductMaterialRelation productMaterial = new ProductMaterialRelation(material, mass);
                         }
                     }
                     break;
@@ -166,7 +169,7 @@ public class ProductMenu {
 
 
     //Choose material from list to add to a product.
-    private String getSelectedMaterial(){
+    private Material getSelectedMaterial(){
         //temporary list when method is called to hold all registered materials.
         List<Material> materials = materialService.getAllMaterials();
 
@@ -182,8 +185,9 @@ public class ProductMenu {
                     return null;
                 }
 
-                String selectedMaterial = materials.get(materialChoice-1).getName();
+                Material selectedMaterial = materials.get(materialChoice-1);
                 return selectedMaterial;
+
 
             } catch(NumberFormatException e) {
                 System.out.println("please enter a valid number.");
@@ -193,5 +197,12 @@ public class ProductMenu {
             System.out.println("There are no registered materials.");
             return null;
         }
+    }
+
+    private double getMass() {
+        System.out.println("Enter the mass of the selected material in that product");
+        double mass = scanner.nextDouble();
+        scanner.nextLine();
+        return mass;
     }
 }

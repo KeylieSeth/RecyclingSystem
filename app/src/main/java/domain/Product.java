@@ -50,12 +50,12 @@ public class Product {
     }
 
     //Called by product service to add a material to the list in product.
-    public void addMaterial(Material material) {
+    public void addMaterial(ProductMaterialRelation material) {
         productMaterials.add(material);
     }
 
     //for other classes (like report) to get access to a product's material list.
-    public List<Material> getMaterials() {
+    public List<ProductMaterialRelation> getMaterials() {
         return productMaterials;
     }
 }

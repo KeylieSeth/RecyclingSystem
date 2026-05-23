@@ -5,6 +5,7 @@ import java.util.List;
 
 import domain.Material;
 import domain.Product;
+import domain.ProductMaterialRelation;
 import domain.ProductRepository;
 
 public class ProductService {
@@ -59,9 +60,7 @@ public class ProductService {
     }
 
     //Method to add a material to a product.
-    public void addMaterialToProduct(Product product, String materialName){
-    
-        Material material = materialService.findByName(materialName);
+    public void addMaterialToProduct(Product product, ProductMaterialRelation material){
         product.addMaterial(material);
     }
 
