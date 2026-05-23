@@ -3,18 +3,26 @@ package domain;
 public class Material {
 
     private String name;
-    private double impactValue;
+    private double eF; // Emmission factor
+    private RecyclingCategory recyclingCategory;
 
-    public Material(String name, double impactValue){
+    public Material(String name, double eF, RecyclingCategory recyclingCategory){
         this.name = name;
-            if (impactValue > 0){
-                this.impactValue = impactValue;
+            if (eF > 0){
+                this.eF = eF;
         }
+        this.recyclingCategory = recyclingCategory;
     }
     public String getName() {
         return name;
     }
     public double getImpact(){
-        return impactValue;
+        return eF;
+    }
+    public double getEmmissionFactor(){
+        return eF;
+    }
+    public RecyclingCategory getRecyclingCategory() {
+        return recyclingCategory;
     }
 }
