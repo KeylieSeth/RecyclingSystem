@@ -49,7 +49,7 @@ Infrastructure /
 	InMemoryProductRepository  
 
 ### Presentation
-In our Presantation layer, we will have both the Menu class and the Main class, since they will be in charge of user         interaction, such as displaying information to the user and Main will be "running" the entire system, getting information    from all the various classes. This layer contains no logic of its own.
+In our Presentation layer, we have divided responsibilities for displaying and handling user interactions between four menus. The main menu contains the loop for running the program and displaying the different category menus. The material menu is responsible for adding and deleting materials from the system, while the product menu handles product interactions. The recycling menu is responsible for providing recycling guidance for products within the system and for changing recycling instructions for products.
 
 ### Application
 The application layer will have all of our services, such as ProductService, MaterialService, RecyclingGuideService,         SimpleSumStrategy and WeightedByLifespanStrategy. This layer calls into the domain to exacute business, gives instructions   but does   not do the work itself. ProductService receives an ImpactCalculationStrategy via its constructor,                 SimpleSumStrategy and WeightedByLifespanStrategy implements our ImpactCalculationStrategy interface and provides the         actual calculations for the products. The RecyclingGuidanceService will provide guidance for recycling, it takes a product   and provides information of what material/s the product is made of and how to recycle it properly. ProductService creates,   removes and changes products and MaterialService defines the various materials.
