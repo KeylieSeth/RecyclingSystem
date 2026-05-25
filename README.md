@@ -23,26 +23,30 @@ The system provides a total calculation for the environmental impact of a produc
 -Receive Input
 
 ## Architecture
-Presentation/
-	Main,
-	Menu
+Presentation/  
+	MainMenu  
+	MaterialMenu  
+	ProductMenu  
+	RecyclingMenu  
+	ReportFormatter  
 
-Application/
-	ProductService,
-	MaterialService,
-	RecyclingGuidanceService,
-	SimpleSumStrategy,
-	WeightedByLifespanStrategy
+Application/  
+	ProductService  
+	MaterialService  
+	RecyclingGuidanceService  
+	SimpleSumStrategy  
+	WeightedByLifespanStrategy  
+	Report  
 
-Domain /
-	ImpactCalculationStrategy,
-	ProductRepository,
-	Product,
-	Material,
-	RecyclingCategory
+Domain /  
+	ImpactCalculationStrategy  
+	ProductRepository  
+	Product  
+	Material  
+	RecyclingCategory  
 
-Infrastructure /
-	InMemoryProductRepository
+Infrastructure /  
+	InMemoryProductRepository  
 
 ### Presentation
 In our Presantation layer, we will have both the Menu class and the Main class, since they will be in charge of user         interaction, such as displaying information to the user and Main will be "running" the entire system, getting information    from all the various classes. This layer contains no logic of its own.
