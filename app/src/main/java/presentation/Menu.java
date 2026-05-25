@@ -116,10 +116,10 @@ public class Menu {
                    Manage products in the system. Add, remove, list products and view their environmental impact.
 
                 3) Recycling Menu
-                   Handle recycling processes. View recycling guidelines, update product recycling info, and register recycled products.
+                   Handle recycling processes. View recycling guidelines and update product recycling info.
 
                 4) Generate Report
-                   Create reports summarizing products, materials, and their environmental impact.""";
+                   Create a report summarizing products with their materials, and their environmental impact.""";
 
         System.out.println(infoText);
 

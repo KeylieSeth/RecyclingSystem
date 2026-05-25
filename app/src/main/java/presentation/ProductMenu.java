@@ -135,8 +135,8 @@ public class ProductMenu {
 
     private void listProducts() {
         //Print all products (one per row), in numbered order for user selection.
-        for (int i = 0; i < productService.getAllProducts().size(); i++) {
-            System.out.println((i+1) + ". " + productService.getAllProducts().get(i).getName());
+        for (int i = 0; i < productService.listProducts().size(); i++) {
+            System.out.println((i+1) + ". " + productService.listProducts().get(i).getName());
         }
     }
 
@@ -187,7 +187,7 @@ public class ProductMenu {
 
     private Optional<Product> getSelectedProduct(){
         //temporary list when method is called to hold all registered products.
-        List<Product> products = productService.getAllProducts();
+        List<Product> products = productService.listProducts();
 
         if (!products.isEmpty()){
             listProducts();
@@ -215,5 +215,4 @@ public class ProductMenu {
             return Optional.empty();
         }
     }
-
 }

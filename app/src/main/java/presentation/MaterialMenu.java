@@ -48,7 +48,6 @@ public class MaterialMenu {
                     }
                         break;
 
-
                 // Delete material
                 case "2":
                     System.out.println("\n====== Delete Material ======");
@@ -97,7 +96,6 @@ public class MaterialMenu {
                         System.out.println(e.getMessage());
                     }
                     break;
-
 
                 // Back to menu
                 case "0":

@@ -15,8 +15,6 @@ public class ProductService {
 
     private List<Product> products = new ArrayList<>();
 
-    private int currentProductindex = 0;
-
     public ProductService(ProductRepository productRepo, MaterialService materialService) {
         this.productRepo = productRepo;
         this.materialService = materialService;
@@ -24,21 +22,12 @@ public class ProductService {
 
     public Product addProduct(String name) {
         Product product = new Product(name);
-        giveIndex(product);
         products.add(product);
         return product;
     }
 
-    // public boolean deleteProduct(String name) {
-    //     return products.removeIf(p -> p.getName().equalsIgnoreCase(name));
-    // }
-
     public boolean deleteProduct(Product product){
         return products.remove(product);
-    }
-
-    public List<Product> getAllProducts() {
-        return products;
     }
 
     public List<Product> listProducts() {
@@ -63,16 +52,6 @@ public class ProductService {
         return Optional.empty();
     }
 
-    public List<Product> findAllMatchingNames(String name){
-        List<Product> matchingProducts = new ArrayList<>();
-        for (Product p: products) {
-            if(p.getName().equalsIgnoreCase(name)){
-                matchingProducts.add(p);
-            }
-        }
-        return matchingProducts;
-    }
-
     public double calculateImpact(String name) {
         Product product = findByName(name);
         if (product == null) {
@@ -86,10 +65,5 @@ public class ProductService {
     
         Material material = materialService.findByName(materialName);
         product.addMaterial(material);
-    }
-
-    public void giveIndex(Product product) {
-        product.setId(currentProductindex);
-        currentProductindex++;
     }
 }
