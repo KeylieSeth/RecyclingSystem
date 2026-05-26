@@ -3,7 +3,7 @@ package presentation;
 import java.util.Scanner;
 
 import application.*;
-import domain.ProductRepository;
+import domain.Repository;
 import infrastructure.*;
 
 public class Main {
@@ -11,12 +11,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         //infratructure
-        ProductRepository productRepo = new InMemoryProductRepository();
+        Repository repo = new InMemoryRepository();
         FileHandler fileHandler = new FileHandler();
 
         //application
-        MaterialService materialService = new MaterialService();
-        ProductService productService = new ProductService(productRepo, materialService);
+        MaterialService materialService = new MaterialService(repo);
+        ProductService productService = new ProductService(repo, materialService);
         RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService(productService, materialService);
 
         //presentation
