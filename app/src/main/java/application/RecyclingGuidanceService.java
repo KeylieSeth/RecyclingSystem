@@ -84,27 +84,4 @@ public class RecyclingGuidanceService {
 
         customGuidanceByProductName.put(product.getName(), newGuidance.trim());
     }
-
-    public boolean recycleProduct(Product product) {
-        if (product == null) {
-            return false;
-        }
-
-        if (product.isRecycled()) {
-            return false;
-        }
-
-        product.setRecycled(true);
-        return true;
-    }
-
-    public boolean recycleProductByName(String productName) {
-        Product product = productService.findByName(productName);
-
-        if (product == null) {
-            return false;
-        }
-
-        return recycleProduct(product);
-    }
 }

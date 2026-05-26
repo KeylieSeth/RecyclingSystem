@@ -6,8 +6,6 @@ import domain.Material;
 
 public class FileHandler {
 
-
-
     public void save(List<Product> products,
                      List<Material> materials,
                      String fileName)
@@ -43,5 +41,12 @@ public class FileHandler {
 
             return (List<Material>) in.readObject();
         }
+    }
+    public void saveReport(String report, String fileName)
+            throws IOException {
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(report);
+        }    
     }
 }
