@@ -1,5 +1,6 @@
 package domain;
 
-public class ImpactCalculationStrategy {
+public interface ImpactCalculationStrategy {
 
+    public double calculate(double eF, double mass);
 }

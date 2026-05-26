@@ -4,13 +4,13 @@ import java.io.Serializable;
 public class Material implements Serializable {
 
     private String name;
-    private double impactValue;
+    private double eF; // Emmission factor
     private RecyclingCategory recyclingCategory;
 
-    public Material(String name, double impactValue, RecyclingCategory recyclingCategory){
+    public Material(String name, double eF, RecyclingCategory recyclingCategory){
         this.name = name;
-            if (impactValue > 0){
-                this.impactValue = impactValue;
+            if (eF > 0){
+                this.eF = eF;
         }
         this.recyclingCategory = recyclingCategory;
     }
@@ -18,7 +18,10 @@ public class Material implements Serializable {
         return name;
     }
     public double getImpact(){
-        return impactValue;
+        return eF;
+    }
+    public double getEmmissionFactor(){
+        return eF;
     }
     public RecyclingCategory getRecyclingCategory() {
         return recyclingCategory;
