@@ -6,35 +6,36 @@ import java.util.Optional;
 
 import domain.Material;
 import domain.Product;
-import domain.ProductRepository;
+import domain.Repository;
 
 public class ProductService {
 
-    private ProductRepository productRepo;
+    private Repository repo;
     private MaterialService materialService;
 
-    private List<Product> products = new ArrayList<>();
+    //private List<Product> products = new ArrayList<>();
 
-    public ProductService(ProductRepository productRepo, MaterialService materialService) {
-        this.productRepo = productRepo;
+    public ProductService(Repository repo, MaterialService materialService) {
+        this.repo = repo;
         this.materialService = materialService;
     }
 
     public Product addProduct(String name) {
         Product product = new Product(name);
-        products.add(product);
+        repo.getAllProducts().add(product);
         return product;
     }
 
     public boolean deleteProduct(Product product){
-        return products.remove(product);
+        return repo.getAllProducts().remove(product);
     }
 
     public List<Product> listProducts() {
-        return products;
+        return repo.getAllProducts();
     }
+
     public Product findByName(String name) {
-        for (Product p : products) {
+        for (Product p : repo.getAllProducts()) {
             if (p.getName().equalsIgnoreCase(name)) {
                 return p;
             }
@@ -43,7 +44,7 @@ public class ProductService {
     }
 
     public Optional<Product> findProductByName(String name){
-        for (Product p : products) {
+        for (Product p : repo.getAllProducts()) {
             if (p.getName().equalsIgnoreCase(name)) {
                 return Optional.of(p);
             }
@@ -52,7 +53,7 @@ public class ProductService {
     }
 
     public void setProducts(List<Product> products) {
-        this.products = products;
+        repo.setAllProducts(products);
     }
 
     public double calculateImpact(String name) {
