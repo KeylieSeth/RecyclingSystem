@@ -52,13 +52,21 @@ public class Menu {
                     ReportFormatter reportFormatter = new ReportFormatter();
                     
                     String result = reportFormatter.format(report);
-                    System.out.println(result);
+                    System.out.print(result);
 
-                    System.out.println("Save report to file? (y/n)");
-                    String answer = readChoice();
+                    System.out.print("Save report to file? (y/n)");
+                    String answer = scanner.nextLine();
                     if (answer.trim().equalsIgnoreCase("y")) {
-                        // fileHandler.saveReport(result);
-                        System.out.println("Report has been saved.");
+                        try {
+                            System.out.print("Enter filename: ");
+                            String fileName = scanner.nextLine();
+
+                            fileHandler.saveReport(result, fileName);
+                            System.out.print("Report has been saved.");  
+                        } catch (Exception e) {
+                        System.out.print("Error saving report.");
+                        e.printStackTrace();
+                        }
                     }
                     break;
 
