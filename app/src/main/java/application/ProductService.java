@@ -33,7 +33,6 @@ public class ProductService {
     public List<Product> listProducts() {
         return products;
     }
-
     public Product findByName(String name) {
         for (Product p : products) {
             if (p.getName().equalsIgnoreCase(name)) {
@@ -50,6 +49,10 @@ public class ProductService {
             }
         }
         return Optional.empty();
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public double calculateImpact(String name) {

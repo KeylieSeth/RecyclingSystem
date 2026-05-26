@@ -7,14 +7,16 @@ import infrastructure.FileHandler;
 
 public class Menu {
     private ProductService productService;
+    private MaterialService materialService;
     private ProductMenu productMenu;
     private MaterialMenu materialMenu;
     private RecyclingMenu recyclingMenu;
     private FileHandler fileHandler;
     private Scanner scanner;
 
-    public Menu(ProductService productService, ProductMenu productMenu, MaterialMenu materialMenu, RecyclingMenu recyclingMenu, FileHandler fileHandler, Scanner scanner){
+    public Menu(ProductService productService, MaterialService materialService,ProductMenu productMenu, MaterialMenu materialMenu, RecyclingMenu recyclingMenu, FileHandler fileHandler, Scanner scanner){
         this.productService = productService;
+        this.materialService = materialService;
         this.productMenu = productMenu;
         this.materialMenu = materialMenu;
         this.recyclingMenu = recyclingMenu;
@@ -47,24 +49,62 @@ public class Menu {
                     ReportFormatter reportFormatter = new ReportFormatter();
                     
                     String result = reportFormatter.format(report);
-                    System.out.println(result);
+                    System.out.print(result);
 
-                    System.out.println("Save report to file? (y/n)");
-                    String answer = readChoice();
+                    System.out.print("Save report to file? (y/n): ");
+                    String answer = scanner.nextLine();
                     if (answer.trim().equalsIgnoreCase("y")) {
-                        // fileHandler.saveReport(result);
-                        System.out.println("Report has been saved.");
+                        try {
+                            System.out.print("Enter filename: ");
+                            String fileName = scanner.nextLine();
+
+                            fileHandler.saveReport(result, fileName);
+                            System.out.print("Report has been saved.");  
+                        } catch (Exception e) {
+                        System.out.print("Error saving report.");
+                        e.printStackTrace();
+                        }
                     }
                     break;
 
                 case "5":
-                    //fileHandler.load(productService, materialService);
-                    System.out.println("Loaded from file..");
+                    try {
+                        System.out.print("Enter filename: ");
+                        String fileName = scanner.nextLine();
+
+                        productService.setProducts(
+                            fileHandler.loadProducts(fileName)
+                        );
+
+                        materialService.setMaterials(
+                            fileHandler.loadMaterials(fileName)
+                        );
+
+                        System.out.println("Loaded from file.");
+
+                    } catch (Exception e) {
+                        System.out.println("Error loading file.");
+                        e.printStackTrace();
+                    }
                     break;
 
                 case "6":
-                    //fileHandler.save(productService, materialService);
-                    System.out.println("Saved to file..");
+                    try {
+                        System.out.print("Enter filename: ");
+                        String fileName = scanner.nextLine();
+
+                        fileHandler.save(
+                            productService.listProducts(),
+                            materialService.getAllMaterials(),
+                            fileName
+                        );
+
+                        System.out.println("Saved to file.");
+
+                    } catch (Exception e) {
+                        System.out.println("Error saving file.");
+                        e.printStackTrace();
+                    }
                     break;
 
                 case "i":

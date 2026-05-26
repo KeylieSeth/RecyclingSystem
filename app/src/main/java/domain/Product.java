@@ -1,8 +1,9 @@
 package domain;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Product {
+public class Product implements Serializable {
     private String name;
     
     //List that will hold all materials that product have.
