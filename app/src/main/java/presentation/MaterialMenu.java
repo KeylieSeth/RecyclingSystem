@@ -5,7 +5,8 @@ import application.MaterialService;
 import application.ProductService;
 import domain.ImpactCalculationStrategy;
 import domain.Material;
-import domain.PerMaterialContribution;
+import domain.SimpleSumStrategy;
+import domain.SingleMaterialImpactCalculation;
 import domain.RecyclingCategory;
 
 public class MaterialMenu {
@@ -42,9 +43,9 @@ public class MaterialMenu {
                 case "1":
                     try{
                         System.out.print("Enter material: ");
-                        String name = scanner.nextLine();
+                        String name = scanner.nextLine().toLowerCase();
                         
-                        // eF
+                        // eF - Emmission Factor
                         System.out.print("Enter material's emmision factor: ");
                         double eF = scanner.nextDouble();
                         scanner.nextLine();
@@ -93,9 +94,7 @@ public class MaterialMenu {
                         double mass = scanner.nextDouble(); 
                         scanner.nextLine();
 
-                        ImpactCalculationStrategy strategy = new PerMaterialContribution();
-
-                        double result = strategy.calculate(materialService.findByName(name).getEmmissionFactor(), mass);
+                        double result = SingleMaterialImpactCalculation.calculateMaterialImpact(mass, material);
 
                         if (result != 0) {
                             System.out.println("carbon contribution of material: " + result);

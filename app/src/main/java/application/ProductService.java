@@ -3,23 +3,23 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.ImpactCalculationStrategy;
 import domain.Material;
 import domain.Product;
 import domain.ProductMaterialRelation;
 import domain.ProductRepository;
 
 public class ProductService {
-
     private ProductRepository productRepo;
     private MaterialService materialService;
-
     private List<Product> products = new ArrayList<>();
-
     private int currentProductindex = 0;
+    private ImpactCalculationStrategy strategy;
 
-    public ProductService(ProductRepository productRepo, MaterialService materialService) {
+    public ProductService(ProductRepository productRepo, MaterialService materialService, ImpactCalculationStrategy strategy) {
         this.productRepo = productRepo;
         this.materialService = materialService;
+        this.strategy = strategy;
     }
 
     public void addProduct(String name, String category, int lifespan) {
@@ -67,5 +67,9 @@ public class ProductService {
     public void giveIndex(Product product) {
         product.setId(currentProductindex);
         currentProductindex++;
+    }
+
+    public double calculateImpact(Product product) {
+        return strategy.calculate(product);
     }
 }

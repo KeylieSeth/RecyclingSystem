@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Product;
+import domain.ProductMaterialRelation;
 import domain.Material;
 
 public class Report {
     private List<Product> products;
     private List<String> rows;
     private double totalImpact;
+    
 
     public Report(ProductService productService){
         this.products = List.copyOf(productService.listProducts());
@@ -17,16 +19,16 @@ public class Report {
         this.totalImpact = 0;
 
         for (Product p : products) {
-           
-            double impact = productService.calculateImpact(p.getName());
+            // total impact for product
+            double impact = productService.calculateImpact(p);
             totalImpact += impact;
 
             String materials = "";
-            for (Material m : p.getMaterials()) {
+            for (ProductMaterialRelation productMaterial : p.getMaterials()) {
                 if (!materials.isEmpty()) {
                     materials += ", ";
                 }
-                materials += m.getName();
+                materials += productMaterial.getMaterial().getName();
             }
 
             int quantity = 1;

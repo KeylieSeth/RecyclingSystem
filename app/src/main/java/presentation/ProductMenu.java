@@ -51,13 +51,13 @@ public class ProductMenu {
                     if (product.isPresent()) {
                         Product p = product.get();
                     
-                        ProductMaterialRelation material = getSelectedMaterial();
+                        Material material = getSelectedMaterial();
                         
                         if (material != null){
-                            productService.addMaterialToProduct(p, material);
                             double mass = getMass();
-
                             ProductMaterialRelation productMaterial = new ProductMaterialRelation(material, mass);
+                            productService.addMaterialToProduct(p, productMaterial);
+                            
                         }
                     }
                     break;
@@ -131,7 +131,16 @@ public class ProductMenu {
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
 
-        System.out.println();
+        Product product = productService.findByName(name);
+
+        if (product == null){
+            System.out.println("Product not found");
+            return;
+        }
+
+        double impact = productService.calculateImpact(product);
+
+        System.out.println("Environmental impact for product " + impact);
     }
 
 
