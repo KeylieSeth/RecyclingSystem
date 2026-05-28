@@ -62,9 +62,9 @@ public class ProductService {
         this.products = products;
     }
 
-    //Method to add a material to a product.
-    public void addMaterialToProduct(Product product, ProductMaterialRelation material){
-        product.addMaterial(material);
+    public void addMaterialToProduct(Product product, Material material, double mass) {
+        ProductMaterialRelation relation = new ProductMaterialRelation(material, mass);
+        product.addMaterial(relation);
     }
 
     public void giveIndex(Product product) {

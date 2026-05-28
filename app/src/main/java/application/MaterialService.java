@@ -56,13 +56,18 @@ public class MaterialService {
             return "No materials found";
         } 
         
-        String result = "";
-        
+        StringBuilder result = new StringBuilder();
+
         for (Material m : materials) {
-            result += m.getName() +" | Impact " + m.getImpact() + "\n";
+
+            result.append(
+                String.format("%-14s %14s%n",
+                    m.getName(),
+                    "Impact: " + m.getImpact())
+            );
         }
 
-        return result;
+        return result.toString();
     }
 
     //Needed for adding materials to a product in productMenu.
