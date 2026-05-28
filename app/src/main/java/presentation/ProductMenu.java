@@ -30,7 +30,8 @@ public class ProductMenu {
             System.out.println("2) Delete product");
             System.out.println("3) List products");
             System.out.println("4) Add material to product");
-            System.out.println("5) Environmental impact");
+            System.out.println("5) Total Material Impacact for specific product");
+            System.out.println("6) Lifespan Adjusted annual impact");
             System.out.println("0) Back to main menu" + "\n");
 
             String choice = readChoice();
@@ -46,8 +47,7 @@ public class ProductMenu {
                     listProducts();
                     break;
                 case "4":
-                    Optional<Product> product = getSelectedProduct();
-                    
+                    Optional<Product> product = getSelectedProduct("Select the number of the product to add material to: ");
                     if (product.isPresent()) {
                         Product p = product.get();
                     
@@ -57,13 +57,14 @@ public class ProductMenu {
                             double mass = getMass();
                             ProductMaterialRelation productMaterial = new ProductMaterialRelation(material, mass);
                             productService.addMaterialToProduct(p, productMaterial);
-                            
                         }
                     }
                     break;
                 case "5":
-                    showImpact();
+                    SimpleSumImpactCalc();
                     break;
+                case "6":
+                    LifespanAdjustedCalc();
                 case "0":
                     System.out.println("Returning to main menu.");
                     return;
@@ -125,8 +126,8 @@ public class ProductMenu {
     }
 
 
-    private void showImpact() {
-        System.out.println("Environmental impact");
+    private void SimpleSumImpactCalc() {
+        System.out.println("Total material impact for product");
 
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
@@ -138,20 +139,36 @@ public class ProductMenu {
             return;
         }
 
-        double impact = productService.calculateImpact(product);
+        double result = productService.calculateSimpleSum(product);
+        System.out.println("Environmental impact for product " + result);
+    }
 
-        System.out.println("Environmental impact for product " + impact);
+    private void LifespanAdjustedCalc(){
+        System.out.println("Lifespan Adjusted calculation");
+
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+
+        Product product = productService.findByName(name);
+
+        if (product == null){
+            System.out.println("Product not found");
+            return;
+        }
+
+        double result = productService.calculateLifespanAdjusted(product);
+        System.out.println("Lifespan Adjusted annual impact " + result);
     }
 
 
     //Choose product from list to add material to.
-    private Optional<Product> getSelectedProduct(){
+    private Optional<Product> getSelectedProduct(String prompt){
         //temporary list when method is called to hold all registered products.
         List<Product> products = productService.getAllProducts();
 
         if (!products.isEmpty()){
             listProducts();
-            System.out.print("Select the number of the product to add material to: ");
+            System.out.print(prompt);
 
             try {    
                 int productChoice = Integer.parseInt(scanner.nextLine());

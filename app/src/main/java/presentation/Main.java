@@ -3,9 +3,11 @@ package presentation;
 import java.util.Scanner;
 
 import application.*;
-import domain.ProductRepository;
+import domain.Repository;
+import domain.Repository;
 import infrastructure.*;
 import domain.ImpactCalculationStrategy;
+import domain.LifespanAdjustedStrategy;
 import domain.SimpleSumStrategy;
 
 public class Main {
@@ -13,15 +15,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         //infratructure
-        ProductRepository productRepo = new InMemoryProductRepository();
+        Repository productRepo = new InMemoryRepository();
         FileHandler fileHandler = new FileHandler();
 
         // Strategy
         ImpactCalculationStrategy strategy = new SimpleSumStrategy();
 
         //application
+        ImpactCalculationStrategy simpleStrategy = new SimpleSumStrategy();
+        ImpactCalculationStrategy lifespanStrategy = new LifespanAdjustedStrategy(simpleStrategy);
         MaterialService materialService = new MaterialService();
-        ProductService productService = new ProductService(productRepo, materialService, strategy);
+        ProductService productService = new ProductService(productRepo, materialService, simpleStrategy, lifespanStrategy);
         RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService(productService, materialService);
 
         //presentation
@@ -29,8 +33,6 @@ public class Main {
         MaterialMenu materialMenu = new MaterialMenu(materialService, scanner);
         RecyclingMenu recyclingMenu = new RecyclingMenu(productService, recyclingGuidanceService, scanner);
 
-        
-        
         Menu menu = new Menu(productService, productMenu, materialMenu, recyclingMenu, fileHandler, scanner);
         menu.runMenu();
         scanner.close();

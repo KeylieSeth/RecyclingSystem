@@ -1,5 +1,4 @@
 package domain;
-
 public class SimpleSumStrategy implements ImpactCalculationStrategy {
 
     @Override
@@ -11,7 +10,6 @@ public class SimpleSumStrategy implements ImpactCalculationStrategy {
 
             result += impactContribution;
         }
-        
         return result;
     }
 }

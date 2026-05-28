@@ -20,7 +20,7 @@ public class Report {
 
         for (Product p : products) {
             // total impact for product
-            double impact = productService.calculateImpact(p);
+            double impact = productService.calculateSimpleSum(p);
             totalImpact += impact;
 
             String materials = "";

@@ -10,7 +10,6 @@ public class ProductMaterialRelation {
             this.mass = mass;
         }
     }
-
     public Material getMaterial(){
         return material;
     }
