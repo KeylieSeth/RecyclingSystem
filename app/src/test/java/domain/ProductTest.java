@@ -1,56 +1,56 @@
 package domain;
-import org.junit.jupiter.api.Test;
 
-import domain.Product;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductTest {
+
     @Test
     void getNameShouldReturnName() {
-        //arrange
-        Product product = new Product("doll", "toys", 2);
+        // arrange
+        Product product = new Product("doll", 2.0);
 
-        //Act
+        // act
         String result = product.getName();
 
-        //assert
+        // assert
         assertEquals("doll", result);
     }
 
     @Test
-    void getCategoryShouldReturnCategory() {
-        //arrange
-        Product product = new Product("doll", "toys", 2);
+    void getEstimatedLifespanShouldReturnLifespan() {
+        // arrange
+        Product product = new Product("doll", 2.0);
 
-        //Act
-        String result = product.getCategory();
+        // act
+        double result = product.getEstimatedLifespan();
 
-        //assert
-        assertEquals("toys", result);  
+        // assert
+        assertEquals(2.0, result);
     }
 
     @Test
-    void getEstimatedLifespanShouldReturnLifespanAsInt() {
-        //arrange
-        Product product = new Product("doll", "toys", 2);
+    void setIdShouldSetId() {
+        // arrange
+        Product product = new Product("doll", 2.0);
 
-        //Act
-        int result = product.getEstimatedLifespan();
+        // act
+        product.setId(5);
 
-        //assert
-        assertEquals(2, result);  
+        // assert
+        assertEquals(5, product.getId());
     }
 
     @Test
-    void isRecycledShouldReturnBooleanValue() {
-        //arrange
-        Product product = new Product("doll", "toys", 2);
+    void getMaterialsShouldReturnEmptyListWhenNoMaterialsAdded() {
+        // arrange
+        Product product = new Product("doll", 2.0);
 
-        //Act
-        Boolean result = product.isRecycled();
+        // act
+        int result = product.getMaterials().size();
 
-        //assert
-        assertEquals(false, result);
+        // assert
+        assertEquals(0, result);
     }
 }
