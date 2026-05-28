@@ -1,7 +1,6 @@
 package presentation;
 
 import java.util.Scanner;
-
 import application.*;
 import infrastructure.FileHandler;
 
@@ -54,18 +53,18 @@ public class Menu {
                     System.out.println("Save report to file? (y/n)");
                     String answer = readChoice();
                     if (answer.trim().equalsIgnoreCase("y")) {
-                        // fileHandler.saveReport(result);
+                        fileHandler.saveReport(result);
                         System.out.println("Report has been saved.");
                     }
                     break;
 
                 case "5":
-                    //fileHandler.load(productService, materialService);
+                    fileHandler.load(productService, materialService);
                     System.out.println("Loaded from file..");
                     break;
 
                 case "6":
-                    //fileHandler.save(productService, materialService);
+                    fileHandler.save(productService, materialService);
                     System.out.println("Saved to file..");
                     break;
 
