@@ -55,16 +55,16 @@ public class ProductMenu {
                     listProducts();
                     break;
                 case "4":
-                    showImpact();
+                    //showImpact();
                     break;
                 case "5":
                     SimpleSumImpactCalc();
 
                     System.out.println("\n====== Delete Product ======");
-                    Optional<Product> product = getSelectedProduct();
+                    Optional<Product> products = getSelectedProduct();
 
-                    if (product.isPresent()) {
-                        Product p = product.get();
+                    if (products.isPresent()) {
+                        Product p = products.get();
 
                         boolean removed = productService.deleteProduct(p);
 
@@ -111,6 +111,7 @@ public class ProductMenu {
 
     private void addProduct() {
         List<String> productMaterials = new ArrayList<>();
+        double estimatedLifespan;
 
         if (materialService.getAllMaterials().isEmpty()){
             System.out.println("No registered materials found.");
@@ -126,8 +127,11 @@ public class ProductMenu {
             System.out.println("Product name not valid.");
             return;
         }
+
+        System.out.println("Enter expected lifespan of product: ");
+        estimatedLifespan = scanner.nextDouble();
             
-        Product product = productService.addProduct(name);
+        Product product = productService.addProduct(name, estimatedLifespan);
 
             while (true) {
                 String materialName = getSelectedMaterial();
@@ -139,7 +143,7 @@ public class ProductMenu {
 
                 else if (materialName != null) {
                     productMaterials.add(materialName);
-                    productService.addMaterialToProduct(product, materialName);
+                    //productService.addMaterialToProduct(product, materialName);
                     System.out.println(materialName + " added to product.");
                 }
 
@@ -240,5 +244,30 @@ public class ProductMenu {
             System.out.println("No products in list.");
             return Optional.empty();
         }
+    }
+
+     //Choose material from list to add to a product.
+    private String getSelectedMaterial(){
+        //temporary list when method is called to hold all registered materials.
+        List<Material> materials = materialService.getAllMaterials();
+
+        listMaterials();
+        System.out.print("Select the number of the material to add: ");
+
+        try {
+            int materialChoice = Integer.parseInt(scanner.nextLine());
+
+            if (materialChoice < 1 || materialChoice > materials.size()){
+                System.out.println("Invalid material number.");
+                return null;
+            }
+
+            String selectedMaterial = materials.get(materialChoice-1).getName();
+            return selectedMaterial;
+
+        } catch(NumberFormatException e) {
+            System.out.println("please enter a valid number.");
+            return null;
+        } 
     }
 }

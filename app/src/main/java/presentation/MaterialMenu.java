@@ -39,7 +39,7 @@ public class MaterialMenu {
                         double eF = scanner.nextDouble();
                         scanner.nextLine();
                         
-                        System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, NATURAL, MIXED): ");
+                        System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, ORGANIC, GLASS, PAPER, TEXTILE, MIXED): ");
                         String categoryInput = scanner.nextLine().toUpperCase();
                         RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
 

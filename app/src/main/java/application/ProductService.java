@@ -9,7 +9,6 @@ import domain.Material;
 import domain.Product;
 import domain.ProductMaterialRelation;
 import domain.Repository;
-import domain.Repository;
 
 public class ProductService {
     private Repository productRepo;
@@ -27,8 +26,8 @@ public class ProductService {
         this.lifespanStrategy = lifespanStrategy;
     }
 
-    public Product addProduct(String name) {
-        Product product = new Product(name);
+    public Product addProduct(String name, double estimatedLifespan) {
+        Product product = new Product(name, estimatedLifespan);
         products.add(product);
         giveIndex(product);
         return product;

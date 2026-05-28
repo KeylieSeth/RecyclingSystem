@@ -8,6 +8,25 @@ public class MaterialService {
 
     public MaterialService(){
         this.materials = new ArrayList<>();
+        defineMaterial("Aluminium", 8.2, RecyclingCategory.METAL);
+
+        defineMaterial("Steel", 6.7, RecyclingCategory.METAL);
+
+        defineMaterial("Copper", 9.1, RecyclingCategory.METAL);
+
+        defineMaterial("Glass", 3.4, RecyclingCategory.CERAMIC);
+
+        defineMaterial("Cardboard", 1.8, RecyclingCategory.PAPER);
+
+        defineMaterial("Paper", 1.2, RecyclingCategory.PAPER);
+
+        defineMaterial("PET Plastic", 5.6, RecyclingCategory.PLASTIC);
+
+        defineMaterial("HDPE Plastic", 4.9, RecyclingCategory.PLASTIC);
+
+        defineMaterial("Wood", 2.3, RecyclingCategory.ORGANIC);
+
+        defineMaterial("Textile", 4.1, RecyclingCategory.TEXTILE);
     }
 
 

@@ -69,10 +69,16 @@ public class RecyclingGuidanceService {
             return "Recycle as metal.";
         } else if (category == RecyclingCategory.CERAMIC) {
             return "Handle as ceramic or general waste depending on local rules.";
-        } else if (category == RecyclingCategory.NATURAL) {
+        } else if (category == RecyclingCategory.ORGANIC) {
             return "Recycle as natural material or compost if applicable.";
         } else if (category == RecyclingCategory.MIXED) {
             return "Mixed material: separate the parts before recycling if possible.";
+        } else if (category == RecyclingCategory.GLASS) {
+            return "Recycle as glass.";
+        } else if (category == RecyclingCategory.PAPER) {
+            return "Recycle as paper.";
+        } else if (category == RecyclingCategory.TEXTILE) {
+            return "Recycle as textile.";
         }
 
         return "No recycling guidance available.";
