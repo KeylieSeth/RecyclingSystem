@@ -1,0 +1,51 @@
+[33m2311fa1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature-filehandler[m[33m, [m[1;31morigin/feature-filehandler[m[33m)[m Added Save/Load methods to FileHandler.
+[33m672c6dd[m Merge pull request #7 from KeylieSeth/feature-report
+[33mfaeef52[m[33m ([m[1;31morigin/feature-report[m[33m)[m Update app/src/main/java/application/ProductService.java
+[33mc79531a[m Refactor getSelectedProduct
+[33m5bf70dd[m add product id and fix add material bug
+[33m62851b6[m Add id to products
+[33m59d5b95[m uncommented and fixed report so it works with main
+[33m683e7cc[m Merge pull request #3 from KeylieSeth/feature-productmenu
+[33m32e1ed6[m Fix grammar in Strategy Pattern description
+[33m224ef1b[m[33m ([m[1;31morigin/feature-productmenu[m[33m, [m[1;32mfeature-productmenu[m[33m)[m Fixed merge conflicts.
+[33m26e4c0b[m Merge pull request #5 from KeylieSeth/feature/materialmenu
+[33m00cfab6[m[33m ([m[1;31morigin/feature/materialmenu[m[33m)[m Changes based on comments
+[33m1b4b2b4[m Merge pull request #6 from KeylieSeth/cleanup
+[33m5e06da4[m cleaned some code in Product class
+[33m27765e2[m MaterialService logic continued
+[33madc5902[m Delete material logic
+[33mbbff7b1[m Added materialMenu logic for basic material interaction
+[33m5c1bacf[m Update README with design patterns information
+[33ma2e7123[m ProductService + mock domain
+[33md319f53[m add improvement section to README.md
+[33md41fa1a[m Material and MaterialService basic implementation
+[33mbbcb933[m Merge pull request #1 from KeylieSeth/feature-report
+[33meb839b2[m Update README.md
+[33m81519a5[m feat: add reportFormatter class
+[33m3092d12[m implement Report with rows, materials and total impact
+[33maf14ec1[m add Report class with total impact calculation
+[33m08bef0c[m[33m ([m[1;31morigin/feature-recyclingmenu[m[33m, [m[1;31morigin/feature-materialmenu[m[33m, [m[1;31morigin/feature-mainmenu[m[33m)[m add recyclingMenu.java
+[33m0e0dd98[m refactor: move menu creation to Main
+[33m8e3d0dd[m Update README.md
+[33m6fcefc0[m add materialMenu.java
+[33m2172b2f[m Update README.md
+[33mc54f2cd[m Update README.md
+[33m8c643c8[m add ProductMenu.java
+[33mad3a0d0[m update Menu.java
+[33m49da8ee[m update main.java file
+[33m41eba35[m Resolved merge conflict
+[33m749c284[m first commit
+[33m853a3fe[m Update .gitignore
+[33ma94d6aa[m Update README.md
+[33mcee55be[m Update README.md
+[33mdadb9f6[m Update README.md
+[33m17d16f4[m Update README.md
+[33mf605ead[m Update README.md
+[33ma81fce5[m Update README.md
+[33m6df44ff[m Update README.md
+[33m9c6c812[m Update README.md
+[33mea4b9b1[m Update README.md
+[33m8bc82a5[m Update README.md
+[33mb4210a8[m Update README.md
+[33m489a3ad[m Update README.md
+[33m6cfa529[m[33m ([m[1;31morigin/feature/domain-model[m[33m)[m Initial commit
