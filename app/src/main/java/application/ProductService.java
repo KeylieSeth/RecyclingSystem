@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import domain.ImpactCalculationStrategy;
 import domain.Material;
@@ -25,26 +26,22 @@ public class ProductService {
         this.lifespanStrategy = lifespanStrategy;
     }
 
-    public void addProduct(String name, String category, int lifespan) {
-        Product product = new Product(name, category, lifespan);
-        giveIndex(product);
-        products.add(product);
+    public Product addProduct(String name) {
+        Product product = new Product(name);
+        repo.getAllProducts().add(product);
+        return product;
     }
 
-    public boolean deleteProduct(String name) {
-        return products.removeIf(p -> p.getName().equalsIgnoreCase(name));
-    }
-
-    public List<Product> getAllProducts() {
-        return products;
+    public boolean deleteProduct(Product product){
+        return repo.getAllProducts().remove(product);
     }
 
     public List<Product> listProducts() {
-        return products;
+        return repo.getAllProducts();
     }
 
     public Product findByName(String name) {
-        for (Product p : products) {
+        for (Product p : repo.getAllProducts()) {
             if (p.getName().equalsIgnoreCase(name)) {
                 return p;
             }
@@ -52,14 +49,17 @@ public class ProductService {
         return null;
     }
 
-    public List<Product> findAllMatchingNames(String name){
-        List<Product> matchingProducts = new ArrayList<>();
-        for (Product p: products) {
-            if(p.getName().equalsIgnoreCase(name)){
-                matchingProducts.add(p);
+    public Optional<Product> findProductByName(String name){
+        for (Product p : repo.getAllProducts()) {
+            if (p.getName().equalsIgnoreCase(name)) {
+                return Optional.of(p);
             }
         }
-        return matchingProducts;
+        return Optional.empty();
+    }
+
+    public void setProducts(List<Product> products) {
+        repo.setAllProducts(products);
     }
 
     //Method to add a material to a product.

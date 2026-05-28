@@ -51,7 +51,6 @@ public class InMemoryRepository implements Repository {
     public void saveToFile(String fileName) throws IOException {
         fileHandler.save(products, materials, fileName);
     }
-
     @Override
     public void loadFromFile(String fileName) throws IOException, ClassNotFoundException {
         this.products = fileHandler.loadProducts(fileName);

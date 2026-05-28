@@ -1,4 +1,4 @@
-# FinalProjectOOD
+# Recycling system
 Menu-driven console application that provides recycling guidance for products and reusable materials. Developed as a final project for the Object-Oriented Design course.
 
 The purpose of this system is mainly to manage products, their varoius materials, their environmental impact and guidance for recycling. The systems product management creates products along with name, category, materials, and estimated lifespan for the product and its material.
@@ -6,34 +6,7 @@ Material management defines the varoius materials which the products are made of
 
 The system provides a total calculation for the environmental impact of a product, based on the material it is made of. Then provides guidance, based on the product and material, on how to recycle single- and mixed-material products.
 
-
-# Team organization / Task list
-Functional implementation (programming and implementation)
-Non functional implementation
-Design and logic 
-Documentation 
-Planning
-Testing and error handling
-Planning and analysing
-Project Review
-
-### Finsihed tasks
-ReadMe - Albin, Kim |
-Skeleton - Alex, Keylie |
-UML - Kim, Alex |
-Packages - Albin, Keylie |
-### Known Issues / Improvements
-- Validate product input (null, empty strings, invalid lifespan)
-- Prevent duplicate products in repository
-- Improve error messages for user input
-- Handle missing or invalid materials when creating Products
-#### Presentation layer:
-Main Menu, Recycling Report: Keylie |
-Product Menu: Albin |
-Material Menu: Alex |
-Recycling Menu: Kim
-
-# Domain Concept
+## Features
 -Products
 -Materials - Material Types
 -Environmental impact
@@ -49,30 +22,34 @@ Recycling Menu: Kim
 -Store Information
 -Receive Input
 
-# Package description
-Presentation/
-	Main,
-	Menu
+## Architecture
+Presentation/  
+	MainMenu  
+	MaterialMenu  
+	ProductMenu  
+	RecyclingMenu  
+	ReportFormatter  
 
-Application/
-	ProductService,
-	MaterialService,
-	RecyclingGuidanceService,
-	SimpleSumStrategy,
-	WeightedByLifespanStrategy
+Application/  
+	ProductService  
+	MaterialService  
+	RecyclingGuidanceService  
+	SimpleSumStrategy  
+	WeightedByLifespanStrategy  
+	Report  
 
-Domain /
-	ImpactCalculationStrategy,
-	ProductRepository,
-	Product,
-	Material,
-	RecyclingCategory
+Domain /  
+	ImpactCalculationStrategy  
+	ProductRepository  
+	Product  
+	Material  
+	RecyclingCategory  
 
-Infrastructure /
-	InMemoryProductRepository
-	
+Infrastructure /  
+	InMemoryProductRepository  
+
 ### Presentation
-In our Presantation layer, we will have both the Menu class and the Main class, since they will be in charge of user         interaction, such as displaying information to the user and Main will be "running" the entire system, getting information    from all the various classes. This layer contains no logic of its own.
+In our Presentation layer, we have divided responsibilities for displaying and handling user interactions between four menus. The main menu contains the loop for running the program and displaying the different category menus. The material menu is responsible for adding and deleting materials from the system, while the product menu handles product interactions. The recycling menu is responsible for providing recycling guidance for products within the system and for changing recycling instructions for products.
 
 ### Application
 The application layer will have all of our services, such as ProductService, MaterialService, RecyclingGuideService,         SimpleSumStrategy and WeightedByLifespanStrategy. This layer calls into the domain to exacute business, gives instructions   but does   not do the work itself. ProductService receives an ImpactCalculationStrategy via its constructor,                 SimpleSumStrategy and WeightedByLifespanStrategy implements our ImpactCalculationStrategy interface and provides the         actual calculations for the products. The RecyclingGuidanceService will provide guidance for recycling, it takes a product   and provides information of what material/s the product is made of and how to recycle it properly. ProductService creates,   removes and changes products and MaterialService defines the various materials.
@@ -83,11 +60,33 @@ The domain layer is the heart of the program. We have our Product class, storing
 ### Infrastructure
 For the infrastructure, we have our InMemoryProductRepository (instantiated in Main) that implements where to save/store file.
 
-# Design Patterns
+## Design Patterns
 ### Strategy Pattern
 Our implementation of Strategy Pattern allows us to calculate different ways of the enviromental impact of a product.
 In our program the ImpactCalculationStrategy is an interface, placed in the domain layer. This defines a common contract for the different impact calculations.
 The actual implementations are placed in the application layer, which in our case is the SimpleSumStrategy and WeightedByLifespanStrategy.
 
-### Factory Pattern
-We will consider the use of Factory Pattern in the later stage of the project, when we have a better understanding and structure of the program as a whole.
+## Contributions
+### Albin
+- Designed the product menu
+- Implemented application layer product service
+- Constructed domain layer product class
+- Implemented FileHandler for project persistence
+
+### Kim
+- Designed the recycling menu
+- Implemented application layer recycling guidance service
+- Constructed domain layer category class for materials
+- Worked with repository and in-memory data storage
+
+### Aleksander
+- Designed the material menu
+- Implemented application layer material service
+- Constructed domain layer material class
+- Worked with impact calculation strategy for enviromental analysis
+
+### Keylie
+- Designed the menu navigation flow and UI
+- Designed and implemented the report feature
+- Worked with integration between products and materials
+- Refactored handling of duplicates and entity selection logic
