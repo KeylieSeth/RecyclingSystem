@@ -10,7 +10,7 @@ public class LifespanAdjustedStrategy implements ImpactCalculationStrategy {
     public double calculate(Product product) {
         double rawImpact = simpleSumStrategy.calculate(product); 
 
-        int lifespan = product.getEstimatedLifespan();
+        double lifespan = product.getEstimatedLifespan();
 
         if (lifespan <= 0){
             return rawImpact;

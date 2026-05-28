@@ -12,7 +12,7 @@ public class MaterialService {
 
 
     public void defineMaterial(String name, double eF, RecyclingCategory category){
-        if (eF >= 0) {
+        if (eF > 0) {
             Material material = new Material(name, eF, category);
             materials.add(material);
             return;
@@ -59,4 +59,8 @@ public class MaterialService {
         } 
         throw new IllegalArgumentException("Material not found: " + name);
      }
+    
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
+    }
 }

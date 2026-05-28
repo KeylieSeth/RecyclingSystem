@@ -18,39 +18,47 @@ public class RecyclingMenu {
         this.scanner = scanner;
     }
 
-        public void run() {
-        boolean running = true;
+    public void run() {
+        while (true) {
+            printMenu();
 
-        while (running) {
-            System.out.println("\n=== Recycling Menu ===");
-            System.out.println("1. Recyclable guidance");
-            System.out.println("2. Change recycling guidance for product");
-            System.out.println("3. Recycle a product");
-            System.out.println("0. Back to main menu");
-            System.out.print("Choose option: ");
-
+            System.out.print("Enter your choice: ");
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
+                    System.out.println("\n===== Recycling Guidance =====");
                     showRecyclingGuidance();
+                    break;
                 case "2":
+                    System.out.println("\n= Change Recycling Guidance =");
                     changeRecyclingGuidanceForProduct();
                     break;
-                case "3":
-                    recycleProduct();
-                    break;
                 case "0":
-                    running = false;
                     return;
                 default:
-                    System.out.println("Invalid choice. Try again.");
+                    System.out.println(choice + " is not a valid input.");
+                    break;
             }
         }
     }
 
+    public void printMenu() {
+        String menuText = """
+
+                ======= Recycling Menu =======
+                ------------------------------
+                1) Recycling guidance          
+                2) Change recycling guidance 
+                   for product                         
+                0) Back to main menu 
+                ------------------------------""";
+
+        System.out.println(menuText);
+    }
+
     private void showRecyclingGuidance() {
-        List<Product> products = productService.getAllProducts();
+        List<Product> products = productService.listProducts();
 
         if (products.isEmpty()) {
             System.out.println("No products available.");
@@ -75,7 +83,7 @@ public class RecyclingMenu {
     }
 
     private void changeRecyclingGuidanceForProduct() {
-        List<Product> products = productService.getAllProducts();
+        List<Product> products = productService.listProducts();
 
         if (products.isEmpty()) {
             System.out.println("No products available.");
@@ -99,35 +107,6 @@ public class RecyclingMenu {
         recyclingGuidanceService.updateGuidance(product, newGuidance);
 
         System.out.println("Recycling guidance updated for " + product.getName() + ".");
-    }
-
-    private void recycleProduct() {
-        List<Product> products = productService.getAllProducts();
-
-        if (products.isEmpty()) {
-            System.out.println("No products available.");
-            return;
-        }
-
-        printProducts(products);
-
-        System.out.print("Enter product number to recycle: ");
-        int index = readInt();
-
-        if (index < 1 || index > products.size()) {
-            System.out.println("Invalid product number.");
-            return;
-        }
-
-        Product product = products.get(index - 1);
-
-        boolean recycled = recyclingGuidanceService.recycleProduct(product);
-
-        if (recycled) {
-            System.out.println(product.getName() + " was recycled successfully.");
-        } else {
-            System.out.println("Could not recycle " + product.getName() + ".");
-        }
     }
 
     private void printProducts(List<Product> products) {

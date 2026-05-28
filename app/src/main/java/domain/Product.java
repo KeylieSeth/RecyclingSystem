@@ -1,23 +1,19 @@
 package domain;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class Product {
+public class Product implements Serializable {
     private String name;
-    private String category;
-    private int estimatedLifespan;
-    private boolean recycled;
-    
     private int id;
+    private double estimatedLifespan;
     
     //List that will hold all materials that product have.
     private List<ProductMaterialRelation> productMaterials;
 
-    public Product(String name, String category, int estimatedLifespan) {
+    public Product(String name, double estimatedLifespan) {
         this.name = name;
-        this.category = category;
         this.estimatedLifespan = estimatedLifespan;
-        this.recycled = false;
 
         //When product is created it dont contain any materials.
         this.productMaterials = new ArrayList<>();
@@ -27,28 +23,18 @@ public class Product {
         return name;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public int getEstimatedLifespan() {
-        return estimatedLifespan;
-    }
-    public boolean isRecycled() {
-        return recycled;
-    }
-    public void setRecycled(boolean recycled) {
-        this.recycled = recycled;
+    public int getId(){
+        return this.id;
     }
 
     public void setId(int id){
-        this.id = id;
+         this.id = id;
     }
 
-    public int getId(){
-        return id;
+    public double getEstimatedLifespan(){
+        return estimatedLifespan;
     }
-
+    
     //Called by product service to add a material to the list in product.
     public void addMaterial(ProductMaterialRelation material) {
         productMaterials.add(material);

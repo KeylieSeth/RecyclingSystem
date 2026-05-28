@@ -44,9 +44,9 @@ public class FileHandler {
     }
     public void saveReport(String report, String fileName)
             throws IOException {
-
+        
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(report);
-        }
+        }    
     }
 }

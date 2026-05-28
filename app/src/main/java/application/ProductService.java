@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import domain.ImpactCalculationStrategy;
 import domain.Material;
@@ -14,6 +15,7 @@ public class ProductService {
     private Repository productRepo;
     private MaterialService materialService;
     private List<Product> products = new ArrayList<>();
+    
     private int currentProductindex = 0;
     private ImpactCalculationStrategy simpleStrategy;
     private ImpactCalculationStrategy lifespanStrategy;
@@ -25,24 +27,20 @@ public class ProductService {
         this.lifespanStrategy = lifespanStrategy;
     }
 
-    public void addProduct(String name, String category, int lifespan) {
-        Product product = new Product(name, category, lifespan);
-        giveIndex(product);
+    public Product addProduct(String name) {
+        Product product = new Product(name);
         products.add(product);
+        giveIndex(product);
+        return product;
     }
 
-    public boolean deleteProduct(String name) {
-        return products.removeIf(p -> p.getName().equalsIgnoreCase(name));
-    }
-
-    public List<Product> getAllProducts() {
-        return products;
+    public boolean deleteProduct(Product product){
+        return products.remove(product);
     }
 
     public List<Product> listProducts() {
         return products;
     }
-
     public Product findByName(String name) {
         for (Product p : products) {
             if (p.getName().equalsIgnoreCase(name)) {
@@ -52,14 +50,17 @@ public class ProductService {
         return null;
     }
 
-    public List<Product> findAllMatchingNames(String name){
-        List<Product> matchingProducts = new ArrayList<>();
-        for (Product p: products) {
-            if(p.getName().equalsIgnoreCase(name)){
-                matchingProducts.add(p);
+    public Optional<Product> findProductByName(String name){
+        for (Product p : products) {
+            if (p.getName().equalsIgnoreCase(name)) {
+                return Optional.of(p);
             }
         }
-        return matchingProducts;
+        return Optional.empty();
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     //Method to add a material to a product.

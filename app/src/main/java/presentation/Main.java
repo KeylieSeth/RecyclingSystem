@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import application.*;
 import domain.Repository;
-import domain.Repository;
 import infrastructure.*;
 import domain.ImpactCalculationStrategy;
 import domain.LifespanAdjustedStrategy;
@@ -17,9 +16,6 @@ public class Main {
         //infratructure
         Repository productRepo = new InMemoryRepository();
         FileHandler fileHandler = new FileHandler();
-
-        // Strategy
-        ImpactCalculationStrategy strategy = new SimpleSumStrategy();
 
         //application
         ImpactCalculationStrategy simpleStrategy = new SimpleSumStrategy();
