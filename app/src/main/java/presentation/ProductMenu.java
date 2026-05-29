@@ -114,18 +114,25 @@ public class ProductMenu {
 
         System.out.print("Enter expected lifespan of the product: ");
 
+        String lifespanInput = scanner.nextLine();
+
+        if (lifespanInput.isBlank()) {
+            System.out.println("No input, returning to menu.");
+            return;
+        }
+
         try {
-            estimatedLifespan = scanner.nextDouble();
-            scanner.nextLine();
+
+            estimatedLifespan = Double.parseDouble(lifespanInput);
 
             if (estimatedLifespan <= 0) {
                 System.out.println("Lifespan must be greater than 0.");
                 return;
             }
-            
-        } catch (InputMismatchException e) {
+
+        } catch (NumberFormatException e) {
+
             System.out.println("Please enter a valid number.");
-            scanner.nextLine();
             return;
         }
             
@@ -142,18 +149,33 @@ public class ProductMenu {
                         System.out.println("Please choose another material.");
                     } else {
                         productMaterials.add(material);
-                        System.out.print("Enter mass of material in kg: ");
-                        
-                        double mass = scanner.nextDouble();
-                        scanner.nextLine();
 
-                        if (mass <= 0) {
-                            System.out.println("Mass must be greater than 0.");
-                            continue;
+                        System.out.print("Enter mass of material in kg: ");
+
+                        String massInput = scanner.nextLine();
+
+                        if (massInput.isBlank()) {
+                            System.out.println("Returning to menu.");
+                            break;
                         }
 
-                        productService.addMaterialToProduct(product, material, mass);
-                        System.out.println(material.getName() + " added to product.");
+                        try {
+
+                            double mass = Double.parseDouble(massInput);
+
+                            if (mass <= 0) {
+                                System.out.println("Mass must be greater than 0.");
+                                continue;
+                            }
+
+                            productService.addMaterialToProduct(product, material, mass);
+
+                            System.out.println(material.getName() + " added to product.");
+
+                        } catch (NumberFormatException e) {
+
+                            System.out.println("Please enter a valid number.");
+                        }
                     }
                 }
 
@@ -168,8 +190,10 @@ public class ProductMenu {
                 if (answer.equalsIgnoreCase("n")) {
                     break;
                 }
+
+                System.out.println(name + " added.");
         }
-        System.out.println(name + " added.");
+        
     }
 
     private void listProducts() {

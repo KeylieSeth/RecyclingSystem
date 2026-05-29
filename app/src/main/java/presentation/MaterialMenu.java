@@ -1,5 +1,6 @@
 package presentation;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import application.MaterialService;
 import application.ProductService;
@@ -28,54 +29,94 @@ public class MaterialMenu {
 
             switch (choice) {
                 // Add material
-                case "1":
+                case "1": {
                     System.out.println("\n======= Add Material =======");
-                    try{
-                        System.out.print("Enter material: ");
-                        String name = scanner.nextLine().toLowerCase();
+
+                    System.out.print("Enter material: ");
+                    String name = scanner.nextLine().toLowerCase();
+
+                    if (name.isBlank()) {
+                        System.out.println("No input, returning to menu.");
+                        break;
+                    }
+
+                    try {
+                        // eF = Emission Factor
+                        System.out.print("Enter material's emission factor: ");
+
+                        String eFInput = scanner.nextLine();
+
+                        if (eFInput.isBlank()) {
+                            System.out.println("Returning to menu.");
+                            break;
+                        }
+
+                        double eF = Double.parseDouble(eFInput);
                         
-                        // eF - Emmission Factor
-                        System.out.print("Enter material's emmision factor: ");
-                        double eF = scanner.nextDouble();
-                        scanner.nextLine();
-                        
+
                         System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, ORGANIC, GLASS, PAPER, TEXTILE, MIXED): ");
                         String categoryInput = scanner.nextLine().toUpperCase();
+
+                        if (categoryInput.isBlank()) {
+                            System.out.println("No input, returning to menu.");
+                        break;
+                    }
+
                         RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
 
                         materialService.defineMaterial(name, eF, category);
 
-                    } catch (IllegalArgumentException e){
-                        System.out.println(e.getMessage());
-                    }
-                        break;
+                    } catch (InputMismatchException e) {
 
+                        System.out.println("Please enter a valid number.");
+                        scanner.nextLine();
+
+                    } catch (IllegalArgumentException e) {
+
+                        System.out.println("Invalid recycling category.");
+
+                    }
+
+                    break;
+                }
                 // Delete material
-                case "2":
+                case "2": {
                     System.out.println("\n====== Delete Material ======");
+
                     try {
                     System.out.print("Enter material name to delete: ");
                     String name = scanner.nextLine();
+
+                    if (name.isBlank()) {
+                        System.out.println("No input, returning to menu.");
+                        break;
+                    }
+
                     materialService.deleteMaterial(name);
 
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
-                    
+                }  
 
                 // List all materials
-                case "3":
+                case "3": {
                     System.out.println("\n======= Material List =======");
                     System.out.println(materialService.listMaterials());
                     break;
-
+                }
                     
                 // Carbon Contribution (per material)
-                case "4":
+                case "4": {
                     try {
                     System.out.print("Enter material name: ");
                     String name = scanner.nextLine();
+
+                    if (name.isBlank()) {
+                        System.out.println("No option choosen, returning to menu.");
+                        break;
+                    }
                     
                     Material material = materialService.findByName(name);
 
@@ -91,11 +132,16 @@ public class MaterialMenu {
                         }
                     }
 
-                    } catch (IllegalArgumentException e){
+                    } catch (InputMismatchException e) {
+
+                        System.out.println("Please enter a valid number.");
+                        scanner.nextLine();
+                    } 
+                    catch (IllegalArgumentException e){
                         System.out.println(e.getMessage());
                     }
                     break;
-
+                }
                 // Back to menu
                 case "0":
                     return;
