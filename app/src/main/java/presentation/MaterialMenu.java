@@ -26,7 +26,7 @@ public class MaterialMenu {
             switch (choice) {
                 // Add material
                 case "1": {
-                    System.out.println("\n======= Add Material =======");
+                    System.out.println("\n=========== Add Material ===========");
 
                     System.out.print("Enter material: ");
                     String name = scanner.nextLine().toLowerCase();
@@ -88,7 +88,7 @@ public class MaterialMenu {
                 }
                 // Delete material
                 case "2": {
-                    System.out.println("\n====== Delete Material ======");
+                    System.out.println("\n========== Delete Material ==========");
 
                     try {
                     System.out.print("Enter material name to delete: ");
@@ -109,14 +109,14 @@ public class MaterialMenu {
 
                 // List all materials
                 case "3": {
-                    System.out.println("\n======= Material List =======");
+                    System.out.println("\n=========== Material List ===========");
                     System.out.println(materialService.listMaterials());
                     break;
                 }
                     
                 // Carbon Contribution (per material)
                 case "4": {
-                    System.out.println("\n===== Enviromental Impact =====");
+                    System.out.println("\n======== Enviromental Impact ========");
 
                     try {
                     System.out.print("Enter material name: ");
@@ -137,7 +137,7 @@ public class MaterialMenu {
                         double result = SingleMaterialImpactCalculation.calculateMaterialImpact(mass, material);
 
                         if (result != 0) {
-                            System.out.println("carbon contribution of material: " + result);
+                            System.out.printf("Carbon contribution: %.2f%n", result);
                         }
                     }
 
@@ -165,14 +165,14 @@ public class MaterialMenu {
     public void printMenu() {
         String menuText = """
 
-                ======= Material Menu =======
-                -----------------------------
+                =========== Material Menu ===========
+                -------------------------------------
                 1) Add material       
                 2) Delete material    
                 3) Material list                
                 4) Show enviromental impact            
                 0) Back to main menu 
-                -----------------------------""";
+                -------------------------------------""";
 
         System.out.println(menuText);
     }

@@ -34,7 +34,7 @@ public class ProductMenu {
                     addProduct();
                     break;
                 case "2":
-                    System.out.println("\n====== Delete Product ======");
+                    System.out.println("\n========== Delete Product ==========");
                     Optional<Product> product = getSelectedProduct();
 
                     if (product.isPresent()) {
@@ -51,7 +51,7 @@ public class ProductMenu {
                     break;
                     
                 case "3":
-                    System.out.println("\n======= Product List =======");
+                    System.out.println("\n=========== Product List ===========");
                     listProducts();
                     break;
                 case "4":
@@ -76,18 +76,17 @@ public class ProductMenu {
     public void printMenu() {
         String menuText = """
 
-                ======= Product Menu =======
-                ----------------------------
+                =========== Product Menu ===========
+                ------------------------------------
                 1) Add product       
                 2) Delete product    
                 3) Product list            
-                4) Total Material Impact 
-                   for specific product
-                5) Lifespan Adjusted 
-                   annual impact
+                4) Total Material Impact for a
+                   specific product
+                5) Lifespan Adjusted annual impact
                 6) Recyclability penalty/score          
                 0) Back to main menu 
-                ----------------------------""";
+                ------------------------------------""";
 
         System.out.println(menuText);
     }
@@ -107,7 +106,7 @@ public class ProductMenu {
             return;
         }
 
-        System.out.println("\n======= Add Product =======");
+        System.out.println("\n=========== Add Product ===========");
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
 
@@ -208,7 +207,7 @@ public class ProductMenu {
     }
 
     private void listMaterials(){
-        System.out.println("\n==== Material List: ====");
+        System.out.println("\n======== Material List: ========");
 
         //Print all products (one per row), in numbered order for user selection.
         for (int i = 0; i < materialService.getAllMaterials().size(); i++) {
@@ -218,7 +217,7 @@ public class ProductMenu {
 
 
     private void simpleSumImpactCalc() {
-        System.out.println("\n=== Environmental Impact ===");
+        System.out.println("\n======= Environmental Impact =======");
 
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
@@ -235,7 +234,7 @@ public class ProductMenu {
     }
 
     private void lifespanAdjustedCalc(){
-        System.out.println("==== Adjusted lifeSpan ====");
+        System.out.println("======== Adjusted lifeSpan ========");
 
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
@@ -252,7 +251,7 @@ public class ProductMenu {
     }
 
     private void recyclabilityCalculation(){
-        System.out.println("==== Recyclability penalty/bonus ====");
+        System.out.println("======== Recyclability penalty/bonus ========");
         
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();

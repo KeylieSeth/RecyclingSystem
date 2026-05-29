@@ -12,15 +12,15 @@ public class MaterialService {
         defineMaterial("Recycled Aluminiym", 1.5, 0.9, RecyclingCategory.METAL);
         defineMaterial("Virgin Steel", 2.2, 0.9, RecyclingCategory.METAL);
         defineMaterial("Recycled Steel", 0.4, 0.9, RecyclingCategory.METAL);
-        defineMaterial("PET Plastic", 3.5, 0.5,  RecyclingCategory.CERAMIC);
-        defineMaterial("HDPE Plastic", 2.0, 0.5, RecyclingCategory.PAPER);
-        defineMaterial("PVC Plastic", 2.1, 0.2, RecyclingCategory.PAPER);
-        defineMaterial("Virgin Glass", 1.1, 0.9, RecyclingCategory.PLASTIC);
-        defineMaterial("Recycled Glass", 0.64, 0.9, RecyclingCategory.PLASTIC);
+        defineMaterial("PET Plastic", 3.5, 0.5,  RecyclingCategory.PLASTIC);
+        defineMaterial("HDPE Plastic", 2.0, 0.5, RecyclingCategory.PLASTIC);
+        defineMaterial("PVC Plastic", 2.1, 0.2, RecyclingCategory.PLASTIC);
+        defineMaterial("Virgin Glass", 1.1, 0.9, RecyclingCategory.GLASS);
+        defineMaterial("Recycled Glass", 0.64, 0.9, RecyclingCategory.GLASS);
         defineMaterial("Wood (class 2)", 0.31, 0.2, RecyclingCategory.ORGANIC);
-        defineMaterial("Paper (recycled/board)", 0.50, 0.5, RecyclingCategory.TEXTILE);
+        defineMaterial("Paper (recycled/board)", 0.50, 0.5, RecyclingCategory.PAPER);
         defineMaterial("Cotton (fabric)", 5.5, 0.2, RecyclingCategory.TEXTILE);
-        defineMaterial("Natural Rubber", 1.3, 0.2, RecyclingCategory.TEXTILE);
+        defineMaterial("Natural Rubber", 1.3, 0.2, RecyclingCategory.MIXED);
     }
 
 
@@ -55,7 +55,7 @@ public class MaterialService {
         for (Material m : materials) {
 
             result.append(
-                String.format("%-14s %14s%n",
+                String.format("%-24s %10s%n",
                     m.getName(),
                     "Impact: " + m.getImpact())
             );

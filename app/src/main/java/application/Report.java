@@ -5,7 +5,6 @@ import java.util.List;
 
 import domain.Product;
 import domain.ProductMaterialRelation;
-import domain.Material;
 
 public class Report {
     private List<Product> products;
@@ -31,9 +30,8 @@ public class Report {
                 materials += productMaterial.getMaterial().getName();
             }
 
-            int quantity = 1;
 
-            String row = p.getName() + "\t" + quantity + "\t" + impact + "\t" + materials;
+            String row = p.getName() + "\t" + p.calculateTotalMass() + "\t" + impact + "\t" + materials;
 
             rows.add(row);
         }

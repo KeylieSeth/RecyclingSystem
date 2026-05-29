@@ -123,8 +123,8 @@ public class Menu {
     public void printMenu() {
         String menuText = """
 
-                ======= Main Menu =======
-                -------------------------
+                =========== Main Menu ===========
+                ---------------------------------
                 1) Material Menu
                 2) Product Menu
                 3) Recycling Menu
@@ -133,7 +133,7 @@ public class Menu {
                 6) Save to file
                 i) Help
                 q) Exit
-                -------------------------""";
+                ---------------------------------""";
 
         System.out.println(menuText);
     }
