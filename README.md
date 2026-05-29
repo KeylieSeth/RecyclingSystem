@@ -80,7 +80,7 @@ The actual implementations are also placed in the domain layer, which in our cas
 - Designed and implemented the product menu
 - Implemented application layer product service
 - Constructed domain layer product class
-- Implemented FileHandler for project persistencedddd
+- Implemented FileHandler for project persistence
 
 ### Kim
 - Designed and implemented the recycling menu
@@ -173,5 +173,6 @@ One limitation is that ProductService has one too many responsibilities. It hand
 
 Another limitation is related to data ownership. InMemoryRepository was introduced to manage system data, but some services still maintain their own collections. This makes it less clear on which component that should act as the main source of the data. 
 
-### Saving and Loading Files 
+
 UML Class diagram: 
+Sequence Diagram:
