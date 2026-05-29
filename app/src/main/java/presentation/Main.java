@@ -15,16 +15,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         //infratructure
-        Repository productRepo = new InMemoryRepository();
+        Repository repo = new InMemoryRepository();
         FileHandler fileHandler = new FileHandler();
 
         //application
         ImpactCalculationStrategy simpleStrategy = new SimpleSumStrategy();
         ImpactCalculationStrategy lifespanStrategy = new LifespanAdjustedStrategy(simpleStrategy);
-        ImpactCalculationStrategy recyclabilityStrategy = new RecyclabilityScoreCalculationStrategy() {
-        };
-        MaterialService materialService = new MaterialService(new InMemoryRepository());
-        ProductService productService = new ProductService(productRepo, simpleStrategy, lifespanStrategy, recyclabilityStrategy);
+        ImpactCalculationStrategy recyclabilityStrategy = new RecyclabilityScoreCalculationStrategy();
+        MaterialService materialService = new MaterialService(repo);
+        ProductService productService = new ProductService(repo, simpleStrategy, lifespanStrategy, recyclabilityStrategy);
         RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService(productService, materialService);
 
         //presentation
@@ -32,7 +31,7 @@ public class Main {
         MaterialMenu materialMenu = new MaterialMenu(materialService, scanner);
         RecyclingMenu recyclingMenu = new RecyclingMenu(productService, recyclingGuidanceService, scanner);
 
-        Menu menu = new Menu(productService, productMenu, materialMenu, recyclingMenu, fileHandler, scanner);
+        Menu menu = new Menu(repo, productService, productMenu, materialMenu, recyclingMenu, fileHandler, scanner);
         menu.runMenu();
         scanner.close();
     }

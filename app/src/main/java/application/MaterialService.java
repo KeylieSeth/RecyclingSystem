@@ -34,17 +34,11 @@ public class MaterialService {
         throw new IllegalArgumentException("Incorrect impact value " + eF);
     }
 
-
     public void deleteMaterial(String name) {
-        for (Material material: repo.getAllMaterials()){
-            if (material.getName().equals(name)) {
-                repo.getAllMaterials().remove(material);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("Material not found: " + name);
+        repo.getAllMaterials().removeIf(
+            material -> material.getName().equals(name)
+        );
     }
-
 
     public String listMaterials(){
         if (repo.getAllMaterials().isEmpty()) {

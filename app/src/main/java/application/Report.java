@@ -7,13 +7,12 @@ import domain.Product;
 import domain.ProductMaterialRelation;
 
 public class Report {
-    private List<Product> products;
     private List<String> rows;
     private double totalImpact;
     
 
     public Report(ProductService productService){
-        this.products = List.copyOf(productService.listProducts());
+        List<Product> products = productService.listProducts();
         this.rows = new ArrayList<>();
         this.totalImpact = 0;
 

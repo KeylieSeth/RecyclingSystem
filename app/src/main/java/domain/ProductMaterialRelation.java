@@ -1,5 +1,8 @@
 package domain;
-public class ProductMaterialRelation {
+
+import java.io.Serializable;
+
+public class ProductMaterialRelation implements Serializable {
 
     private Material material;
     private double mass;
