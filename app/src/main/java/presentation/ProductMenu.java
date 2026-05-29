@@ -55,10 +55,13 @@ public class ProductMenu {
                     listProducts();
                     break;
                 case "4":
-                    SimpleSumImpactCalc();
+                    simpleSumImpactCalc();
                     break;
                 case "5":
-                    LifespanAdjustedCalc();
+                    lifespanAdjustedCalc();
+                    break;
+                case "6":
+                    recyclabilityCalculation();
                     break;
                 case "0":
                     System.out.println("Returning to main menu.");
@@ -81,7 +84,8 @@ public class ProductMenu {
                 4) Total Material Impact 
                    for specific product
                 5) Lifespan Adjusted 
-                   annual impact          
+                   annual impact
+                6) Recyclability penalty/score          
                 0) Back to main menu 
                 ----------------------------""";
 
@@ -189,7 +193,7 @@ public class ProductMenu {
     }
 
 
-    private void SimpleSumImpactCalc() {
+    private void simpleSumImpactCalc() {
         System.out.println("\n=== Environmental Impact ===");
 
         System.out.print("Enter product name: ");
@@ -206,7 +210,7 @@ public class ProductMenu {
         System.out.println("Environmental impact: " + result);
     }
 
-    private void LifespanAdjustedCalc(){
+    private void lifespanAdjustedCalc(){
         System.out.println("==== Adjusted lifeSpan ====");
 
         System.out.print("Enter product name: ");
@@ -221,6 +225,24 @@ public class ProductMenu {
 
         double result = productService.calculateLifespanAdjusted(product);
         System.out.printf("Lifespan Adjusted annual impact %.2f%n", result);
+    }
+
+    private void recyclabilityCalculation(){
+        System.out.println("==== Recyclability penalty/bonus ====");
+        
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+
+        Product product = productService.findByName(name);
+
+        if (product == null){
+            System.out.println("Product not found");
+            return;
+        }
+
+        double result = productService.calculateRecyclability(product);
+        System.out.println("Recyclability: " + result);
+            
     }
 
 

@@ -8,31 +8,25 @@ public class MaterialService {
 
     public MaterialService(){
         this.materials = new ArrayList<>();
-        defineMaterial("Aluminium", 8.2, RecyclingCategory.METAL);
-
-        defineMaterial("Steel", 6.7, RecyclingCategory.METAL);
-
-        defineMaterial("Copper", 9.1, RecyclingCategory.METAL);
-
-        defineMaterial("Glass", 3.4, RecyclingCategory.CERAMIC);
-
-        defineMaterial("Cardboard", 1.8, RecyclingCategory.PAPER);
-
-        defineMaterial("Paper", 1.2, RecyclingCategory.PAPER);
-
-        defineMaterial("PET Plastic", 5.6, RecyclingCategory.PLASTIC);
-
-        defineMaterial("HDPE Plastic", 4.9, RecyclingCategory.PLASTIC);
-
-        defineMaterial("Wood", 2.3, RecyclingCategory.ORGANIC);
-
-        defineMaterial("Textile", 4.1, RecyclingCategory.TEXTILE);
+        defineMaterial("Virgin Aluminium", 12.0, 0.9, RecyclingCategory.METAL);
+        defineMaterial("Recycled Aluminiym", 1.5, 0.9, RecyclingCategory.METAL);
+        defineMaterial("Virgin Steel", 2.2, 0.9, RecyclingCategory.METAL);
+        defineMaterial("Recycled Steel", 0.4, 0.9, RecyclingCategory.METAL);
+        defineMaterial("PET Plastic", 3.5, 0.5,  RecyclingCategory.CERAMIC);
+        defineMaterial("HDPE Plastic", 2.0, 0.5, RecyclingCategory.PAPER);
+        defineMaterial("PVC Plastic", 2.1, 0.2, RecyclingCategory.PAPER);
+        defineMaterial("Virgin Glass", 1.1, 0.9, RecyclingCategory.PLASTIC);
+        defineMaterial("Recycled Glass", 0.64, 0.9, RecyclingCategory.PLASTIC);
+        defineMaterial("Wood (class 2)", 0.31, 0.2, RecyclingCategory.ORGANIC);
+        defineMaterial("Paper (recycled/board)", 0.50, 0.5, RecyclingCategory.TEXTILE);
+        defineMaterial("Cotton (fabric)", 5.5, 0.2, RecyclingCategory.TEXTILE);
+        defineMaterial("Natural Rubber", 1.3, 0.2, RecyclingCategory.TEXTILE);
     }
 
 
-    public void defineMaterial(String name, double eF, RecyclingCategory category){
+    public void defineMaterial(String name, double eF, double recyclabilityFactor, RecyclingCategory category){
         if (eF > 0) {
-            Material material = new Material(name, eF, category);
+            Material material = new Material(name,  eF, recyclabilityFactor, category);
             materials.add(material);
             return;
         }

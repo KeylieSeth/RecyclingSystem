@@ -39,11 +39,16 @@ public class MaterialMenu {
                         double eF = scanner.nextDouble();
                         scanner.nextLine();
                         
+                        // recyclabilityFactor
+                        System.out.print("Enter material's recyclability factor: ");
+                        double recyclabilityFactor = scanner.nextDouble();
+                        scanner.nextLine();
+
                         System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, ORGANIC, GLASS, PAPER, TEXTILE, MIXED): ");
                         String categoryInput = scanner.nextLine().toUpperCase();
                         RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
 
-                        materialService.defineMaterial(name, eF, category);
+                        materialService.defineMaterial(name, eF, recyclabilityFactor, category);
 
                     } catch (IllegalArgumentException e){
                         System.out.println(e.getMessage());

@@ -18,12 +18,15 @@ public class ProductService {
     private int currentProductindex = 0;
     private ImpactCalculationStrategy simpleStrategy;
     private ImpactCalculationStrategy lifespanStrategy;
+    private ImpactCalculationStrategy recyclabilityStrategy;
 
-    public ProductService(Repository productRepo, MaterialService materialService, ImpactCalculationStrategy simpleStrategy, ImpactCalculationStrategy lifespanStrategy ) {
+    public ProductService(Repository productRepo, MaterialService materialService, ImpactCalculationStrategy simpleStrategy, 
+        ImpactCalculationStrategy lifespanStrategy, ImpactCalculationStrategy recyclabilityStrategy ) {
         this.productRepo = productRepo;
         this.materialService = materialService;
         this.simpleStrategy = simpleStrategy;
         this.lifespanStrategy = lifespanStrategy;
+        this.recyclabilityStrategy = recyclabilityStrategy;
     }
 
     public Product addProduct(String name, double estimatedLifespan) {
@@ -78,6 +81,14 @@ public class ProductService {
 
     public double calculateLifespanAdjusted (Product product){
         return lifespanStrategy.calculate(product);
+    }
+
+    public double calculateRecyclability(Product product){
+        return recyclabilityStrategy.calculate(product);
+    }
+
+    public double getTotalMass(Product product) {
+        return product.calculateTotalMass();
     }
     
 }
