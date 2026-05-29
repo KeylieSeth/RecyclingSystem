@@ -1,5 +1,5 @@
 # Recycling system
-[![.github/workflows/CI.yml](https://github.com/KeylieSeth/FinalProjectOOD/actions/workflows/CI.yml/badge.svg)](https://github.com/KeylieSeth/FinalProjectOOD/actions/workflows/CI.yml)
+[![.github/workflows/CI.yml](https://github.com/KeylieSeth/RecyclingSystem/actions/workflows/CI.yml/badge.svg)](https://github.com/KeylieSeth/FinalProjectOOD/actions/workflows/CI.yml)
 
 Menu-driven console application that provides recycling guidance for products and reusable materials. Developed as a final project for the Object-Oriented Design course.
 
