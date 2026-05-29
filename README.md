@@ -38,7 +38,7 @@ Presentation /
 Application /  
 	ProductService  
 	MaterialService  
-	RecyclingGuidanceService
+	RecyclingGuidanceService  
 	Report  
 
 Domain /  
@@ -49,8 +49,8 @@ Domain /
 	Material  
 	RecyclabilityScoreCalculationStrategy  
 	RecyclingCategory  
-	SingleMaterialImapctCalculation  
-	SimpleSumStretegy  
+	SingleMaterialImpactCalculation  
+	SimpleSumStrategy  
 	Repository  
 
 Infrastructure /   
