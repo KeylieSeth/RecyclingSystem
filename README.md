@@ -111,8 +111,8 @@ To verify Java installation, run:
 
 ### Clone the Repository
 Clone the project and navigate into the project folder:  
-`git clone https://github.com/KeylieSeth/FinalProjectOOD.git`  
-	`cd FinalProjectOOD`
+`git clone https://github.com/KeylieSeth/RecyclingSystem.git`  
+	`cd RecyclingSystem`
 
 ### Run the Application
 Run the project using the Gradle:
