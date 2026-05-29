@@ -12,8 +12,11 @@ public class ReportFormatter {
         
         StringBuilder content = new StringBuilder();
 
-        String header = String.format("%-15s %-10s %-12s %s\n",
-        "Name", "Qty", "Impact", "Materials");
+        String header = String.format("%-10s %-14s   %-12s %s%n",
+            "Name",
+            " Weight (kg) ",
+            "Impact",
+            "Materials");
 
         content.append(header);
         maxWidth = header.length();
@@ -22,8 +25,13 @@ public class ReportFormatter {
             
             String[] parts = row.split("\t", -1);
 
-            String formattedRow = String.format("%-15s %-11s %-11s %s\n",
-            parts[0], parts[1], parts[2], parts[3]);
+            String formattedRow = String.format(
+                "%-10s %-14s   %-12.2f %s%n",
+                parts[0],
+                center(parts[1], 12),
+                Double.parseDouble(parts[2]),
+                parts[3]
+            );
 
             content.append(formattedRow);
 
@@ -44,12 +52,25 @@ public class ReportFormatter {
         sb.append(content);
 
        
-        sb.append("\nTotal Impact: " + report.getTotalImpact() + "\n");
+        sb.append(String.format("%nTotal Impact: %.2f%n", report.getTotalImpact()));
         sb.append("-".repeat(maxWidth) + "\n");
         
         date = LocalDate.now();
         sb.append("Report Generated: " + date.format(DateTimeFormatter.ISO_DATE) + ".\n");
 
         return sb.toString();
+    }
+
+    private String center(String text, int width) {
+    int padding = width - text.length();
+
+    if (padding <= 0) {
+        return text;
+    }
+
+    int left = padding / 2;
+    int right = padding - left;
+
+    return " ".repeat(left) + text + " ".repeat(right);
     }
 }

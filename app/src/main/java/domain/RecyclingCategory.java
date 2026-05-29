@@ -4,6 +4,9 @@ public enum RecyclingCategory {
     PLASTIC,
     METAL,
     CERAMIC,
-    NATURAL,
-    MIXED
+    ORGANIC,
+    TEXTILE,
+    MIXED,
+    GLASS,
+    PAPER
 }

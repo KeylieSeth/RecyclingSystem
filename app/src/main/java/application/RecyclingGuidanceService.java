@@ -2,6 +2,7 @@ package application;
 
 import domain.Material;
 import domain.Product;
+import domain.ProductMaterialRelation;
 import domain.RecyclingCategory;
 import java.util.List;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class RecyclingGuidanceService {
             return customGuidanceByProductName.get(product.getName());
         }
 
-        List<Material> materials = product.getMaterials();
+        List<ProductMaterialRelation> materials = product.getMaterials();
 
         if (materials == null || materials.isEmpty()) {
             return "No materials registered for this product.";
@@ -37,7 +38,7 @@ public class RecyclingGuidanceService {
             return "Mixed-material product. Separate materials before recycling if possible.";
         }
 
-        return getGuidanceForMaterial(materials.get(0));
+        return getGuidanceForMaterial(materials.get(0).getMaterial());
     }
 
     public String getGuidanceByProductName(String productName) {
@@ -68,10 +69,16 @@ public class RecyclingGuidanceService {
             return "Recycle as metal.";
         } else if (category == RecyclingCategory.CERAMIC) {
             return "Handle as ceramic or general waste depending on local rules.";
-        } else if (category == RecyclingCategory.NATURAL) {
+        } else if (category == RecyclingCategory.ORGANIC) {
             return "Recycle as natural material or compost if applicable.";
         } else if (category == RecyclingCategory.MIXED) {
             return "Mixed material: separate the parts before recycling if possible.";
+        } else if (category == RecyclingCategory.GLASS) {
+            return "Recycle as glass.";
+        } else if (category == RecyclingCategory.PAPER) {
+            return "Recycle as paper.";
+        } else if (category == RecyclingCategory.TEXTILE) {
+            return "Recycle as textile.";
         }
 
         return "No recycling guidance available.";
