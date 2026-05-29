@@ -20,6 +20,8 @@ public class ProductMenu {
         this.productService = productService;   
         this.materialService = materialService;    
     }
+
+
     public void run() {
         while (true) {
             printMenu();
@@ -31,7 +33,7 @@ public class ProductMenu {
                     addProduct();
                     break;
                 case "2":
-                    System.out.println("\n====== Delete Product ======");
+                    System.out.println("\n========== Delete Product ==========");
                     Optional<Product> product = getSelectedProduct();
 
                     if (product.isPresent()) {
@@ -48,11 +50,17 @@ public class ProductMenu {
                     break;
                     
                 case "3":
-                    System.out.println("\n======= Product List =======");
+                    System.out.println("\n=========== Product List ===========");
                     listProducts();
                     break;
                 case "4":
-                    showImpact();
+                    simpleSumImpactCalc();
+                    break;
+                case "5":
+                    lifespanAdjustedCalc();
+                    break;
+                case "6":
+                    recyclabilityCalculation();
                     break;
                 case "0":
                     System.out.println("Returning to main menu.");
@@ -67,14 +75,17 @@ public class ProductMenu {
     public void printMenu() {
         String menuText = """
 
-                ======= Product Menu =======
-                ----------------------------
+                =========== Product Menu ===========
+                ------------------------------------
                 1) Add product       
                 2) Delete product    
-                3) Product list           
-                4) Show enviromental impact            
+                3) Product list            
+                4) Total Material Impact for a
+                   specific product
+                5) Lifespan Adjusted annual impact
+                6) Recyclability penalty/score          
                 0) Back to main menu 
-                ----------------------------""";
+                ------------------------------------""";
 
         System.out.println(menuText);
     }
@@ -85,7 +96,8 @@ public class ProductMenu {
     }
 
     private void addProduct() {
-        List<String> productMaterials = new ArrayList<>();
+        List<Material> productMaterials = new ArrayList<>();
+        double estimatedLifespan;
 
         if (materialService.getAllMaterials().isEmpty()){
             System.out.println("No registered materials found.");
@@ -93,7 +105,7 @@ public class ProductMenu {
             return;
         }
 
-        System.out.println("\n======= Add Product =======");
+        System.out.println("\n=========== Add Product ===========");
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
 
@@ -101,36 +113,89 @@ public class ProductMenu {
             System.out.println("Product name not valid.");
             return;
         }
+
+        System.out.print("Enter expected lifespan of the product: ");
+
+        String lifespanInput = scanner.nextLine();
+
+        if (lifespanInput.isBlank()) {
+            System.out.println("No input, returning to menu.");
+            return;
+        }
+
+        try {
+
+            estimatedLifespan = Double.parseDouble(lifespanInput);
+
+            if (estimatedLifespan <= 0) {
+                System.out.println("Lifespan must be greater than 0.");
+                return;
+            }
+
+        } catch (NumberFormatException e) {
+
+            System.out.println("Please enter a valid number.");
+            return;
+        }
             
-        Product product = productService.addProduct(name);
+        Product product = productService.addProduct(name, estimatedLifespan);
 
             while (true) {
-                String materialName = getSelectedMaterial();
+                Optional<Material> materialOptional = getSelectedMaterial();
 
-                if (productMaterials.contains(materialName)){
-                    System.out.println(name + " already has " + materialName + ".");
-                    System.out.println("Please choose another material.");
-                }
+                if (materialOptional.isPresent()) {
+                    Material material = materialOptional.get();
 
-                else if (materialName != null) {
-                    productMaterials.add(materialName);
-                    productService.addMaterialToProduct(product, materialName);
-                    System.out.println(materialName + " added to product.");
+                    if (productMaterials.contains(material)) {
+                        System.out.println(name + " already has " + material.getName() + ".");
+                        System.out.println("Please choose another material.");
+                    } else {
+                        productMaterials.add(material);
+
+                        System.out.print("Enter mass of material in kg: ");
+
+                        String massInput = scanner.nextLine();
+
+                        if (massInput.isBlank()) {
+                            System.out.println("Returning to menu.");
+                            break;
+                        }
+
+                        try {
+
+                            double mass = Double.parseDouble(massInput);
+
+                            if (mass <= 0) {
+                                System.out.println("Mass must be greater than 0.");
+                                continue;
+                            }
+
+                            productService.addMaterialToProduct(product, material, mass);
+
+                            System.out.println(material.getName() + " added to product.");
+
+                        } catch (NumberFormatException e) {
+
+                            System.out.println("Please enter a valid number.");
+                        }
+                    }
                 }
 
                 System.out.print("Add another material to product? (y/n): ");
                 String answer = scanner.nextLine();
 
                 if (answer.equalsIgnoreCase("n") && productMaterials.isEmpty()){
-                    System.out.println("A product must have atleast one material.");
+                    System.out.println("A product must have at least one material.");
                     continue;
                 }
 
                 if (answer.equalsIgnoreCase("n")) {
                     break;
                 }
+
+                System.out.println(name + " added.");
         }
-        System.out.println(name + " added.");
+        
     }
 
     private void listProducts() {
@@ -141,50 +206,69 @@ public class ProductMenu {
     }
 
     private void listMaterials(){
-        System.out.println("\n==== Material List: ====");
+        System.out.println("\n======== Material List: ========");
 
         //Print all products (one per row), in numbered order for user selection.
         for (int i = 0; i < materialService.getAllMaterials().size(); i++) {
-            System.out.println((i+1) + ". " + materialService.getAllMaterials().get(i).getName());
+            System.out.printf("%-3s %s%n", (i + 1) + ".", materialService.getAllMaterials().get(i).getName());
         }
     }
 
-    private void showImpact() {
-        System.out.println("\n=== Environmental Impact ===");
+
+    private void simpleSumImpactCalc() {
+        System.out.println("\n======= Environmental Impact =======");
 
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
 
-        double impact = productService.calculateImpact(name);
+        Product product = productService.findByName(name);
 
-       System.out.println("Environmental impact: " + impact);
+        if (product == null){
+            System.out.println("Product not found");
+            return;
+        }
+
+        double result = productService.calculateSimpleSum(product);
+        System.out.println("Environmental impact: " + result);
     }
 
-    //Choose material from list to add to a product.
-    private String getSelectedMaterial(){
-        //temporary list when method is called to hold all registered materials.
-        List<Material> materials = materialService.getAllMaterials();
+    private void lifespanAdjustedCalc(){
+        System.out.println("======== Adjusted lifeSpan ========");
 
-        listMaterials();
-        System.out.print("Select the number of the material to add: ");
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
 
-        try {
-            int materialChoice = Integer.parseInt(scanner.nextLine());
+        Product product = productService.findByName(name);
 
-            if (materialChoice < 1 || materialChoice > materials.size()){
-                System.out.println("Invalid material number.");
-                return null;
-            }
+        if (product == null){
+            System.out.println("Product not found");
+            return;
+        }
 
-            String selectedMaterial = materials.get(materialChoice-1).getName();
-            return selectedMaterial;
-
-        } catch(NumberFormatException e) {
-            System.out.println("please enter a valid number.");
-            return null;
-        } 
+        double result = productService.calculateLifespanAdjusted(product);
+        System.out.printf("Lifespan Adjusted annual impact %.2f%n", result);
     }
 
+    private void recyclabilityCalculation(){
+        System.out.println("======== Recyclability penalty/bonus ========");
+        
+        System.out.print("Enter product name: ");
+        String name = scanner.nextLine();
+
+        Product product = productService.findByName(name);
+
+        if (product == null){
+            System.out.println("Product not found");
+            return;
+        }
+
+        double result = productService.calculateRecyclability(product);
+        System.out.println("Recyclability: " + result);
+            
+    }
+
+
+    //Choose product from list to add material to.
     private Optional<Product> getSelectedProduct(){
         //temporary list when method is called to hold all registered products.
         List<Product> products = productService.listProducts();
@@ -214,5 +298,30 @@ public class ProductMenu {
             System.out.println("No products in list.");
             return Optional.empty();
         }
+    }
+
+     //Choose material from list to add to a product.
+    private Optional<Material> getSelectedMaterial(){
+        //temporary list when method is called to hold all registered materials.
+        List<Material> materials = materialService.getAllMaterials();
+
+        listMaterials();
+        System.out.print("Select the number of the material to add: ");
+
+        try {
+            int materialChoice = Integer.parseInt(scanner.nextLine());
+
+            if (materialChoice < 1 || materialChoice > materials.size()){
+                System.out.println("Invalid material number.");
+                return Optional.empty();
+            }
+
+            Material selectedMaterial = materials.get(materialChoice-1);
+            return Optional.of(selectedMaterial);
+
+        } catch(NumberFormatException e) {
+            System.out.println("please enter a valid number.");
+            return Optional.empty();
+        } 
     }
 }

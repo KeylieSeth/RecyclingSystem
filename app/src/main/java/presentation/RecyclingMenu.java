@@ -27,7 +27,7 @@ public class RecyclingMenu {
 
             switch (choice) {
                 case "1":
-                    System.out.println("\n===== Recycling Guidance =====");
+                    System.out.println("\n========= Recycling Guidance =========");
                     showRecyclingGuidance();
                     break;
                 case "2":
@@ -46,13 +46,13 @@ public class RecyclingMenu {
     public void printMenu() {
         String menuText = """
 
-                ======= Recycling Menu =======
-                ------------------------------
+                =========== Recycling Menu ===========
+                --------------------------------------
                 1) Recycling guidance          
-                2) Change recycling guidance 
-                   for product                         
+                2) Change recycling guidance for 
+                   product                         
                 0) Back to main menu 
-                ------------------------------""";
+                --------------------------------------""";
 
         System.out.println(menuText);
     }

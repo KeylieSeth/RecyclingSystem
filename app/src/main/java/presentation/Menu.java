@@ -1,22 +1,22 @@
 package presentation;
 
 import java.util.Scanner;
-
 import application.*;
+import domain.Repository;
 import infrastructure.FileHandler;
 
 public class Menu {
     private ProductService productService;
-    private MaterialService materialService;
     private ProductMenu productMenu;
     private MaterialMenu materialMenu;
     private RecyclingMenu recyclingMenu;
     private FileHandler fileHandler;
     private Scanner scanner;
+    private Repository repo;
 
-    public Menu(ProductService productService, MaterialService materialService,ProductMenu productMenu, MaterialMenu materialMenu, RecyclingMenu recyclingMenu, FileHandler fileHandler, Scanner scanner){
+    public Menu(Repository repo, ProductService productService, ProductMenu productMenu, MaterialMenu materialMenu, RecyclingMenu recyclingMenu, FileHandler fileHandler, Scanner scanner){
+        this.repo = repo;
         this.productService = productService;
-        this.materialService = materialService;
         this.productMenu = productMenu;
         this.materialMenu = materialMenu;
         this.recyclingMenu = recyclingMenu;
@@ -72,11 +72,11 @@ public class Menu {
                         System.out.print("Enter filename: ");
                         String fileName = scanner.nextLine();
 
-                        productService.setProducts(
+                        repo.setAllProducts(
                             fileHandler.loadProducts(fileName)
                         );
 
-                        materialService.setMaterials(
+                        repo.setAllMaterials(
                             fileHandler.loadMaterials(fileName)
                         );
 
@@ -94,8 +94,8 @@ public class Menu {
                         String fileName = scanner.nextLine();
 
                         fileHandler.save(
-                            productService.listProducts(),
-                            materialService.getAllMaterials(),
+                            repo.getAllProducts(),
+                            repo.getAllMaterials(),
                             fileName
                         );
 
@@ -125,8 +125,8 @@ public class Menu {
     public void printMenu() {
         String menuText = """
 
-                ======= Main Menu =======
-                -------------------------
+                =========== Main Menu ===========
+                ---------------------------------
                 1) Material Menu
                 2) Product Menu
                 3) Recycling Menu
@@ -135,7 +135,7 @@ public class Menu {
                 6) Save to file
                 i) Help
                 q) Exit
-                -------------------------""";
+                ---------------------------------""";
 
         System.out.println(menuText);
     }

@@ -1,41 +1,47 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import domain.ImpactCalculationStrategy;
 import domain.Material;
 import domain.Product;
+import domain.ProductMaterialRelation;
 import domain.Repository;
 
 public class ProductService {
+    private Repository productRepo;
+    
+    private int currentProductindex = 0;
+    private ImpactCalculationStrategy simpleStrategy;
+    private ImpactCalculationStrategy lifespanStrategy;
+    private ImpactCalculationStrategy recyclabilityStrategy;
 
-    private Repository repo;
-    private MaterialService materialService;
-
-    //private List<Product> products = new ArrayList<>();
-
-    public ProductService(Repository repo, MaterialService materialService) {
-        this.repo = repo;
-        this.materialService = materialService;
+    public ProductService(Repository productRepo, ImpactCalculationStrategy simpleStrategy, 
+        ImpactCalculationStrategy lifespanStrategy, ImpactCalculationStrategy recyclabilityStrategy ) {
+        this.productRepo = productRepo;
+        this.simpleStrategy = simpleStrategy;
+        this.lifespanStrategy = lifespanStrategy;
+        this.recyclabilityStrategy = recyclabilityStrategy;
     }
 
-    public Product addProduct(String name) {
-        Product product = new Product(name);
-        repo.getAllProducts().add(product);
+    public Product addProduct(String name, double estimatedLifespan) {
+        Product product = new Product(name, estimatedLifespan);
+        productRepo.getAllProducts().add(product);
+        giveIndex(product);
         return product;
     }
 
     public boolean deleteProduct(Product product){
-        return repo.getAllProducts().remove(product);
+        return productRepo.getAllProducts().remove(product);
     }
 
     public List<Product> listProducts() {
-        return repo.getAllProducts();
+        return productRepo.getAllProducts();
     }
 
     public Product findByName(String name) {
-        for (Product p : repo.getAllProducts()) {
+        for (Product p : productRepo.getAllProducts()) {
             if (p.getName().equalsIgnoreCase(name)) {
                 return p;
             }
@@ -44,7 +50,7 @@ public class ProductService {
     }
 
     public Optional<Product> findProductByName(String name){
-        for (Product p : repo.getAllProducts()) {
+        for (Product p : productRepo.getAllProducts()) {
             if (p.getName().equalsIgnoreCase(name)) {
                 return Optional.of(p);
             }
@@ -53,21 +59,33 @@ public class ProductService {
     }
 
     public void setProducts(List<Product> products) {
-        repo.setAllProducts(products);
+        productRepo.setAllProducts(products);
     }
 
-    public double calculateImpact(String name) {
-        Product product = findByName(name);
-        if (product == null) {
-            return 0.0;
-        }
-        return 1.0; // MOCK THING (Whole method)
+    public void addMaterialToProduct(Product product, Material material, double mass) {
+        ProductMaterialRelation relation = new ProductMaterialRelation(material, mass);
+        product.addMaterial(relation);
     }
 
-    //Method to add a material to a product.
-    public void addMaterialToProduct(Product product, String materialName){
+    public void giveIndex(Product product) {
+        product.setId(currentProductindex);
+        currentProductindex++;
+    }
+
+    public double calculateSimpleSum (Product product) {
+        return simpleStrategy.calculate(product);
+    }
+
+    public double calculateLifespanAdjusted (Product product){
+        return lifespanStrategy.calculate(product);
+    }
+
+    public double calculateRecyclability(Product product){
+        return recyclabilityStrategy.calculate(product);
+    }
+
+    public double getTotalMass(Product product) {
+        return product.calculateTotalMass();
+    }
     
-        Material material = materialService.findByName(materialName);
-        product.addMaterial(material);
-    }
 }
