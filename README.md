@@ -90,3 +90,50 @@ The actual implementations are placed in the application layer, which in our cas
 - Designed and implemented the report feature
 - Worked with integration between products and materials
 - Refactored handling of duplicates and entity selection logic
+
+## How to Build/Run
+### Prerequisites
+Before running the project, make sure the following are installed:
+Java JDK 21
+Git
+To verify Java installation:
+java --version
+
+## Clone the Repository
+Clone the project and navigate into the project folder:
+git clone https://github.com/KeylieSeth/FinalProjectOOD.git
+cd FinalProjectOOD
+
+## Run the Application
+Run the project using the Gradle:
+Windows (PowerShell):
+.\gradlew run
+macOS / Linux:
+./gradlew run
+
+## Build the Project
+To compile and build the project:
+./gradlew build
+On Windows:
+.\gradlew build
+
+## Clean the Project
+To remove generated build files:
+./gradlew clean
+On Windows:
+.\gradlew clean
+
+## Running Tests
+Run automated tests with:
+./gradlew test
+On Windows:
+.\gradlew test
+
+## Saving and Loading Files
+The application supports saving and loading text/serialized data files.
+Example file names:
+report.txt
+save.ser
+save.ser - stores serialized application data such as products and materials.
+report.txt - stores generated reports in a readable text format.
+Saved files are generated inside the app/ folder during runtime.
