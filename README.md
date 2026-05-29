@@ -26,7 +26,8 @@ The system provides a total calculation for the environmental impact of a produc
 
 ## Architecture
 Presentation/  
-	MainMenu  
+	Main
+	Menu
 	MaterialMenu  
 	ProductMenu  
 	RecyclingMenu  
@@ -35,19 +36,20 @@ Presentation/
 Application/  
 	ProductService  
 	MaterialService  
-	RecyclingGuidanceService  
-	SimpleSumStrategy  
-	WeightedByLifespanStrategy  
+	RecyclingGuidanceService
 	Report  
 
 Domain /  
 	ImpactCalculationStrategy  
-	ProductRepository  
+	LifespanAdjustedStrategy
+	ProductMaterialRelation
 	Product  
-	Material  
-	RecyclingCategory  
+	Material
+	RecyclabilityScoreCalculationStrategy
+	RecyclingCategory
 
 Infrastructure /  
+	FileHandler
 	InMemoryProductRepository  
 
 ### Presentation
@@ -161,3 +163,7 @@ Therefore, new functionality can be added with minimal changes and responsibilit
 
 We considered using Factory Pattern but eventually decided not to use it. Since object creation in our case is pretty straightforward, it felt to some extent unnececessary to introduce it. Using constructors directly felt more appropriate taking the size of the system into consideration. However, if the system were to grow and complexity increases introducing a Factory Pattern could be more ideal. 
 
+### Limitations & Room for improvement
+One limitation is that ProductService has one too many responsibilities. It handles product creation, product storage, material assignment, and also coordinating enviromental impact calculations. Even though the calculations are implemented in separate strategy classes, the ProductService class plays a very central role in the entire system. This risks violating the Single Responsibility Principle, since changes regarding product management, material assignment or calculation coordination might affect the same class. An improvement would be to further introduce more classes with clear responsibilities. 
+
+Another limitation is related to data ownership. InMemoryRepository was introduced to manage system data, but some services still maintain their own collections. This makes it less clear on which component that should act as the main source of the data. 
