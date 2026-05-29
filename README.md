@@ -140,3 +140,24 @@ save.ser
 save.ser - stores serialized application data such as products and materials.  
 report.txt - stores generated reports in a readable text format.  
 Saved files are generated inside the app/ folder during runtime.  
+
+## Design Reflection
+### Architectual Decisions
+The system was designed using a layered architecture consisting of Presentation, Application, Domain and Infrastructure layers.
+The intention behind it is to separate resonisibilities and improve maintainability.
+
+The Presenatation layer is responsible for the user interaction through the different menus. This layer only handles the input/output and delegates logic to the Application layer. Our different menus forwards operations such as product/material management and generate report to the separate services, instead of implementing business logic directly from the domain.
+
+The Application layer contains services like ProductService, MaterialService & RecyclingGuiudanceService. This layer helps seperate responsibilities by keeping business logic outside the presentation layer, keeping the presentation classes focused on user interaction. The application layer connects the presentation and domain layers by coordinating operations regarding e.g. products, material and recycling.
+
+The Domain layer contains the core concepts of the system. The classes in this layer represent business entities and their data, such as Product, Material and RecyclingCategory. This layer acts as the central model of the system and allows the application layer use its domain objects to perform operations.
+
+The Infrastructure layer handles data management, for saving and loading files using the class FileHandler. InMemoryRepository is the other class inside this layer which is used to manage data in memory for storing products and materials during runtime. These classes isolate persistence-related responsibilities from the other layers.
+
+### Design Pattern
+The project applies the Strategy Pattern for the enviromental impact calculations using the interface ImpactCalcuationStrategy. This allows classes like SimpleSumStrategy LifespanAdjustedStrategy to implement different calculation approaches while still following a shared contract for the calculation(s).
+This design makes it easier to extend the existing system by adding new ways of calculating impact as seperate classes, rather than having one large class with multiple conditional calculations.
+Therefore, new functionality can be added with minimal changes and responsibilities remain separated, which improves cohesion and maintainability. 
+
+We considered using Factory Pattern but eventually decided not to use it. Since object creation in our case is pretty straightforward, it felt to some extent unnececessary to introduce it. Using constructors directly felt more appropriate taking the size of the system into consideration. However, if the system were to grow and complexity increases introducing a Factory Pattern could be more ideal. 
+
