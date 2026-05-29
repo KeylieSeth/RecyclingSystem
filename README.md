@@ -175,4 +175,4 @@ Another limitation is related to data ownership. InMemoryRepository was introduc
 
 
 UML Class diagram: 
-Sequence Diagram:
+Sequence Diagram: ![Sequence Diagram](app/Sequence%20Diagram%20-%20OOD.png)
