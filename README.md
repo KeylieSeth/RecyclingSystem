@@ -99,37 +99,37 @@ Git
 To verify Java installation:
 java --version
 
-## Clone the Repository
+### Clone the Repository
 Clone the project and navigate into the project folder:
 git clone https://github.com/KeylieSeth/FinalProjectOOD.git
 cd FinalProjectOOD
 
-## Run the Application
+### Run the Application
 Run the project using the Gradle:
 Windows (PowerShell):
 .\gradlew run
 macOS / Linux:
 ./gradlew run
 
-## Build the Project
+### Build the Project
 To compile and build the project:
 ./gradlew build
 On Windows:
 .\gradlew build
 
-## Clean the Project
+### Clean the Project
 To remove generated build files:
 ./gradlew clean
 On Windows:
 .\gradlew clean
 
-## Running Tests
+### Running Tests
 Run automated tests with:
 ./gradlew test
 On Windows:
 .\gradlew test
 
-## Saving and Loading Files
+### Saving and Loading Files
 The application supports saving and loading text/serialized data files.
 Example file names:
 report.txt
