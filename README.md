@@ -27,15 +27,15 @@ As a user, you are able to create a product into which, you can either add mater
 -Receive Input
 
 ## Architecture
-Presentation/  
-	Main
-	Menu
+Presentation /  
+	Main  
+	Menu  
 	MaterialMenu  
 	ProductMenu  
 	RecyclingMenu  
 	ReportFormatter  
 
-Application/  
+Application /  
 	ProductService  
 	MaterialService  
 	RecyclingGuidanceService
@@ -43,15 +43,18 @@ Application/
 
 Domain /  
 	ImpactCalculationStrategy  
-	LifespanAdjustedStrategy
-	ProductMaterialRelation
+	LifespanAdjustedStrategy  
+	ProductMaterialRelation  
 	Product  
-	Material
-	RecyclabilityScoreCalculationStrategy
-	RecyclingCategory
+	Material  
+	RecyclabilityScoreCalculationStrategy  
+	RecyclingCategory  
+	SingleMaterialImapctCalculation  
+	SimpleSumStretegy  
+	Repository  
 
-Infrastructure /  
-	FileHandler
+Infrastructure /   
+	FileHandler  
 	InMemoryProductRepository  
 
 ### Presentation
