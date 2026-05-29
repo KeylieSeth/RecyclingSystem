@@ -101,19 +101,13 @@ The actual implementations are also placed in the domain layer, which in our cas
 - Refactored handling of duplicates and entity selection logic
 
 ## Quick Start (Recommended)
-### Windows Executable
+### Download
+Latest release: https://github.com/KeylieSeth/RecyclingSystem/releases
 
-Run:
-
-RecyclingSystem.exe
+### Running the Application
+Recommended: Download RecyclingSystem.zip, extract it, and run RecyclingSystem.exe.
 
 No Java installation is required.
-
-This version includes a bundled Java runtime and is recommended for users who only want to run the application.
-
-### Alternative: Run from Source
-
-Follow the build and run instructions below if you want to run the application from source code or contribute to development.
 
 ## How to Build/Run
 ### Prerequisites
