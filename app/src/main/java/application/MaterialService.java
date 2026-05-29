@@ -10,7 +10,7 @@ public class MaterialService {
         this.repo = repo;
 
         defineMaterial("Virgin Aluminium", 12.0, 0.9, RecyclingCategory.METAL);
-        defineMaterial("Recycled Aluminiym", 1.5, 0.9, RecyclingCategory.METAL);
+        defineMaterial("Recycled Aluminium", 1.5, 0.9, RecyclingCategory.METAL);
         defineMaterial("Virgin Steel", 2.2, 0.9, RecyclingCategory.METAL);
         defineMaterial("Recycled Steel", 0.4, 0.9, RecyclingCategory.METAL);
         defineMaterial("PET Plastic", 3.5, 0.5,  RecyclingCategory.PLASTIC);
