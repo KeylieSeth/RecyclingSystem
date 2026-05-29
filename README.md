@@ -103,7 +103,7 @@ The actual implementations are also placed in the domain layer, which in our cas
 ## How to Build/Run
 ### Prerequisites
 Before running the project, make sure the following are installed:
-- Java JDK 21
+- Java JDK 17
 - Git
 
 To verify Java installation, run:  
