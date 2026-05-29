@@ -100,6 +100,21 @@ The actual implementations are also placed in the domain layer, which in our cas
 - Worked with integration between products and materials
 - Refactored handling of duplicates and entity selection logic
 
+## Quick Start (Recommended)
+### Windows Executable
+
+Run:
+
+RecyclingSystem.exe
+
+No Java installation is required.
+
+This version includes a bundled Java runtime and is recommended for users who only want to run the application.
+
+### Alternative: Run from Source
+
+Follow the build and run instructions below if you want to run the application from source code or contribute to development.
+
 ## How to Build/Run
 ### Prerequisites
 Before running the project, make sure the following are installed:
