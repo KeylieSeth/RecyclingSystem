@@ -7,6 +7,7 @@ import domain.Repository;
 import infrastructure.*;
 import domain.ImpactCalculationStrategy;
 import domain.LifespanAdjustedStrategy;
+import domain.RecyclabilityScoreCalculationStrategy;
 import domain.SimpleSumStrategy;
 
 public class Main {
@@ -20,8 +21,10 @@ public class Main {
         //application
         ImpactCalculationStrategy simpleStrategy = new SimpleSumStrategy();
         ImpactCalculationStrategy lifespanStrategy = new LifespanAdjustedStrategy(simpleStrategy);
+        ImpactCalculationStrategy recyclabilityStrategy = new RecyclabilityScoreCalculationStrategy() {
+        };
         MaterialService materialService = new MaterialService();
-        ProductService productService = new ProductService(productRepo, materialService, simpleStrategy, lifespanStrategy);
+        ProductService productService = new ProductService(productRepo, materialService, simpleStrategy, lifespanStrategy, recyclabilityStrategy);
         RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService(productService, materialService);
 
         //presentation

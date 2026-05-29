@@ -44,4 +44,12 @@ public class Product implements Serializable {
     public List<ProductMaterialRelation> getMaterials() {
         return productMaterials;
     }
+
+    public double calculateTotalMass(){
+        double result = 0;
+        for (ProductMaterialRelation productMaterial : productMaterials){
+            result += productMaterial.getMass();
+        }
+        return result;
+    }
 }

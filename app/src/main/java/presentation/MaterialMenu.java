@@ -3,17 +3,13 @@ package presentation;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import application.MaterialService;
-import application.ProductService;
-import domain.ImpactCalculationStrategy;
 import domain.Material;
-import domain.SimpleSumStrategy;
 import domain.SingleMaterialImpactCalculation;
 import domain.RecyclingCategory;
 
 public class MaterialMenu {
     private MaterialService materialService;
     private Scanner scanner;
-    private ProductService productService;
     
     public MaterialMenu(MaterialService materialService, Scanner scanner){
         this.materialService = materialService;
@@ -53,6 +49,17 @@ public class MaterialMenu {
 
                         double eF = Double.parseDouble(eFInput);
                         
+                        // recyclabilityFactor
+                        System.out.print("Enter material's recyclability factor: ");
+
+                        String recyclabilityInput = scanner.nextLine();
+
+                        if (recyclabilityInput.isBlank()) {
+                            System.out.println("Returning to menu.");
+                            break;
+                        }
+
+                        double recyclabilityFactor = Double.parseDouble(recyclabilityInput);
 
                         System.out.print("Enter recycling category (PLASTIC, METAL, CERAMIC, ORGANIC, GLASS, PAPER, TEXTILE, MIXED): ");
                         String categoryInput = scanner.nextLine().toUpperCase();
@@ -64,7 +71,7 @@ public class MaterialMenu {
 
                         RecyclingCategory category = RecyclingCategory.valueOf(categoryInput);
 
-                        materialService.defineMaterial(name, eF, category);
+                        materialService.defineMaterial(name, eF, recyclabilityFactor, category);
 
                     } catch (InputMismatchException e) {
 
@@ -109,6 +116,8 @@ public class MaterialMenu {
                     
                 // Carbon Contribution (per material)
                 case "4": {
+                    System.out.println("\n===== Enviromental Impact =====");
+
                     try {
                     System.out.print("Enter material name: ");
                     String name = scanner.nextLine();

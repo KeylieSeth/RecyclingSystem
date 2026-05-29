@@ -17,4 +17,5 @@ public class ProductMaterialRelation {
     public double getMass(){
         return mass;
     }
+
 }
