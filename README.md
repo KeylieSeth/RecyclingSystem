@@ -61,19 +61,19 @@ Infrastructure /
 In our Presentation layer, we have divided responsibilities for displaying and handling user interactions between the menus. The main menu contains the loop for running the program and displaying the different category menus. The material menu is responsible for adding and deleting materials from the system, while the product menu handles product interactions. The recycling menu is responsible for providing recycling guidance for products within the system and for changing recycling instructions for products.
 
 ### Application
-The application layer will have all of our services, such as ProductService, MaterialService, RecyclingGuideService, SimpleSumStrategy and WeightedByLifespanStrategy. This layer calls into the domain to execute business, give instructions, but hide logical implementations. ProductService receives an ImpactCalculationStrategy via its constructor, SimpleSumStrategy and WeightedByLifespanStrategy implements our ImpactCalculationStrategy interface and provides the actual calculations for the products. The RecyclingGuidanceService will provide guidance for recycling, it takes a product and provides information of what material/s the product is made of and how to recycle it properly. ProductService creates, removes and changes products and MaterialService defines the various materials.
+The application layer will have all of our services, such as ProductService, MaterialService, RecyclingGuideService. This layer calls into the domain to execute business, give instructions, but hide logical implementations. The RecyclingGuidanceService will provide guidance for recycling, it takes a product and provides information of what material/s the product is made of and how to recycle it properly. ProductService creates, removes and changes products and MaterialService defines the various materials.
 
 ### Domain
 The domain layer is the heart of the program. We have our Product class, storing all of the products and Material storing the different materials. We have our ImpactCalculationStrategy interface, which is an interface because we want to be able   to possibly add more ways of calculating impact. Here is also where we have our RecyclingCategory class because this class   will divide all the materials into different recycling sections. We have a ProductRepository interface that provides a contract on how to load and save files.
 
 ### Infrastructure
-For the infrastructure, we have our InMemoryProductRepository (instantiated in Main) that implements where to save/store file.
+For the infrastructure, we have our InMemoryRepository and FileHandler in order to store data, save and load to files.
 
 ## Design Patterns
 ### Strategy Pattern
-Our implementation of Strategy Pattern allows us to calculate different ways of the enviromental impact of a product.
+Our implementation of Strategy Pattern allows us to calculate the enviromental impact in different ways of a product.
 In our program the ImpactCalculationStrategy is an interface, placed in the domain layer. This defines a common contract for the different impact calculations.
-The actual implementations are placed in the application layer, which in our case is the SimpleSumStrategy and WeightedByLifespanStrategy.
+The actual implementations are also placed in the domain layer, which in our case is the LifespanAdjustedStrategy, RecyclabilityScoreCalculationStrategy and SimpleSumStrategy.
 
 ## Contributions
 ### Albin
