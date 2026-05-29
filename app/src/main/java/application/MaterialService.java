@@ -1,13 +1,14 @@
 package application;
 import domain.*;
 import java.util.List;
-import java.util.ArrayList;
 
 public class MaterialService {
-    private List<Material> materials;
+    private Repository repo;
 
-    public MaterialService(){
-        this.materials = new ArrayList<>();
+
+    public MaterialService(Repository repo){
+        this.repo = repo;
+
         defineMaterial("Virgin Aluminium", 12.0, 0.9, RecyclingCategory.METAL);
         defineMaterial("Recycled Aluminiym", 1.5, 0.9, RecyclingCategory.METAL);
         defineMaterial("Virgin Steel", 2.2, 0.9, RecyclingCategory.METAL);
@@ -27,7 +28,7 @@ public class MaterialService {
     public void defineMaterial(String name, double eF, double recyclabilityFactor, RecyclingCategory category){
         if (eF > 0) {
             Material material = new Material(name,  eF, recyclabilityFactor, category);
-            materials.add(material);
+            repo.getAllMaterials().add(material);
             return;
         }
         throw new IllegalArgumentException("Incorrect impact value " + eF);
@@ -35,9 +36,9 @@ public class MaterialService {
 
 
     public void deleteMaterial(String name) {
-        for (Material material: materials){
+        for (Material material: repo.getAllMaterials()){
             if (material.getName().equals(name)) {
-                materials.remove(material);
+                repo.getAllMaterials().remove(material);
                 return;
             }
         }
@@ -46,13 +47,13 @@ public class MaterialService {
 
 
     public String listMaterials(){
-        if (materials.isEmpty()) {
+        if (repo.getAllMaterials().isEmpty()) {
             return "No materials found";
         } 
         
         StringBuilder result = new StringBuilder();
 
-        for (Material m : materials) {
+        for (Material m : repo.getAllMaterials()) {
 
             result.append(
                 String.format("%-24s %10s%n",
@@ -66,11 +67,11 @@ public class MaterialService {
 
     //Needed for adding materials to a product in productMenu.
     public List<Material> getAllMaterials() {
-        return materials;
+        return repo.getAllMaterials();
     }
 
     public Material findByName(String name) {
-        for (Material material: materials) {
+        for (Material material : repo.getAllMaterials()) {
             if (material.getName().toLowerCase().equals(name.toLowerCase())) {
                 return material;
             }
@@ -79,6 +80,6 @@ public class MaterialService {
      }
     
     public void setMaterials(List<Material> materials) {
-        this.materials = materials;
+        repo.setAllMaterials(materials);
     }
 }

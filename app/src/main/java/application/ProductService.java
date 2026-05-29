@@ -1,6 +1,5 @@
 package application;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,18 +11,15 @@ import domain.Repository;
 
 public class ProductService {
     private Repository productRepo;
-    private MaterialService materialService;
-    private List<Product> products = new ArrayList<>();
     
     private int currentProductindex = 0;
     private ImpactCalculationStrategy simpleStrategy;
     private ImpactCalculationStrategy lifespanStrategy;
     private ImpactCalculationStrategy recyclabilityStrategy;
 
-    public ProductService(Repository productRepo, MaterialService materialService, ImpactCalculationStrategy simpleStrategy, 
+    public ProductService(Repository productRepo, ImpactCalculationStrategy simpleStrategy, 
         ImpactCalculationStrategy lifespanStrategy, ImpactCalculationStrategy recyclabilityStrategy ) {
         this.productRepo = productRepo;
-        this.materialService = materialService;
         this.simpleStrategy = simpleStrategy;
         this.lifespanStrategy = lifespanStrategy;
         this.recyclabilityStrategy = recyclabilityStrategy;
@@ -31,20 +27,21 @@ public class ProductService {
 
     public Product addProduct(String name, double estimatedLifespan) {
         Product product = new Product(name, estimatedLifespan);
-        products.add(product);
+        productRepo.getAllProducts().add(product);
         giveIndex(product);
         return product;
     }
 
     public boolean deleteProduct(Product product){
-        return products.remove(product);
+        return productRepo.getAllProducts().remove(product);
     }
 
     public List<Product> listProducts() {
-        return products;
+        return productRepo.getAllProducts();
     }
+
     public Product findByName(String name) {
-        for (Product p : products) {
+        for (Product p : productRepo.getAllProducts()) {
             if (p.getName().equalsIgnoreCase(name)) {
                 return p;
             }
@@ -53,7 +50,7 @@ public class ProductService {
     }
 
     public Optional<Product> findProductByName(String name){
-        for (Product p : products) {
+        for (Product p : productRepo.getAllProducts()) {
             if (p.getName().equalsIgnoreCase(name)) {
                 return Optional.of(p);
             }
@@ -62,7 +59,7 @@ public class ProductService {
     }
 
     public void setProducts(List<Product> products) {
-        this.products = products;
+        productRepo.setAllProducts(products);
     }
 
     public void addMaterialToProduct(Product product, Material material, double mass) {

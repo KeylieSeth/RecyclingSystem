@@ -23,8 +23,8 @@ public class Main {
         ImpactCalculationStrategy lifespanStrategy = new LifespanAdjustedStrategy(simpleStrategy);
         ImpactCalculationStrategy recyclabilityStrategy = new RecyclabilityScoreCalculationStrategy() {
         };
-        MaterialService materialService = new MaterialService();
-        ProductService productService = new ProductService(productRepo, materialService, simpleStrategy, lifespanStrategy, recyclabilityStrategy);
+        MaterialService materialService = new MaterialService(new InMemoryRepository());
+        ProductService productService = new ProductService(productRepo, simpleStrategy, lifespanStrategy, recyclabilityStrategy);
         RecyclingGuidanceService recyclingGuidanceService = new RecyclingGuidanceService(productService, materialService);
 
         //presentation
