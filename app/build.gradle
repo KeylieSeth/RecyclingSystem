@@ -45,3 +45,12 @@ tasks.named('run') {
     standardInput = System.in
 }
 
+jar {
+    archiveBaseName = 'RecyclingSystem'
+
+    manifest {
+            attributes(
+                'Main-Class': 'presentation.Main'
+            )
+    }
+}
