@@ -9,7 +9,7 @@ class MaterialTest {
     @Test
     void getNameShouldReturnName() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
 
         // act
         String result = material.getName();
@@ -21,7 +21,7 @@ class MaterialTest {
     @Test
     void getImpactShouldReturnImpactValue() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
 
         // act
         double result = material.getImpact();
@@ -33,7 +33,7 @@ class MaterialTest {
     @Test
     void getEmmissionFactorShouldReturnEF() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
 
         // act
         double result = material.getEmmissionFactor();
@@ -43,9 +43,18 @@ class MaterialTest {
     }
 
     @Test
+    void getRecyclabilityFactorShouldReturnRecyclabilityFactor() {
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
+
+        double result = material.getRecyclabilityFactor();
+
+        assertEquals(1.0, result, 0.001);
+    }
+
+    @Test
     void getRecyclingCategoryShouldReturnCategory() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
 
         // act
         RecyclingCategory result = material.getRecyclingCategory();

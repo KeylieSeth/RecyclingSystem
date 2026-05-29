@@ -9,7 +9,7 @@ class ProductMaterialRelationTest {
     @Test
     void getMaterialShouldReturnMaterial() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
         ProductMaterialRelation relation = new ProductMaterialRelation(material, 3.0);
 
         // act
@@ -22,7 +22,7 @@ class ProductMaterialRelationTest {
     @Test
     void getMassShouldReturnMass() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
         ProductMaterialRelation relation = new ProductMaterialRelation(material, 3.0);
 
         // act
@@ -35,7 +35,7 @@ class ProductMaterialRelationTest {
     @Test
     void getMassShouldBeZeroWhenMassIsNotPositive() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
         ProductMaterialRelation relation = new ProductMaterialRelation(material, 0.0);
 
         // act

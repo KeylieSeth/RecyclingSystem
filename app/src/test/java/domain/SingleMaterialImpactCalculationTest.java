@@ -9,7 +9,7 @@ class SingleMaterialImpactCalculationTest {
     @Test
     void calculateMaterialImpactShouldReturnMassTimesEmissionFactor() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
 
         // act
         double result = SingleMaterialImpactCalculation.calculateMaterialImpact(4.0, material);
@@ -21,7 +21,7 @@ class SingleMaterialImpactCalculationTest {
     @Test
     void calculateMaterialImpactShouldReturnZeroWhenMassIsZero() {
         // arrange
-        Material material = new Material("plastic", 2.5, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 2.5, 1.0, RecyclingCategory.PLASTIC);
 
         // act
         double result = SingleMaterialImpactCalculation.calculateMaterialImpact(0.0, material);
@@ -33,7 +33,7 @@ class SingleMaterialImpactCalculationTest {
     @Test
     void calculateMaterialImpactShouldReturnZeroWhenEmissionFactorIsZero() {
         // arrange
-        Material material = new Material("plastic", 0.0, RecyclingCategory.PLASTIC);
+        Material material = new Material("plastic", 0.0, 1.0, RecyclingCategory.PLASTIC);
 
         // act
         double result = SingleMaterialImpactCalculation.calculateMaterialImpact(4.0, material);

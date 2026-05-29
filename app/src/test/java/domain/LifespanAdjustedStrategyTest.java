@@ -13,8 +13,8 @@ class LifespanAdjustedStrategyTest {
         LifespanAdjustedStrategy strategy = new LifespanAdjustedStrategy(simpleStrategy);
 
         Product product = new Product("doll", 2.0);
-        Material material = new Material("plastic", 10.0, RecyclingCategory.PLASTIC);
-        ProductMaterialRelation relation = new ProductMaterialRelation(product, material, 1.0);
+        Material material = new Material("plastic", 10.0, 1.0, RecyclingCategory.PLASTIC);
+        ProductMaterialRelation relation = new ProductMaterialRelation(material, 1.0);
         product.addMaterial(relation);
 
         // act
@@ -31,8 +31,8 @@ class LifespanAdjustedStrategyTest {
         LifespanAdjustedStrategy strategy = new LifespanAdjustedStrategy(simpleStrategy);
 
         Product product = new Product("doll", 0.0);
-        Material material = new Material("plastic", 10.0, RecyclingCategory.PLASTIC);
-        ProductMaterialRelation relation = new ProductMaterialRelation(product, material, 1.0);
+        Material material = new Material("plastic", 10.0, 1.0, RecyclingCategory.PLASTIC);
+        ProductMaterialRelation relation = new ProductMaterialRelation(material, 1.0);
         product.addMaterial(relation);
 
         // act
@@ -49,8 +49,8 @@ class LifespanAdjustedStrategyTest {
         LifespanAdjustedStrategy strategy = new LifespanAdjustedStrategy(simpleStrategy);
 
         Product product = new Product("doll", -2.0);
-        Material material = new Material("plastic", 10.0, RecyclingCategory.PLASTIC);
-        ProductMaterialRelation relation = new ProductMaterialRelation(product, material, 1.0);
+        Material material = new Material("plastic", 10.0, 1.0, RecyclingCategory.PLASTIC);
+        ProductMaterialRelation relation = new ProductMaterialRelation(material, 1.0);
         product.addMaterial(relation);
 
         // act
