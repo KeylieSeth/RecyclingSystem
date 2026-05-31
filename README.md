@@ -183,5 +183,5 @@ One limitation is that ProductService has one too many responsibilities. It hand
 Another limitation is related to data ownership. InMemoryRepository was introduced to manage system data, but some services still maintain their own collections. This makes it less clear on which component that should act as the main source of the data. 
 
 
-UML Class diagram:  ![Open UML Diagram](app/ 
+UML Class diagram:  ![Open UML Diagram](app/UML_Class_Diagram.png)
 Sequence Diagram:   ![Sequence Diagram](app/Sequence%20Diagram%20-%20OOD.png)
