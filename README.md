@@ -183,8 +183,6 @@ In terms of refactoring, we have moved managing collections from services to Rep
 ### Limitations & improvements
 One limitation is that ProductService has one too many responsibilities. It handles product creation, product storage, material assignment, and also coordinating enviromental impact calculations. Even though the calculations are implemented in separate strategy classes, the ProductService class plays a very central role in the entire system. This risks violating the Single Responsibility Principle, since changes regarding product management, material assignment or calculation coordination might affect the same class. An improvement would be to further introduce more classes with clear responsibilities. 
 
-Another limitation is related to data ownership. InMemoryRepository was introduced to manage system data, but some services still maintain their own collections. This makes it less clear on which component that should act as the main source of the data. 
-
 ### Diagrams
 UML Class Diagram:  ![Open UML Diagram](app/UML_Class_Diagram.png)
 
