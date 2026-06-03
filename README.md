@@ -69,12 +69,6 @@ The domain layer is the heart of the program. We have our Product class, storing
 ### Infrastructure
 For the infrastructure, we have our InMemoryRepository and FileHandler in order to store data, save and load to files.
 
-## Design Patterns
-### Strategy Pattern
-Our implementation of Strategy Pattern allows us to calculate the enviromental impact in different ways of a product.
-In our program the ImpactCalculationStrategy is an interface, placed in the domain layer. This defines a common contract for the different impact calculations.
-The actual implementations are also placed in the domain layer, which in our case is the LifespanAdjustedStrategy, RecyclabilityScoreCalculationStrategy and SimpleSumStrategy.
-
 ## Contributions
 ### Albin
 - Designed and implemented the product menu
@@ -170,20 +164,19 @@ The Domain layer contains the core concepts of the system. The classes in this l
 
 The Infrastructure layer handles data management, for saving and loading files using the class FileHandler. InMemoryRepository is the other class inside this layer which is used to manage data in memory for storing products and materials during runtime. These classes isolate persistence-related responsibilities from the other layers.
 
-### Design Pattern
-The project applies the Strategy Pattern for the enviromental impact calculations using the interface ImpactCalcuationStrategy. This allows classes like SimpleSumStrategy LifespanAdjustedStrategy to implement different calculation approaches while still following a shared contract for the calculation(s).
-This design makes it easier to extend the existing system by adding new ways of calculating impact as seperate classes, rather than having one large class with multiple conditional calculations.
-Therefore, new functionality can be added with minimal changes and responsibilities remain separated, which improves cohesion and maintainability. 
-
-We considered using Factory Pattern but eventually decided not to use it. Since object creation in our case is pretty straightforward, it felt to some extent unnececessary to introduce it. Using constructors directly felt more appropriate taking the size of the system into consideration. However, if the system were to grow and complexity increases introducing a Factory Pattern could be more ideal. 
+## Design Pattern
+### Strategy Pattern
+Our implementation of Strategy Pattern allows us to calculate the enviromental impact in different ways of a product.
+In our program the ImpactCalculationStrategy is an interface, placed in the domain layer. This defines a common contract for the different impact calculations.
+The actual implementations are also placed in the domain layer, which in our case is the LifespanAdjustedStrategy, RecyclabilityScoreCalculationStrategy and SimpleSumStrategy. This design makes it easier to extend the existing system by adding new ways of calculating impact as seperate classes, rather than having one large class with multiple conditional calculations. Therefore, new functionality can be added with minimal changes and responsibilities remain separated, which improves cohesion and maintainability. 
 
 ### Refactoring
 In terms of refactoring, we have moved managing collections from services to Repository/InMemoryRepository to split responsibilities. Impact calculation Strategies were separated into strategy classes which implement one interface for calculation, eash specific calculation now belongs in its own class. Equally important, Product now owns a relation of mass and material for each material inside product as well as a material object with its attribibutes, which allowed variable mass for each different product-material relation as well as material reusability. In terms of smaller improvements, menu formating and specification of input was improved (such as spacing, directives towards input information) as well as a direct way to add materials to product inside product menu without the need to interact with material menu. More materials were also added into materials list for users to select as previus ones were to abstract. 
 
 ### Limitations & improvements
-One limitation is that ProductService has one too many responsibilities. It handles product creation, product storage, material assignment, and also coordinating enviromental impact calculations. Even though the calculations are implemented in separate strategy classes, the ProductService class plays a very central role in the entire system. This risks violating the Single Responsibility Principle, since changes regarding product management, material assignment or calculation coordination might affect the same class. An improvement would be to further introduce more classes with clear responsibilities. 
+One limitation is that ProductService has one too many responsibilities. It handles product creation, material assignment, and also coordinating enviromental impact calculations. Even though the calculations are implemented in separate strategy classes, the ProductService class plays a very central role in the entire system. This risks violating the Single Responsibility Principle, since changes regarding product management, material assignment or calculation coordination might affect the same class. An improvement would be to further introduce more classes with clear responsibilities. 
 
-### Diagrams
+## Diagrams
 UML Class Diagram:  ![Open UML Diagram](app/UML_Class_Diagram.png)
 
 Sequence Diagram:  ![Sequence Diagram](app/Sequence%20Diagram%20-%20OOD.png)
