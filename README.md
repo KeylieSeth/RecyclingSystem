@@ -3,12 +3,12 @@
 
 Menu-driven console application that provides recycling guidance for products and reusable materials. Developed as a final project for the Object-Oriented Design course.
 
-The purpose of this system is mainly to manage products, their varoius materials, their environmental impact and guidance for recycling. The systems product management creates products along with name, category, materials, and estimated lifespan for the product and its material.
+The purpose of this system is mainly to manage products, their various materials, their environmental impact and guidance for recycling. The systems product management creates products along with name, category, materials, and estimated lifespan for the product and its material.
 Material management defines the varoius materials which the products are made of, name of it, environmental impact value and recycling category for the material.
 
 The system provides a total calculation for the environmental impact of a product, based on the material it is made of. Then provides guidance, based on the product and material, on how to recycle single- and mixed-material products.
 
-As a user, you are able to create a product into which, you can either add materials from an existing list or add your own materials with specification of their properties. It is then possible to do various calculations which allow you to calculate environmental of a product from its included materials. Addittionally, it is possible to receive guidance on recycling a specific product based on its material composition.
+As a user, you are able to create a product into which, you can either add materials from an existing list or add your own materials with specification of their properties. It is then possible to do various calculations which allow you to calculate environmental of a product from its included materials. Additionally, it is possible to receive guidance on recycling a specific product based on its material composition.
 
 ## Features
 -Products
@@ -25,6 +25,16 @@ As a user, you are able to create a product into which, you can either add mater
 -Categorize Products
 -Store Information
 -Receive Input
+
+## Demo
+Watch a short video demonstration of the application:
+[Demo Video](https://youtu.be/L6wiNaDXJdc)
+
+### Main Menu
+<img width="427" height="338" alt="Main Menu" src="https://github.com/user-attachments/assets/e7994b8f-dcb2-42a0-83a1-fcf995ac1914" />
+
+### Recycling Report
+<img width="904" height="454" alt="Recycling Report" src="https://github.com/user-attachments/assets/1467b244-5243-4665-90c6-6f6321ea3f9d" />
 
 ## Architecture
 Presentation /  
